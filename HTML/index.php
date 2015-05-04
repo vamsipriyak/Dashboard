@@ -32,7 +32,7 @@
                                     </thead>
                                    <tbody>
                                         <tr class="odd gradeX">
-                                            <td><a href="performancedetails.php">www.timeinc.com</a></td>
+                                            <td><a href="performancedetails.php?pageid=1">www.timeinc.com</a></td>
                                             <td>10</td>
                                             <td>20</td>
                                             <td class="center">30</td>

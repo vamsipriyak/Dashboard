@@ -1,3 +1,6 @@
+<?php
+ include 'includes/config.php';
+?>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -21,6 +24,7 @@
     <script src="http://code.highcharts.com/highcharts.js"></script>
     <!-- 2. You can add print and export feature by adding this line -->
     <script src="http://code.highcharts.com/modules/exporting.js"></script>
+	<script src="assets/js/custom-dashboard.js"></script>
     <link href="assets/css/dashboard-styles.css" rel="stylesheet" />
 </head>
 <body>

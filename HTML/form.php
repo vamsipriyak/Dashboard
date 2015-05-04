@@ -1,63 +1,34 @@
 <?php include 'includes/header.php'; ?>
 <?php //include 'includes/leftpanel.php'; ?>
-<script>
- $(document).ready(function() {
-            
-            $('#isparentfalse').click(function(){
-                
-                $("#parentsite").show(); 
-            });
-            $('#isparenttrue').click(function(){
-                
-                $("#parentsite").hide(); 
-            });
-        });
-</script>
-<body ng-app="myapp">
-    <div id="wrapper">
-        <nav class="navbar navbar-default top-navbar" role="navigation">
-            <div class="navbar-header">
-                <!-- <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse"> -->
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="index.php">Matrix</a>
-            </div>
-			</div>
-
         <div id="page-wrapper-home" >		
             <div id="page-inner">
 			 <div class="row">
                     <div class="col-md-12">
-                                    <form role="form">
+                                    <form role="form" action="" method="POST" id="webPageForm">
                                         <div class="form-group">
                                             <label>Web page URL</label>
-                                            <input class="form-control">
+                                            <input class="form-control" name = "webPageUrl" id = "webPageUrl" value = "">
                                         </div>
                                         <div class="form-group">
                                             <label>Is it a parent site</label>
                                             <label class="radio-inline">
-                                                <input type="radio" name="isparent" id="isparenttrue" value="" checked="">Yes
+                                                <input type="radio" name="isParent" id="isParentTrue" value="" checked="">Yes
                                             </label>
                                             <label class="radio-inline">
-                                                <input type="radio" name="isparent" id="isparentfalse" value="">No
+                                                <input type="radio" name="isParent" id="isParentFalse" value="">No
                                             </label>
                                         </div>
-                                        <div class="form-group" id="parentsite" style="display:none;">
+                                        <div class="form-group" id="parentSite" style="display:none;">
                                             <label>Choose a parent site</label>
 											
-                                            <select class="form-control">
-                                                <option>1</option>
-                                                <option>2</option>
-                                                <option>3</option>
-                                                <option>4</option>
-                                                <option>5</option>
+                                            <select class="form-control" id="parentSiteId">
+                                                <option value=1>http://www.timeinc.com/about/</option>
+                                                <option value=2>http://www.timeinc.com/experiences/</option>
+                                                <option value=3>http://www.timeinc.com/brands/</option>
                                             </select>
                                         </div>
-                                        <button type="submit" class="btn btn-default">Submit Button</button>
-                                        <button type="reset" class="btn btn-default">Reset Button</button>
+										<input id="submitForm" name="submitForm" class="btn btn-default" onclick="postWebsiteParams()" type="button" value="Submit">
+                                        <input id="submitForm" name="submitForm" class="btn btn-default" onclick="resetValues()" type="button" value="Reset">
                                     </form>
                     </div>
              </div> 
@@ -82,63 +53,24 @@
                                 <table class="table table-striped table-bordered table-hover" id="dataTables-example">
                                     <thead>
                                         <tr>
-                                            <th>Site</th>
-                                            <th>Parameter 1</th>
-                                            <th>Parameter 2</th>
-                                            <th>Parameter 3</th>
-                                            <th>Parameter 4</th>
-											<th>Parameter 5</th>
+                                            <th>Page ID</th>
+                                            <th>Parent page ID</th>
+											<th>URL</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr class="odd gradeX">
-                                            <td>www.google.com</td>
-                                            <td>10</td>
-                                            <td>20</td>
-                                            <td class="center">30</td>
-                                            <td class="center">40</td>
-											<td class="center">50</td>
-                                        </tr>
-                                        <tr class="odd gradeX">
-                                            <td>www.google.com</td>
-                                            <td>10</td>
-                                            <td>20</td>
-                                            <td class="center">30</td>
-                                            <td class="center">40</td>
-											<td class="center">50</td>
-                                        </tr>
-										<tr class="odd gradeX">
-                                            <td>www.google.com</td>
-                                            <td>10</td>
-                                            <td>20</td>
-                                            <td class="center">30</td>
-                                            <td class="center">40</td>
-											<td class="center">50</td>
-                                        </tr>
-										<tr class="odd gradeX">
-                                            <td>www.google.com</td>
-                                            <td>10</td>
-                                            <td>20</td>
-                                            <td class="center">30</td>
-                                            <td class="center">40</td>
-											<td class="center">50</td>
-                                        </tr>
-										<tr class="odd gradeX">
-                                            <td>www.google.com</td>
-                                            <td>10</td>
-                                            <td>20</td>
-                                            <td class="center">30</td>
-                                            <td class="center">40</td>
-											<td class="center">50</td>
-                                        </tr>
-										<tr class="odd gradeX">
-                                            <td>www.google.com</td>
-                                            <td>10</td>
-                                            <td>20</td>
-                                            <td class="center">30</td>
-                                            <td class="center">40</td>
-											<td class="center">50</td>
-                                        </tr>
+										<?php										
+										   $collection = $db->websites;
+										   $cursor = $collection->find();
+										   // iterate cursor to display title of documents
+										   foreach ($cursor as $document) {
+											print '<tr class="odd gradeX">';												
+											print '<td class="center">'.$document["_id"].'</td>';
+											print '<td class="center">'.$document["parent_page_id"].'</td>';
+											print '<td class="center">'.$document["URL"].'</td>';
+											print '</tr>';
+										   }
+										?>										
                                        
                                     </tbody>
                                 </table>
@@ -153,6 +85,5 @@
         </div>
              
     </div>
-	</body>
   <?php include 'includes/footer.php'; ?>
    
