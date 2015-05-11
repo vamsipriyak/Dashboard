@@ -1,4 +1,4 @@
-        <!-- /. PAGE INNER  -->
+  <!-- /. PAGE INNER  -->
             </div>
          <!-- /. PAGE WRAPPER  -->
      <!-- /. WRAPPER  -->
@@ -21,69 +21,41 @@
             });
     </script>
 	
- <script type="text/javascript">
-        jQuery(document).ready(function() { 
-            var options = {
-                chart: {
-                    renderTo: 'container',
-                    type: 'line'
-                },
-                title: {
-                    text: 'Tiny Tool Monthly Sales'                 
-                },
-                subtitle: {
-                    text: '2014 Q1-Q2'
-                },
-                xAxis: {
-                    categories: []
-                },
-                yAxis: {
-                    title: {
-                        text: 'Sales'
-                    }
-                },
-                series: []
-            };
-            // JQuery function to process the csv data
-            $.get('column-data.csv', function(data) {
-                // Split the lines
-                var lines = data.split('\n');
-                $.each(lines, function(lineNo, line) {
-                    var items = line.split(',');
-                     
-                    // header line contains names of categories
-                    if (lineNo == 0) {
-                        $.each(items, function(itemNo, item) {
-                            //skip first item of first line
-                            if (itemNo > 0) options.xAxis.categories.push(item);
-                        });
-                    }
-                     
-                    // the rest of the lines contain data with their name in the first position
-                    else {
-                        var series = { 
-                            data: []
-                        };
-                        $.each(items, function(itemNo, item) {
-                            if (itemNo == 0) {
-                                series.name = item;
-                            } else {
-                                series.data.push(parseFloat(item));
-                            }
-                        });
-                         
-                        options.series.push(series);
-                    }
-                     
-                });
-                //putting all together and create the chart
-                var chart = new Highcharts.Chart(options);
- 
-           });         
-             
-        });
-        </script>
-        <script>
+	  <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+		<script type="text/javascript">
+		  google.load("visualization", "1", {packages:["corechart", "line"]});
+		  google.setOnLoadCallback(drawChart);
+		  function drawChart() {
+			var data = google.visualization.arrayToDataTable([
+			  ['Months', <?php print "'".$paramArray[$param-1]."'"; ?>],
+			  <?php
+			  for($i=0;$i<count($chartData['param']);$i++) {
+				  if($i == count($chartData['param'])-1)
+				  {
+					  $delimiter = '';
+				  }
+				  else {
+					  $delimiter = ',';
+				  }
+					print "["."'".$chartData['date'][$i]."'	,".$chartData['param'][$i]."]".$delimiter ;
+			  }
+			  ?>
+			]);
+		  var options = {
+			hAxis: {
+			  title: 'Month'
+			},
+			vAxis: {
+			  title: '<?php print $paramUnitArray[$param]; ?>'
+			}, 'width':'70%', 'height':'30%', 'min':0
+		  };
+
+			var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
+			chart.draw(data, options);
+		  }
+	</script>
+
+    <script>
             $(document).ready(function () {
                 $('#dataTables-example').dataTable();
             });
