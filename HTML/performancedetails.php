@@ -3,15 +3,24 @@
 <?php include 'includes/leftpanel.php'; ?>
 <?php include 'includes/generic.php'; ?>
 <?php 
+
+	$mongotime = New Mongodate(time());
+	$mongoendtime = New Mongodate(time()-30*24*3600);
+	
 	$collection = $db->parameterdata;
 	$cursor = $collection->find(array('datasource_id' => 1))->sort(array('_id' => -1))->limit(1);
 	$values =$db->parametersCollection->find(array('page_id' => $pageid))->sort(array('_id' => -1))->limit(1);
+	$parameterChartData = $db->parametersCollection->find(array('updated_time' => array('$lte'=>$mongotime, '$gte'=>$mongoendtime), 'page_id' => $pageid))->sort(array('updated_time' => 1));
 	$paramValues = array();
 	$i=0;
 	foreach ($values as $value) {
 		for($i=0; $i<5; $i++){
 			$paramValues[$i] = $value["Param".($i+1)];
 		}
+	}
+	foreach ($parameterChartData as $paramData) {
+		$chartData['param'][] = $paramData['Param'.$param.''];
+		$chartData['date'][] = date('Y-m-d',$paramData['updated_time']->sec);
 	}
 ?>
 
@@ -35,7 +44,7 @@
 								$i++;
 							}
 						?>
-
+						
                             Insights for www.timeinc.com
                         </h1>
                     </div>
@@ -89,16 +98,16 @@
                 </div>
             </div>
 			<br><br>
-            <!--<div class="row">
-                <div class="col-md-6">
+            <div class="row" >
+                <div class="col-md-12">
                      <!--    Hover Rows  -->
-                   <!--<div class="panel panel-default">
+                   <div class="panel panel-default">
                         <div class="panel-body">
-							<div id="container" ></div>
+							<div id="chart_div" ></div>
 						</div>
                     </div>
                     <!-- End  Hover Rows  -->
-               <!--</div>
+               </div>
             </div>
                 <!-- /. ROW  -->
         </div>
