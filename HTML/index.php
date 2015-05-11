@@ -1,11 +1,86 @@
-<?php include 'includes/header.php'; ?>
+<?php 
+include 'includes/header.php'; 
+
+	$mapWebsites = new MongoCode("function () {
+
+				var output= {pageid : this._id,Param1:null, Param2:null, Param3:null, Param4:null, Param5:null , URL:this.URL}
+					emit(this._id, output);
+				};");
+	$mapParam = new MongoCode("function () {
+
+			   var output= {pageid : this.page_id,Param1:this.Param1, Param2:this.Param2, Param3:this.Param3,Param4:this.Param4,Param5:this.Param5  }
+						emit(this.page_id, output);
+				};");
+
+	$reduceF = new MongoCode("function(key, values) { var outs = {Param1:null, Param2:null, Param3:null, Param4:null, Param5:null };
+
+	values.forEach(function(v){
+
+				   if(outs.Param1 ==null){
+						outs.Param1 = v.Param1
+					}
+					if(outs.Param2 ==null){
+						outs.Param2 = v.Param2
+					}
+					 if(outs.Param3 ==null){
+						outs.Param3 = v.Param3
+					}
+					 if(outs.Param4 ==null){
+						outs.Param4 = v.Param4
+					}
+					 if(outs.Param5 ==null){
+						outs.Param5 = v.Param5
+					}
+					if(outs.URL ==null){
+						outs.URL = v.URL
+					}
+					
+
+	 });
+	return outs;
+	};");
+
+
+	$result = $db->command(array(
+
+		'mapreduce' => 'websites', // collection name
+
+		'map' => $mapWebsites,
+
+		'reduce' => $reduceF,
+		
+
+		"out" => array('reduce'=>'parameters_Collection') // new collection name
+	));
+
+	$result = $db->command(array(
+
+		'mapreduce' => 'parametersCollection', // collection name
+
+		'map' => $mapParam,
+		'reduce' => $reduceF,
+       'sort' =>array('_id' => -1),
+		"out" => array('reduce'=>'parameters_Collection') // new collection name
+	));
+
+?>
+
+
         <div id="page-wrapper-home" >
             <div id="page-inner">
 			 <div class="row">
                     <div class="col-md-12">
-                        <h1 class="page-header">
-                           Summary
+                          <h1 >
+                           <span class="left">Summary </span>
+						   <div class="col-md-1" id="image" >
+					<img src="assets/img/refresh.png" alt="Mountain View" style="width:60px;height:60px">
+                    </div>
                         </h1>
+						 <div style="clear:both"> </div>
+						 <h1 class="page-header"> </h1>
+						
+                    </div>
+						
                     </div>
                 </div> 
                  <!-- /. ROW  -->
@@ -22,64 +97,62 @@
                                 <table class="table table-striped table-bordered table-hover" id="dataTables-example">
                                     <thead>
                                         <tr>
-                                            <th>Site</th>
-                                            <th>Parameter 1</th>
-                                            <th>Parameter 2</th>
-                                            <th>Parameter 3</th>
-                                            <th>Parameter 4</th>
-											<th>Parameter 5</th>
+                                            <th>Web Page</th>
+											<?php
+											$result = $db->parameters->find()->sort(array('_id' => 1));
+											$minarr=array();
+											$maxarr=array();
+											$i=0;
+											 foreach($result as $row){
+											   print '<th>'.$row['name'].'</td>';
+											   $minarr[$i] = $row['minimum_value'];
+											   $maxarr[$i] = $row['maximum_value'];
+											   $i++;										   
+											 }
+										    ?>
                                         </tr>
                                     </thead>
                                    <tbody>
-                                        <tr class="odd gradeX">
-                                            <td><a href="performancedetails.php?pageid=1">www.timeinc.com</a></td>
-                                            <td>10</td>
-                                            <td>20</td>
-                                            <td class="center">30</td>
-                                            <td class="center">40</td>
-											<td class="center">50</td>
-                                        </tr>
-                                        <tr class="odd gradeX">
-                                            <td><a href="performancedetails.php">www.google.com</td>
-                                            <td>10</td>
-                                            <td>20</td>
-                                            <td class="center">30</td>
-                                            <td class="center">40</td>
-											<td class="center">50</td>
-                                        </tr>
-										<tr class="odd gradeX">
-                                            <td><a href="performancedetails.php">www.google.com</td>
-                                            <td>10</td>
-                                            <td>20</td>
-                                            <td class="center">30</td>
-                                            <td class="center">40</td>
-											<td class="center">50</td>
-                                        </tr>
-										<tr class="odd gradeX">
-                                            <td><a href="performancedetails.php">www.google.com</td>
-                                            <td>10</td>
-                                            <td>20</td>
-                                            <td class="center">30</td>
-                                            <td class="center">40</td>
-											<td class="center">50</td>
-                                        </tr>
-										<tr class="odd gradeX">
-                                            <td><a href="performancedetails.php">www.google.com</td>
-                                            <td>10</td>
-                                            <td>20</td>
-                                            <td class="center">30</td>
-                                            <td class="center">40</td>
-											<td class="center">50</td>
-                                        </tr>
-										<tr class="odd gradeX">
-                                            <td><a href="performancedetails.php">www.google.com</a></td>
-                                            <td>10</td>
-                                            <td>20</td>
-                                            <td class="center">30</td>
-                                            <td class="center">40</td>
-											<td class="center">50</td>
-                                        </tr>
+					
+								   
+								   <?php										
+										    $result = $db->parameters_Collection->find()->sort(array('_id' => 1)); 
+										   // iterate cursor to display the values
+										  
+										  foreach($result as $row){
+
+											print '<tr >';												
+											print '<td class="center"><a href="performancedetails.php?param=1&pageid='.$row['_id'].'">'.$row['value']['URL'].'</td>';
+											for($j=0; $j<5; $j++) {
+											$paramValue = $row['value']["Param".($j+1)];
+											if($j != 1 && $j != 2) {
+											if($paramValue > $maxarr[$j]) {
+												print '<td class="Green">'.$paramValue.'</td>';
+											} else if($paramValue < $maxarr[$j] && $paramValue > $minarr[$j]) {
+												print '<td class="Yellow">'.$paramValue.'</td>';
+											} else {
+												print '<td class="Red">'.$paramValue.'</td>';
+											}
+											} else {
+												if($paramValue < $minarr[$j]) {
+												print '<td class="Green">'.$paramValue.'</td>';
+											} else if($paramValue > $minarr[$j] && $paramValue < $maxarr[$j]) {
+												print '<td class="Yellow">'.$paramValue.'</td>';
+											} else {
+												print '<td class="Red">'.$paramValue.'</td>';
+											}
+											}
+											
+											}
+											/*print '<td class="center">'.$row['value']["Param2"].'</td>';
+											print '<td class="center">'.$row['value']["Param3"].'</td>';
+											print '<td class="center">'.$row['value']["Param4"].'</td>';
+											print '<td class="center">'.$row['value']["Param5"].'</td>';*/
+											print '</tr>';
+										   }
+								?>		
                                        
+                                      
                                     </tbody>
                                 </table>
                             </div>
@@ -89,56 +162,7 @@
                     <!--End Advanced Tables -->
                 </div>
            
-                <div class="col-md-12">
-                    <!-- Advanced Tables -->
               
-                        <div class="panel-body">
-                            <div class="table-responsive">
-                                <table class="table table-striped table-bordered table-hover" id="dataTables-example">
-                                    <thead>
-                                        <tr>
-                                            <th>Color Code</th>
-                                            <th>Parameter 1</th>
-                                            <th>Parameter 2</th>
-                                            <th>Parameter 3</th>
-                                            <th>Parameter 4</th>
-											<th>Parameter 5</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr class="odd gradeX">
-                                            <td>Yellow</td>
-                                            <td>Param 1 > 80</td>
-                                            <td>Param 1 > 60 & < 80</td>
-                                            <td>Param 1 > 60 & < 80</td>
-                                            <td>Param 1 > 60 & < 80</td>
-											 <td>Param 1 > 60 & < 80</td>
-                                        </tr>
-                                        <tr class="odd gradeX">
-                                            <td>Green</td>
-                                            <td>Param 1 > 80</td>
-                                            <td>Param 1 > 60 & < 80</td>
-                                            <td>Param 1 > 60 & < 80</td>
-                                            <td>Param 1 > 60 & < 80</td>
-											 <td>Param 1 > 60 & < 80</td>
-                                        </tr>
-										 <tr class="odd gradeX">
-                                            <td>Red</td>
-                                            <td>Param 1 > 80</td>
-                                            <td>Param 1 > 60 & < 80</td>
-                                            <td>Param 1 > 60 & < 80</td>
-                                            <td>Param 1 > 60 & < 80</td>
-											 <td>Param 1 > 60 & < 80</td>
-                                        </tr>
-										
-                                       
-                                    </tbody>
-                                </table>
-                            </div>
-                            
-                        </div>
-                    <!--End Advanced Tables -->
-                </div>
             </div>
         </div>
              
