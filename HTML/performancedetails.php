@@ -1,19 +1,42 @@
+<?php error_reporting(1); ?>
 <?php include 'includes/header.php'; ?>
 <?php include 'includes/leftpanel.php'; ?>
+<?php include 'includes/generic.php'; ?>
+<?php 
+	$collection = $db->parameterdata;
+	$cursor = $collection->find(array('datasource_id' => 1))->sort(array('_id' => -1))->limit(1);
+	$values =$db->parametersCollection->find(array('page_id' => $pageid))->sort(array('_id' => -1))->limit(1);
+	$paramValues = array();
+	$i=0;
+	foreach ($values as $value) {
+		for($i=0; $i<5; $i++){
+			$paramValues[$i] = $value["Param".($i+1)];
+		}
+	}
+?>
 
-
- <div id="page-wrapper" >
+<div id="page-wrapper" >
             <div id="page-inner">
 			 <div class="row">
                     <div class="col-md-8">
                         <h1 >
 						<?php
-$pageid=(int)$_REQUEST['pageid'];
-$collection = $db->websites;
-$document = $collection->findOne(array("_id" => $pageid));
-?>
+							
+							$collection = $db->websites;
+							$document = $collection->findOne(array("_id" => $pageid));
+							$parameters = $db->parameters->find()->sort(array('_id' => 1));
+							$values =  $db->parametersCollection->find()->sort(array('_id' => 1));
+							$paramArray = array();
+							$i=0;
+							foreach ($parameters as $parameter) {
+								$paramArray[$i] = $parameter['name'];
+								$paramUnitArray[$i] = $parameter['units'];
+								$paramDescriptionArray[$i] = $parameter['description'];
+								$i++;
+							}
+						?>
 
-                            Insights for website 1 
+                            Insights for www.timeinc.com
                         </h1>
                     </div>
                     <div class="col-md-1">
@@ -35,63 +58,47 @@ $document = $collection->findOne(array("_id" => $pageid));
 					
                     <div class="panel panel-default" id="pagespeed">
                         <div class="panel-heading">
-                             Page Score
+                             <?php 
+								$heading = $_GET['param'];
+								echo  "<b style=\"font-size:25px;font-weight: lighter;text-decoration: none;color:black;\">".$paramArray[$param-1].": ".$paramValues[$param-1]." ".$paramUnitArray[$param-1]."</b>";
+								echo '<br><br>';
+
+								echo  "Description".": <b style=\"font-weight: lighter;text-decoration: none;color:black;\">".$paramDescriptionArray[$param-1]."</b>";
+								echo '<br><br>';
+								if($heading == 5) 
+								{
+									getWebsiteDetails('LeverageBrowserCaching', $cursor);
+								}
+								if($heading == 4) 
+								{
+									getWebsiteDetails('EnableGzipCompression', $cursor);
+								}
+								
+							?>
                         </div>
+						<?php if($heading == 1 || $heading == 2) { ?>
                         <div class="panel-body" id="test">
                             <div class="table-responsive">
+								
                             </div>
                             
                         </div>
+						<?php } ?>
                     </div>
                     <!--End Advanced Tables -->
                 </div>
             </div>
-            <div class="row">
+			<br><br>
+            <!--<div class="row">
                 <div class="col-md-6">
                      <!--    Hover Rows  -->
-                   <div class="panel panel-default">
+                   <!--<div class="panel panel-default">
                         <div class="panel-body">
 							<div id="container" ></div>
 						</div>
                     </div>
                     <!-- End  Hover Rows  -->
-               </div>
-                <div class="col-md-6">
-                     <!--    Context Classes  -->
-                    <div class="panel panel-default">
-                        <div class="panel-body">
-                            <div class="table-responsive">
-                                <table class="table">
-                                    <thead>
-                                        <tr>
-                                            <th>Color code</th>
-                                            <th>Param #</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr class="success">
-                                            <td>Mark</td>
-                                            <td>Otto</td>
-                                        </tr>
-                                        <tr class="info">
-                                            <td>Jacob</td>
-                                            <td>Thornton</td>
-                                        </tr>
-                                        <tr class="warning">
-                                            <td>Larry</td>
-                                            <td>the Bird</td>
-                                        </tr>
-                                        <tr class="danger">
-                                            <td>John</td>
-                                            <td>Smith</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                    <!--  end  Context Classes  -->
-                </div>
+               <!--</div>
             </div>
                 <!-- /. ROW  -->
         </div>
@@ -107,6 +114,7 @@ var URL_TO_GET_RESULTS_FOR = '<?php echo $document["URL"]; ?>';
 </script>
 
 <script>
+
 var API_URL = 'https://www.googleapis.com/pagespeedonline/v1/runPagespeed?';
 var CHART_API_URL = 'http://chart.apis.google.com/chart?';
 
@@ -175,26 +183,32 @@ $.ajax({
 		dataType: "json",
         success: function(data){
             //alert(data.score);
-var json_text = JSON.stringify(data, null, 2);
-	
-		//alert(json_text);
-    var pagescore = 'pagescore='+ score + '&json=' + json_text; //build a post data structure
- $.ajax({
-        url: "insertparameterdata.php",
-        type: "post",
-        data: pagescore,
-        success: function(){
-           // alert("success");
-            $("#result").html('Submitted successfully');
-        },
-        error:function(){
-            alert("failure");
-            $("#result").html('There is error while submit');
-        }
-    });
-	
+			var json_text = JSON.stringify(data, null, 2);
+						
+			//Split to get the	parameter name.		
+			path = window.location.href; 
+			param = path.split('=');
+			$insertToDatabase = param[1];
 
-        }
+			//Insert data to DB if param is 'pagespeed'.
+			if($insertToDatabase == 'pagespeed')
+			{
+				var pagescore = 'pagescore='+ score + '&json=' + json_text; //build a post data structure
+				$.ajax({
+					url: "insertparameterdata.php",
+					type: "post",
+					data: pagescore,
+					success: function(){
+					   // alert("success");
+						$("#result").html('Submitted successfully');
+					},
+					error:function(){
+						alert("failure");
+						$("#result").html('There is error while submit');
+					}
+				});
+			}
+		}
        
     });   
 
