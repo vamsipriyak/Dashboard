@@ -27,26 +27,41 @@
 		  google.setOnLoadCallback(drawChart);
 		  function drawChart() {
 			var data = google.visualization.arrayToDataTable([
-			  ['Months', <?php print "'".$paramArray[$param-1]."'"; ?>],
+			  ['Date', <?php print "'".$paramArray[$param-1]."'"; ?>],
 			  <?php
-			  for($i=0;$i<count($chartData['param']);$i++) {
-				  if($i == count($chartData['param'])-1)
-				  {
-					  $delimiter = '';
-				  }
-				  else {
-					  $delimiter = ',';
-				  }
-					print "["."'".$chartData['date'][$i]."'	,".$chartData['param'][$i]."]".$delimiter ;
+			  $existingDates = array();
+			  for($i=0;$i<count($chartData['param']);$i++) 
+			  {
+				if($i == count($chartData['param'])-1)
+				{
+				  $delimiter = '';
+				}
+				else {
+				  $delimiter = ',';
+				}
+				
+				if(!in_array($chartData['date'][$i], $existingDates))
+				{
+					$existingDates[] = $chartData['date'][$i];
+				}
+				else
+				{
+					$existingDates[] = '';
+				}
+				print "["."'".$existingDates[$i]."'	,".$chartData['param'][$i]."]".$delimiter ;						
 			  }
+			  
 			  ?>
 			]);
 		  var options = {
+			series: {
+				0: { color: '#39C6F0' }
+			},
 			hAxis: {
-			  title: 'Month'
+			  title: 'Date'
 			},
 			vAxis: {
-			  title: '<?php print $paramUnitArray[$param]; ?>'
+			  title: '<?php print $paramUnitArray[$param-1]; ?>'
 			}, 'width':'70%', 'height':'30%', 'min':0
 		  };
 
