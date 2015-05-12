@@ -84,7 +84,7 @@
 								
 							?>
                         </div>
-						<?php if($heading == 1 || $heading == 2) { ?>
+						<?php if($heading == 1) { ?>
                         <div class="panel-body" id="test">
                             <div class="table-responsive">
 								
@@ -219,7 +219,6 @@ $.ajax({
 		}
        
     });   
-
   var query = [
     'chtt=Page+Speed+score:+' + score,
     'chs=180x100',
@@ -233,6 +232,7 @@ $.ajax({
   //document.body.insertBefore(i, null);
   document.getElementById('test').insertBefore(i, null);
 };
+
 </script>
 
 
