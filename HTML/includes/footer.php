@@ -4,6 +4,8 @@
      <!-- /. WRAPPER  -->
 	   <footer><p>Copyright © 2008 Time Inc. All rights reserved. </p></footer>
 	   </div>
+	   </div>
+	   </div>
         <!-- /. PAGE WRAPPER  -->
     <!-- JS Scripts-->
     <!-- jQuery Js -->
@@ -27,7 +29,7 @@
 		  google.setOnLoadCallback(drawChart);
 		  function drawChart() {
 			var data = google.visualization.arrayToDataTable([
-			  ['Date', <?php print "'".$paramArray[$param-1]."'"; ?>],
+			  ['Dates', <?php print "'".$paramArray[$param-1]."'"; ?>],
 			  <?php
 			  $existingDates = array();
 			  for($i=0;$i<count($chartData['param']);$i++) 
@@ -62,7 +64,7 @@
 			},
 			vAxis: {
 			  title: '<?php print $paramUnitArray[$param-1]; ?>'
-			}, 'width':'70%', 'height':'30%', 'min':0
+			}, 'width':'60%', 'height':'30%', 'min':0
 		  };
 
 			var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
