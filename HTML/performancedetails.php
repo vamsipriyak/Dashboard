@@ -27,8 +27,8 @@
 <div id="page-wrapper" >
             <div id="page-inner">
 			 <div class="row">
-                    <div class="col-md-8">
-                        <h1 >
+                    <div class="col-md-10">
+                        <h2 >
 						<?php
 							
 							$collection = $db->websites;
@@ -43,10 +43,9 @@
 								$paramDescriptionArray[$i] = $parameter['description'];
 								$i++;
 							}
+                            print "Insights for ".$document['URL'].""; 
 						?>
-						
-                            Insights for www.timeinc.com
-                        </h1>
+                        </h2>
                     </div>
                     <div class="col-md-1">
                     </div>
