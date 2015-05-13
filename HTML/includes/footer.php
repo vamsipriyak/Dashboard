@@ -2,7 +2,7 @@
             </div>
          <!-- /. PAGE WRAPPER  -->
      <!-- /. WRAPPER  -->
-	   <footer><p>Copyright © 2008 Time Inc. All rights reserved. </p></footer>
+	   <footer><p>Copyright © 2015 Time Inc. All rights reserved. </p></footer>
 	   </div>
         <!-- /. PAGE WRAPPER  -->
     <!-- JS Scripts-->
@@ -17,76 +17,65 @@
     <script src="assets/js/dataTables/dataTables.bootstrap.js"></script>
         <script>
             $(document).ready(function () {
-                $('#dataTables-example').dataTable();
+                $('#dataTables-example').dataTable({
+				 "bInfo" : false,
+				 "bFilter": false,
+				 "bPaginate": false,
+				 "bSort" : false
+				});
             });
     </script>
 	
- <script type="text/javascript">
-        jQuery(document).ready(function() { 
-            var options = {
-                chart: {
-                    renderTo: 'container',
-                    type: 'line'
-                },
-                title: {
-                    text: 'Tiny Tool Monthly Sales'                 
-                },
-                subtitle: {
-                    text: '2014 Q1-Q2'
-                },
-                xAxis: {
-                    categories: []
-                },
-                yAxis: {
-                    title: {
-                        text: 'Sales'
-                    }
-                },
-                series: []
-            };
-            // JQuery function to process the csv data
-            $.get('column-data.csv', function(data) {
-                // Split the lines
-                var lines = data.split('\n');
-                $.each(lines, function(lineNo, line) {
-                    var items = line.split(',');
-                     
-                    // header line contains names of categories
-                    if (lineNo == 0) {
-                        $.each(items, function(itemNo, item) {
-                            //skip first item of first line
-                            if (itemNo > 0) options.xAxis.categories.push(item);
-                        });
-                    }
-                     
-                    // the rest of the lines contain data with their name in the first position
-                    else {
-                        var series = { 
-                            data: []
-                        };
-                        $.each(items, function(itemNo, item) {
-                            if (itemNo == 0) {
-                                series.name = item;
-                            } else {
-                                series.data.push(parseFloat(item));
-                            }
-                        });
-                         
-                        options.series.push(series);
-                    }
-                     
-                });
-                //putting all together and create the chart
-                var chart = new Highcharts.Chart(options);
- 
-           });         
-             
-        });
-        </script>
+ <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+		<script type="text/javascript">
+		  google.load("visualization", "1", {packages:["corechart", "line"]});
+		  google.setOnLoadCallback(drawChart);
+		  function drawChart() {
+			var data = google.visualization.arrayToDataTable([
+			  ['Dates', <?php print "'".$paramArray[$param-1]."'"; ?>],
+			  <?php
+			  $existingDates = array();
+			  for($i=0;$i<count($chartData['param']);$i++) 
+			  {
+				if($i == count($chartData['param'])-1)
+				{
+				  $delimiter = '';
+				}
+				else {
+				  $delimiter = ',';
+				}
+				
+				if(!in_array($chartData['date'][$i], $existingDates))
+				{
+					$existingDates[] = $chartData['date'][$i];
+				}
+				else
+				{
+					$existingDates[] = '';
+				}
+				print "["."'".$existingDates[$i]."'	,".$chartData['param'][$i]."]".$delimiter ;						
+			  }
+			  
+			  ?>
+			]);
+		  var options = {
+			series: {
+				0: { color: '#39C6F0' }
+			},
+			hAxis: {
+			  title: 'Date'
+			},
+			vAxis: {
+			  title: '<?php print $paramUnitArray[$param-1]; ?>'
+			}, 'width':'60%', 'height':'30%', 'min':0
+		  };
+
+			var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
+			chart.draw(data, options);
+		  }
+	</script>
         <script>
-            $(document).ready(function () {
-                $('#dataTables-example').dataTable();
-            });
+          
 	$(function() {
 
 		var loading = function() {
@@ -111,7 +100,7 @@
 
 		// you won't need this button click
 		// just call the loading function directly
-		$('#image img').click(loading);
+		//$('#image img').click(loading);
 
 	});			
     </script>

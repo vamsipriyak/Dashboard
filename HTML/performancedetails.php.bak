@@ -4,58 +4,34 @@
 <?php include 'includes/generic.php'; ?>
 <?php 
 
-	$mongotime = New Mongodate(time());
-	$mongoendtime = New Mongodate(time()-30*24*3600);
-	
 	$collection = $db->parameterdata;
-	$cursor = $collection->find(array('datasource_id' => 1,'page_id' => $pageid))->sort(array('_id' => -1))->limit(1);
-	$values =$db->parametersCollection->find(array('page_id' => $pageid))->sort(array('_id' => -1))->limit(1);
-	$parameterChartData = $db->parametersCollection->find(array('updated_time' => array('$lte'=>$mongotime, '$gte'=>$mongoendtime), 'page_id' => $pageid))->sort(array('updated_time' => 1));
-	$paramValues = array();
-	$i=0;
-	foreach ($values as $value) {
-		for($i=0; $i<5; $i++){
-			$paramValues[$i] = $value["Param".($i+1)];
-		}
-	}
-	foreach ($parameterChartData as $paramData) {
-		$chartData['param'][] = $paramData['Param'.$param.''];
-		$chartData['date'][] = date('Y-m-d',$paramData['updated_time']->sec);
-	}
+	$cursor = $collection->find()->sort(array('_id' => -1))->limit(1);
+
 ?>
 
 <div id="page-wrapper" >
             <div id="page-inner">
 			 <div class="row">
-                    <div class="col-md-10">
-                        <h2 >
+                    <div class="col-md-8">
+                        <h1 >
 						<?php
-							
+							$pageid=(int)$_REQUEST['pageid'];
 							$collection = $db->websites;
-							$document = $collection->findOne(array("_id" => $pageid));
-							$parameters = $db->parameters->find()->sort(array('_id' => 1));
-							$values =  $db->parametersCollection->find()->sort(array('_id' => 1));
-							$paramArray = array();
-							$i=0;
-							foreach ($parameters as $parameter) {
-								$paramArray[$i] = $parameter['name'];
-								$paramUnitArray[$i] = $parameter['units'];
-								$paramDescriptionArray[$i] = $parameter['description'];
-								$i++;
-							}
-                            print "Insights for ".$document['URL'].""; 
+							$document = $collection->findOne(array("_id" => 1));
 						?>
-                        </h2>
+
+                            Insights for www.timeinc.com
+                        </h1>
                     </div>
                     <div class="col-md-1">
                     </div>
                     <div class="col-md-1">
                     </div>
                     <div class="col-md-1">
-					<a href="index.php"><img src="assets/img/back.jpg" alt="Mountain View" style="width:80px;height:80px"></a>
+					<img src="assets/img/back.jpg" alt="Mountain View" style="width:80px;height:80px">
                     </div>
                     <div class="col-md-1" id="image">
-					<img src="assets/img/refresh.png" alt="Mountain View" style="width:80px;height:80px" id="refreshData">
+					<img src="assets/img/refresh.png" alt="Mountain View" style="width:80px;height:80px">
                     </div>
                 </div> 
                  <!-- /. ROW  -->
@@ -65,26 +41,24 @@
                     <!-- Advanced Tables -->
 					
                     <div class="panel panel-default" id="pagespeed">
-                        <div class="panel-heading-detailed">
+                        <div class="panel-heading">
                              <?php 
 								$heading = $_GET['param'];
-								echo  "<b style=\"font-size:25px;font-weight: lighter;text-decoration: none;color:black;\">".$paramArray[$param-1].": ".$paramValues[$param-1]." ".$paramUnitArray[$param-1]."</b>";
-								echo '<br><br>';
-
-								echo  "Description".": <b style=\"font-weight: lighter;text-decoration: none;color:black;\">".$paramDescriptionArray[$param-1]."</b>";
-								echo '<br><br>';
-								if($heading == 5) 
+								echo $heading;
+								print '<br><br>';
+								if($heading == "Leverage browser caching") 
 								{
+									
 									getWebsiteDetails('LeverageBrowserCaching', $cursor);
 								}
-								if($heading == 4) 
+								if($heading == "Enable Gzip compression") 
 								{
 									getWebsiteDetails('EnableGzipCompression', $cursor);
 								}
 								
 							?>
                         </div>
-						<?php if($heading == 1) { ?>
+						<?php if($heading == 'pagespeed' || $heading == 'firstbyte') { ?>
                         <div class="panel-body" id="test">
                             <div class="table-responsive">
 								
@@ -96,13 +70,12 @@
                     <!--End Advanced Tables -->
                 </div>
             </div>
-			<br><br>
-            <div class="row" >
-                <div class="col-md-12">
+            <div class="row">
+                <div class="col-md-6">
                      <!--    Hover Rows  -->
                    <div class="panel panel-default">
                         <div class="panel-body">
-							<div id="chart_div" ></div>
+							<div id="container" ></div>
 						</div>
                     </div>
                     <!-- End  Hover Rows  -->
@@ -111,7 +84,7 @@
                 <!-- /. ROW  -->
         </div>
     </div>
-   <?php include 'updateDB.php'; ?>
+     
    <?php include 'includes/footer.php'; ?>
    <script>
 // Specify your actual API key here:
@@ -122,7 +95,6 @@ var URL_TO_GET_RESULTS_FOR = '<?php echo $document["URL"]; ?>';
 </script>
 
 <script>
-
 var API_URL = 'https://www.googleapis.com/pagespeedonline/v1/runPagespeed?';
 var CHART_API_URL = 'http://chart.apis.google.com/chart?';
 
@@ -191,34 +163,29 @@ $.ajax({
 		dataType: "json",
         success: function(data){
             //alert(data.score);
-			var json_text = JSON.stringify(data, null, 2);
-						
-			//Split to get the	parameter name.		
-			path = window.location.href; 
-			param = path.split('=');
-			$insertToDatabase = param[1];
+var json_text = JSON.stringify(data, null, 2);
+	
+		//alert(json_text);
+    var pagescore = 'pagescore='+ score + '&json=' + json_text; //build a post data structure
+ $.ajax({
+        url: "insertparameterdata.php",
+        type: "post",
+        data: pagescore,
+        success: function(){
+           // alert("success");
+            $("#result").html('Submitted successfully');
+        },
+        error:function(){
+            alert("failure");
+            $("#result").html('There is error while submit');
+        }
+    });
+	
 
-			//Insert data to DB if param is 'pagespeed'.
-			if($insertToDatabase == 'pagespeed')
-			{
-				var pagescore = 'pagescore='+ score + '&json=' + json_text; //build a post data structure
-				$.ajax({
-					url: "insertparameterdata.php",
-					type: "post",
-					data: pagescore,
-					success: function(){
-					   // alert("success");
-						$("#result").html('Submitted successfully');
-					},
-					error:function(){
-						alert("failure");
-						$("#result").html('There is error while submit');
-					}
-				});
-			}
-		}
+        }
        
     });   
+
   var query = [
     'chtt=Page+Speed+score:+' + score,
     'chs=180x100',
@@ -232,7 +199,6 @@ $.ajax({
   //document.body.insertBefore(i, null);
   document.getElementById('test').insertBefore(i, null);
 };
-
 </script>
 
 

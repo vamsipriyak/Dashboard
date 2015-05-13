@@ -1,8 +1,13 @@
 <?php
   include 'includes/config.php';
-  $score=$_POST['pagescore'];
-   $json=$_POST['json'];
-  $json=json_decode($_POST['json'],true);
+ // $score=$_POST['pagescore'];
+   $pageid=json_decode($_POST['page_id']);
+   $json=$_POST['data'];
+   //echo $pageid;
+   //$pageid=$_POST['page_id'];
+	//print_r($json);
+  // echo $json;
+  //$json=json_decode($_POST['json'],true);
    $collection = $db->parameterdata_counters; 
    $user_collection = $db->parameterdata;
 
@@ -10,13 +15,14 @@
       "_id" => getNextSequence("parameterdataid"),
       "datasource_id" => 1,
 	  "parameter_id" => 1,
-	  "page_id" => 1,
-	  "value" => $score,
-	  "data" => $json
+	  "page_id" => $pageid,
+	  "value" => "",
+	  "data" => $json,
+	  "updated_time" => new MongoDate()
    );
    $user_collection->insert($document);
-   echo $score."Document inserted successfully <br>";
+   echo "Document inserted successfully <br>"; 
    
-  
+ 
 ?>
 

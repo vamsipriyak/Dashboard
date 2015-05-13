@@ -1,6 +1,7 @@
 <?php 
 include 'includes/header.php'; 
 
+
 	$mapWebsites = new MongoCode("function () {
 
 				var output= {pageid : this._id,Param1:null, Param2:null, Param3:null, Param4:null, Param5:null , URL:this.URL}
@@ -69,18 +70,7 @@ include 'includes/header.php';
         <div id="page-wrapper-home" >
             <div id="page-inner">
 			 <div class="row">
-                    <div class="col-md-12">
-                          <h1 >
-                           <span class="left">Summary </span>
-						   <div class="col-md-1" id="image" >
-					<img src="assets/img/refresh.png" alt="Mountain View" style="width:60px;height:60px">
-                    </div>
-                        </h1>
-						 <div style="clear:both"> </div>
-						 <h1 class="page-header"> </h1>
-						
-                    </div>
-						
+                  						
                     </div>
                 </div> 
                  <!-- /. ROW  -->
@@ -89,8 +79,11 @@ include 'includes/header.php';
                 <div class="col-md-12">
                     <!-- Advanced Tables -->
                     <div class="panel panel-default">
-                        <div class="panel-heading">
+                         <div class="panel-heading">
                             Website Performance
+						    <div class="col-md-1" id="image" >
+					<img src="assets/img/refresh.png" alt="Mountain View" style="width:60px;height:60px" id="refreshData">
+                    </div>
                         </div>
                         <div class="panel-body">
                             <div class="table-responsive">
@@ -99,12 +92,15 @@ include 'includes/header.php';
                                         <tr>
                                             <th>Web Page</th>
 											<?php
+											// Display the Parameters
 											$result = $db->parameters->find()->sort(array('_id' => 1));
 											$minarr=array();
 											$maxarr=array();
 											$i=0;
 											 foreach($result as $row){
-											   print '<th>'.$row['name'].'</td>';
+											   print '<th style="text-align: center;">'.$row['name'].' <br>
+											   <span id="units">('.$row['units'].')</span>
+											   </td>';
 											   $minarr[$i] = $row['minimum_value'];
 											   $maxarr[$i] = $row['maximum_value'];
 											   $i++;										   
@@ -117,7 +113,7 @@ include 'includes/header.php';
 								   
 								   <?php										
 										    $result = $db->parameters_Collection->find()->sort(array('_id' => 1)); 
-										   // iterate cursor to display the values
+										   // iterate result array to display the values
 										  
 										  foreach($result as $row){
 
@@ -144,12 +140,10 @@ include 'includes/header.php';
 											}
 											
 											}
-											/*print '<td class="center">'.$row['value']["Param2"].'</td>';
-											print '<td class="center">'.$row['value']["Param3"].'</td>';
-											print '<td class="center">'.$row['value']["Param4"].'</td>';
-											print '<td class="center">'.$row['value']["Param5"].'</td>';*/
+
 											print '</tr>';
 										   }
+										   // End of for loop//
 								?>		
                                        
                                       
@@ -167,5 +161,7 @@ include 'includes/header.php';
         </div>
              
     </div>
+			
+  <?php include 'updateDB.php'; ?>
   <?php include 'includes/footer.php'; ?>
    
