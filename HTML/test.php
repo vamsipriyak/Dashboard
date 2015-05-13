@@ -27,7 +27,6 @@ var xml = "<?xml version='1.0' encoding='UTF-8'?>
 </response>";
 $(xml).find('testId').each{
   alert( $(this).text());
-  alert("test");
  }
 </script>
  
