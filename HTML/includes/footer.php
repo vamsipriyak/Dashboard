@@ -66,7 +66,7 @@
 				0: { color: '#39C6F0' }
 			},
 			hAxis: {
-			  title: 'Date'
+			  title: 'Date', textStyle:{color: 'black', fontName: 'Arial Black'}
 			},
 			vAxis: {
 			  title: '<?php print $paramUnitArray[$param-1]; ?>'
@@ -77,16 +77,10 @@
 			chart.draw(data, options);
 		  }
 	</script>
-<<<<<<< HEAD
-        <script>
-          
-=======
-
     <script>
             $(document).ready(function () {
                 $('#dataTables-example').dataTable();
             });
->>>>>>> 338ceb320634ffa89d5dde174ec3e31a61f0e55c
 	$(function() {
 
 		var loading = function() {
