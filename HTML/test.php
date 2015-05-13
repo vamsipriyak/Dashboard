@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>jQuery.parseXML demo</title>
+  <title>jQuery.parseXML demo test</title>
   <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
 </head>
 <body>
