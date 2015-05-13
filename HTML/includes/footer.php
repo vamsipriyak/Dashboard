@@ -1,8 +1,10 @@
-        <!-- /. PAGE INNER  -->
+  <!-- /. PAGE INNER  -->
             </div>
          <!-- /. PAGE WRAPPER  -->
      <!-- /. WRAPPER  -->
 	   <footer><p>Copyright © 2015 Time Inc. All rights reserved. </p></footer>
+	   </div>
+	   </div>
 	   </div>
         <!-- /. PAGE WRAPPER  -->
     <!-- JS Scripts-->
@@ -25,8 +27,9 @@
 				});
             });
     </script>
-	
- <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+
+	  <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+
 		<script type="text/javascript">
 		  google.load("visualization", "1", {packages:["corechart", "line"]});
 		  google.setOnLoadCallback(drawChart);
@@ -74,8 +77,16 @@
 			chart.draw(data, options);
 		  }
 	</script>
+<<<<<<< HEAD
         <script>
           
+=======
+
+    <script>
+            $(document).ready(function () {
+                $('#dataTables-example').dataTable();
+            });
+>>>>>>> 338ceb320634ffa89d5dde174ec3e31a61f0e55c
 	$(function() {
 
 		var loading = function() {

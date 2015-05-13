@@ -21,9 +21,7 @@
     <link href="assets/js/dataTables/dataTables.bootstrap.css" rel="stylesheet" />
 	<script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
-    <script src="http://code.highcharts.com/highcharts.js"></script>
-    <!-- 2. You can add print and export feature by adding this line -->
-    <script src="http://code.highcharts.com/modules/exporting.js"></script>
+
 	<script src="assets/js/custom-dashboard.js"></script>
     <link href="assets/css/dashboard-styles.css" rel="stylesheet" />
 </head>
