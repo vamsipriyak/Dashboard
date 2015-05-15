@@ -90,8 +90,50 @@ class Model extends Database{
 	{	
 	  echo "basics";
 		$collection = $this->db->website_counters; 
-		}
-	
+	}	
+		
+	public function getPerformanceDetails($pageid)
+	{	 
+
+		$collection = $this->db->parameterdata;
+		$cursor = $collection->find(array('datasource_id' => 1,'page_id' => $pageid))->sort(array('_id' => -1))->limit(1);
+
+		return $cursor;
+	}
+	public function getLeftPanelDetails()
+	{	 
+	    $collection = $this->db->parameters;
+	    $cursor = $collection->find()->sort(array('_id' => 1));					   
+		return $cursor;
+	}
+	public function getParameterCollectionValues($pageid)
+	{	 
+        $values = $this->db->parametersCollection->find(array('page_id' => $pageid))->sort(array('_id' => -1))->limit(1);
+		return $values;
+	}
+	public function getParameterChartData($pageid)
+	{	 
+		$mongotime = New Mongodate(time());
+		$mongoendtime = New Mongodate(time()-30*24*3600);
+  	    $parameterChartData = $this->db->parametersCollection->find(array('updated_time' => array('$lte'=>$mongotime, '$gte'=>$mongoendtime), 'page_id' => $pageid))->sort(array('updated_time' => 1));
+		return $parameterChartData;
+	}
+	public function getUrls($pageid)
+	{	 
+		$collection = $this->db->websites;
+		$document = $collection->findOne(array("_id" => $pageid));
+		return $document;
+	}
+	public function getParameter($pageid)
+	{	 
+		$parameters = $this->db->parameters->find()->sort(array('_id' => 1));
+		return $parameters;
+	}	
+	public function getWebsite()
+	{	 
+		$websites = $this->db->websites->find();
+		return $websites;
+	}		
 }
 
 ?>
