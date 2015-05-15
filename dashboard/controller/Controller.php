@@ -4,8 +4,8 @@ function __autoload($class_name)
 {
     require_once  "model/Model.php";
 }
-	echo "hiii".$functName = $_REQUEST['foo'];
-	 echo "hii==".$url = mysql_escape_string($_POST['webPageUrl']);
+	$functName = $_REQUEST['foo'];
+	$url = mysql_escape_string($_POST['webPageUrl']);
   $parentSiteId = mysql_escape_string($_POST['parentSiteId']);
 if($functName !='')
 {
@@ -21,7 +21,7 @@ class Controller {
 	public function __construct()  
     {  
         $this->model = new Model();
-		echo "test";
+	   include 'view/includes/header.php';
 
     } 
 	
@@ -31,7 +31,6 @@ class Controller {
 	
 	    $parameterdata = $this->model->getParameterdata();
 	   $parameters = $this->model->getParameters();
-	   include 'view/includes/header.php';
 	   include 'view/home.php';
 	   include 'view/includes/footer.php';
 	}
@@ -48,10 +47,24 @@ class Controller {
 
 
 	   $websites = $this->model->getWebsites();
-	   include 'view/includes/header.php';
 	   include 'view/form.php';
 	   include 'view/includes/footer.php';
 	}
+	public function getPerformanceDetails($pageid)
+	{
+	   $cursor = $this->model->getPerformanceDetails($pageid);
+	   $getLeftPanelDetailsData = $this->model->getLeftPanelDetails();
+	   $values = $this->model->getParameterCollectionValues($pageid);
+	   $parameterChartData = $this->model->getParameterChartData($pageid);
+	   $pageUrl = $this->model->getUrls($pageid);
+	   $parameters = $this->model->getParameter($pageid);
+	   $websites = $this->model->getWebsite();
+	   include 'view/includes/leftpanel.php'; 
+	   include 'view/includes/generic.php'; 
+	   include 'view/performancedetails.php';	   
+	   include 'view/includes/footer.php';
+	}	
+	
 	
 }
 
