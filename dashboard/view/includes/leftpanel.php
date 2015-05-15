@@ -13,11 +13,10 @@ if(empty($_REQUEST['param'])){
         <nav class="navbar-default navbar-side" role="navigation">
           <div class="sidebar-collapse">
                 <ul class="nav" id="main-menu">
-					<?php										
-					   $collection = $db->parameters;
-					   $cursor = $collection->find()->sort(array('_id' => 1));					   
+					<?php								
+						
 					   // iterate cursor to display title of documents
-					   foreach ($cursor as $document) {
+					   foreach ($getLeftPanelDetailsData as $document) {
 						 //If the panel is clicked then include 'active-menu' class.		
 						 if($param == $document['name'])
 						 {
