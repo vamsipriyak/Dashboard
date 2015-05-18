@@ -106,6 +106,7 @@ include 'includes/header.php';
 											   $i++;										   
 											 }
 										    ?>
+											
                                         </tr>
                                     </thead>
                                    <tbody>
@@ -123,19 +124,67 @@ include 'includes/header.php';
 											$paramValue = $row['value']["Param".($j+1)];
 											if($j != 1 && $j != 2) {
 											if($paramValue > $maxarr[$j]) {
-												print '<td class="Green">'.$paramValue.'</td>';
+												print '<td class="white">';
+												?>												
+												<svg width="100%" height="80">
+												  <rect x="5" y="5" rx="20" ry="20" width="75" height="75"
+												  style="fill:#b6ffbd;stroke:black;stroke-width:1;opacity:0.5" />
+												   <text x="25" y="50" fill="black"><?php print $paramValue; ?></text>
+												   <text x="85" y="65" fill="grey"><?php //print '%'; ?></text>
+												</svg>
+												<?php  print '</td>';
 											} else if($paramValue < $maxarr[$j] && $paramValue > $minarr[$j]) {
-												print '<td class="Yellow">'.$paramValue.'</td>';
+												print '<td class="white">';
+												?>												
+												<svg width="100%" height="80">
+												  <rect x="5" y="5" rx="20" ry="20" width="75" height="75"
+												  style="fill:#FFFF66;stroke:black;stroke-width:1;opacity:0.5" />
+												   <text x="25" y="50" fill="black"><?php print $paramValue; ?></text>
+												   <text x="85" y="65" fill="grey"><?php //print 'Out of 100'; ?></text>												   
+												</svg>
+												<?php print '</td>';
 											} else {
-												print '<td class="Red">'.$paramValue.'</td>';
+												print '<td class="white">';
+												?>												
+												<svg width="100%" height="80">
+												  <rect x="5" y="5" rx="20" ry="20" width="75" height="75"
+												  style="fill:#fb4215;stroke:black;stroke-width:1;opacity:0.5" />
+												   <text x="25" y="50" fill="black"><?php print $paramValue; ?></text>
+												   <text x="85" y="65" fill="grey"><?php  //print 'Out of 100';  ?></text>												   
+												</svg>
+												<?php print '</td>';
 											}
 											} else {
 												if($paramValue < $minarr[$j]) {
-												print '<td class="Green">'.$paramValue.'</td>';
+												print '<td class="white">';
+												?>												
+												<svg width="100%" height="80">
+												  <rect x="5" y="5" rx="20" ry="20" width="75" height="75"
+												  style="fill:#b6ffbd;stroke:black;stroke-width:1;opacity:0.5" />
+												   <text x="25" y="50" fill="black"><?php print $paramValue; ?></text>
+												   <text x="85" y="65" fill="grey"><?php  //print 'Seconds';  ?></text>												   
+												</svg>
+												<?php print '</td>';
 											} else if($paramValue > $minarr[$j] && $paramValue < $maxarr[$j]) {
-												print '<td class="Yellow">'.$paramValue.'</td>';
+												print '<td class="white">';
+												?>												
+												<svg width="100%" height="80">
+												  <rect x="5" y="5" rx="20" ry="20" width="75" height="75"
+												  style="fill:#FFFF66;stroke:black;stroke-width:1;opacity:0.5" />
+												   <text x="25" y="50" fill="black"><?php print $paramValue; ?></text>
+												   <text x="85" y="65" fill="grey"><?php  //print 'Seconds';  ?></text>												   												   
+												</svg>
+												<?php print '</td>';
 											} else {
-												print '<td class="Red">'.$paramValue.'</td>';
+												print '<td class="red">';
+												?>												
+												<svg width="100%" height="80">
+												  <rect x="5" y="5" rx="20" ry="20" width="75" height="75"
+												  style="fill:green;stroke:black;stroke-width:1;opacity:0.5" />
+												   <text x="25" y="50" fill="black"><?php print $paramValue; ?></text>
+												   <text x="85" y="65" fill="grey"><?php  //print '%';  ?></text>												   
+												</svg>
+												<?php print '</td>';
 											}
 											}
 											
