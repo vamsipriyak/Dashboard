@@ -1,5 +1,4 @@
 <?php
-
 //echo file_get_contents("http://www.googleapis.com/pagespeedonline/v1/runPagespeed");
 $testIDs = array();
 $pageScores = array();
