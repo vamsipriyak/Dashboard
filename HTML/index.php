@@ -2,34 +2,12 @@
 <script>
 function cl(id, imageId)
 {
-    //$(document).ajaxStart(function(){
-        $("#wait"+imageId).css("display", "block");
-    //});
-    //$(document).ajaxStop(function(){
-     //   $("#wait"+imageId).css("display", "none");
-    //});
-	$.ajaxSetup({
-  success: function(data) { 
-    return;
-  }
-});
+    $("#wait"+imageId).css("display", "block");
+
     $("img").click(function(){
         $("#txt"+imageId).load("index.php "+"#"+id);
     });
 }
-/*$(document).ready(function(){
-	alert('dfdf');
-    $(document).ajaxStart(function(){
-        $("#wait1").css("display", "block");
-    });
-    $(document).ajaxComplete(function(){
-        $("#wait1").css("display", "none");
-    });
-    $("button").click(function(){
-	alert('in');
-        $("#txt1").load("index.php #txt11");
-    });
-});*/
 </script>
 
 <?php 
@@ -212,11 +190,11 @@ include 'includes/header.php';
 												</svg>
 												<?php print '</td>';
 											} else {
-												print '<td class="red" id="txt1'.$i.'">';
+												print '<td class="white" id="txt1'.$i.'">';
 												?>												
 												<svg width="100%" height="80">
 												  <rect x="30" y="5" rx="20" ry="20" width="75" height="75"
-												  style="fill:green;stroke:black;stroke-width:1;opacity:0.5" />
+												  style="fill:b6ffbd;stroke:black;stroke-width:1;opacity:0.5" />
 												   <text x="50" y="50" fill="black"><?php print $paramValue; ?></text>
 												   <text x="85" y="65" fill="grey"><?php  //print '%';  ?></text>												   
 												</svg>
