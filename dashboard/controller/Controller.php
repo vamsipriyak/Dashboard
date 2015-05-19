@@ -1,5 +1,5 @@
 <?php
-error_reporting(1);
+error_reporting(0);
 function __autoload($class_name) 
 {
     require_once  "model/Model.php";
@@ -64,7 +64,12 @@ class Controller {
 	   include 'view/performancedetails.php';	   
 	   include 'view/includes/footer.php';
 	}	
-	
+	public function getHelp()
+	{	
+	    $parameters = $this->model->getParameter();
+	   include 'view/parameters.php';
+	   include 'view/includes/footer.php';
+	}
 	
 }
 

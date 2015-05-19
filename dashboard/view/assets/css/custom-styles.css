@@ -619,3 +619,18 @@ font-size:12px;
 #dataTables-example .even {
     background: #F0FCFF;
 }
+
+a.navbar-help {
+color: #fff;
+width: 260px;
+text-align: left;
+height: 60px;
+font-size: 12px;
+font-weight: 700;
+text-transform: uppercase;
+line-height: 30px;
+text-decoration:none;
+padding:30px;
+
+}
+

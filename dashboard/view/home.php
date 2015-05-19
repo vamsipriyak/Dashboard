@@ -37,6 +37,7 @@
 											   $i++;										   
 											 }
 										    ?>
+											<th></td>
                                         </tr>
                                     </thead>
                                    <tbody>
@@ -44,11 +45,16 @@
 								   
 								   <?php										
 										   // iterate result array to display the values
-										  
+										  $k=0;
 										  foreach($parameterdata as $row){
-
-											print '<tr >';												
-											print '<td class="center"><a href="performancedetails.php?param=1&pageid='.$row['_id'].'">'.$row['value']['URL'].'</td>';
+											?>										 
+											<tr id="<?php echo $row['_id'];?>">
+											<?php										
+											print '<td class="center">';
+											print ' 
+												<div  id="wait'.$row['_id'].'" style="display:none;"><img src="view/assets/img/demo_wait.gif" width="64" height="64" /></div>	
+												
+											<a href="performancedetails.php?param=1&pageid='.$row['_id'].'">'.$row['value']['URL'].'</td>';
 											for($j=0; $j<5; $j++) {
 											$paramValue = $row['value']["Param".($j+1)];
 											if($j != 1 && $j != 2) {
@@ -71,7 +77,15 @@
 											
 											}
 
-											print '</tr>';
+											print '<td align="center">   
+												<img src="view/assets/img/refresh.png" alt="Mountain View" style="width:40px;height:40px;cursor:pointer;" id="'.$row['_id'].'" value="'.$k.'"> 
+												</td>';
+											?>	
+											<input type="hidden" name="cnt" id="cnt-<?php echo $k; ?>" value="<?php echo $k; ?>">
+
+											</tr>
+											<?php
+											$k++;
 										   }
 										   // End of for loop//
 								?>		
@@ -91,3 +105,28 @@
         </div>
              
     </div>
+	
+	      <script type="text/javascript">
+	  
+$(document).on('click', 'img', function () {
+	var row_id = this.id;
+	var merge=$('#'+row_id).attr('class');
+	//var test=document.getElementById(merge).value;
+	$("#wait"+row_id).css("display", "block");
+	//alert($('#'+row_id).attr('class'));
+	$.ajax({
+  url: "view/ajaxload.php",
+  method: "POST",
+  data: { id : this.id,cnt : merge},
+  dataType: "html",
+  success: function (res) {
+  //alert(res);
+  //$("#this.id").html(res);
+  console.log(res);
+       $('#'+row_id).replaceWith(res);
+  }
+});
+});	  
+	  
+
+      </script>
