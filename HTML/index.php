@@ -1,3 +1,15 @@
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script>
+function cl(id, imageId)
+{
+    $("#wait"+imageId).css("display", "block");
+
+    $("img").click(function(){
+        $("#txt"+imageId).load("index.php "+"#"+id);
+    });
+}
+</script>
+
 <?php 
 include 'includes/header.php'; 
 
@@ -106,7 +118,7 @@ include 'includes/header.php';
 											   $i++;										   
 											 }
 										    ?>
-											
+											<th></th>
                                         </tr>
                                     </thead>
                                    <tbody>
@@ -116,72 +128,74 @@ include 'includes/header.php';
 										    $result = $db->parameters_Collection->find()->sort(array('_id' => 1)); 
 										   // iterate result array to display the values
 										  
-										  foreach($result as $row){
+										  foreach($result as $i => $row){
 
-											print '<tr >';												
-											print '<td class="center"><a href="performancedetails.php?param=1&pageid='.$row['_id'].'">'.$row['value']['URL'].'</td>';
+											print '<tr id="txt'.$i.'">';												
+											print '<td class="center" id="txt1'.$i.'" >';
+											print '<div  id="wait'.$i.'" style="display:none;"><img src="assets/img/demo_wait.gif" width="64" height="64" /></div>';											
+											print '<a href=performancedetails.php?param=1&pageid='.$row['_id'].'">'.$row['value']['URL'].'</td>';
 											for($j=0; $j<5; $j++) {
 											$paramValue = $row['value']["Param".($j+1)];
 											if($j != 1 && $j != 2) {
 											if($paramValue > $maxarr[$j]) {
-												print '<td class="white">';
+												print '<td class="white" id="txt1'.$i.'">';
 												?>												
 												<svg width="100%" height="80">
-												  <rect x="5" y="5" rx="20" ry="20" width="75" height="75"
+												  <rect x="30" y="5" rx="20" ry="20" width="75" height="75"
 												  style="fill:#b6ffbd;stroke:black;stroke-width:1;opacity:0.5" />
-												   <text x="25" y="50" fill="black"><?php print $paramValue; ?></text>
+												   <text x="50" y="50" fill="black"><?php print $paramValue; ?></text>
 												   <text x="85" y="65" fill="grey"><?php //print '%'; ?></text>
 												</svg>
 												<?php  print '</td>';
 											} else if($paramValue < $maxarr[$j] && $paramValue > $minarr[$j]) {
-												print '<td class="white">';
+												print '<td class="white" id="txt1'.$i.'">';
 												?>												
 												<svg width="100%" height="80">
-												  <rect x="5" y="5" rx="20" ry="20" width="75" height="75"
+												  <rect x="30" y="5" rx="20" ry="20" width="75" height="75"
 												  style="fill:#FFFF66;stroke:black;stroke-width:1;opacity:0.5" />
-												   <text x="25" y="50" fill="black"><?php print $paramValue; ?></text>
+												   <text x="50" y="50" fill="black"><?php print $paramValue; ?></text>
 												   <text x="85" y="65" fill="grey"><?php //print 'Out of 100'; ?></text>												   
 												</svg>
 												<?php print '</td>';
 											} else {
-												print '<td class="white">';
+												print '<td class="white" id="txt1'.$i.'">';
 												?>												
 												<svg width="100%" height="80">
-												  <rect x="5" y="5" rx="20" ry="20" width="75" height="75"
+												  <rect x="30" y="5" rx="20" ry="20" width="75" height="75"
 												  style="fill:#fb4215;stroke:black;stroke-width:1;opacity:0.5" />
-												   <text x="25" y="50" fill="black"><?php print $paramValue; ?></text>
+												   <text x="50" y="50" fill="black"><?php print $paramValue; ?></text>
 												   <text x="85" y="65" fill="grey"><?php  //print 'Out of 100';  ?></text>												   
 												</svg>
 												<?php print '</td>';
 											}
 											} else {
 												if($paramValue < $minarr[$j]) {
-												print '<td class="white">';
+												print '<td class="white" id="txt1'.$i.'">';
 												?>												
 												<svg width="100%" height="80">
-												  <rect x="5" y="5" rx="20" ry="20" width="75" height="75"
+												  <rect x="30" y="5" rx="20" ry="20" width="75" height="75"
 												  style="fill:#b6ffbd;stroke:black;stroke-width:1;opacity:0.5" />
-												   <text x="25" y="50" fill="black"><?php print $paramValue; ?></text>
+												   <text x="50" y="50" fill="black"><?php print $paramValue; ?></text>
 												   <text x="85" y="65" fill="grey"><?php  //print 'Seconds';  ?></text>												   
 												</svg>
 												<?php print '</td>';
 											} else if($paramValue > $minarr[$j] && $paramValue < $maxarr[$j]) {
-												print '<td class="white">';
+												print '<td class="white" id="txt1'.$i.'">';
 												?>												
 												<svg width="100%" height="80">
-												  <rect x="5" y="5" rx="20" ry="20" width="75" height="75"
+												  <rect x="30" y="5" rx="20" ry="20" width="75" height="75"
 												  style="fill:#FFFF66;stroke:black;stroke-width:1;opacity:0.5" />
-												   <text x="25" y="50" fill="black"><?php print $paramValue; ?></text>
+												   <text x="50" y="50" fill="black"><?php print $paramValue; ?></text>
 												   <text x="85" y="65" fill="grey"><?php  //print 'Seconds';  ?></text>												   												   
 												</svg>
 												<?php print '</td>';
 											} else {
-												print '<td class="red">';
+												print '<td class="white" id="txt1'.$i.'">';
 												?>												
 												<svg width="100%" height="80">
-												  <rect x="5" y="5" rx="20" ry="20" width="75" height="75"
-												  style="fill:green;stroke:black;stroke-width:1;opacity:0.5" />
-												   <text x="25" y="50" fill="black"><?php print $paramValue; ?></text>
+												  <rect x="30" y="5" rx="20" ry="20" width="75" height="75"
+												  style="fill:b6ffbd;stroke:black;stroke-width:1;opacity:0.5" />
+												   <text x="50" y="50" fill="black"><?php print $paramValue; ?></text>
 												   <text x="85" y="65" fill="grey"><?php  //print '%';  ?></text>												   
 												</svg>
 												<?php print '</td>';
@@ -189,12 +203,12 @@ include 'includes/header.php';
 											}
 											
 											}
-
+											print '<td id="txt1'.$i.'" onclick="cl(this.id, '.$i.')"><img src="assets/img/refresh.png" alt="Mountain View" style="width:60px;height:60px" ></td>';
 											print '</tr>';
 										   }
+										   
 										   // End of for loop//
 								?>		
-                                       
                                       
                                     </tbody>
                                 </table>
