@@ -215,7 +215,7 @@ include 'includes/header.php';
 											}
 											
 											}
-											print '<td id="row1'.$i.'" ><button id="submit'.$i.'" onclick="loadData.call(this, '.$i.')"><img src="assets/img/refresh.png" alt="Mountain View" style="width:60px;height:60px" ></button></td>';
+											print '<td id="row1'.$i.'" ><button id="submit'.$i.'" onclick="loadData.call(this, '.$i.')" style="background-color: Transparent;background-repeat:no-repeat;border: none;cursor:pointer;overflow: hidden;outline:none;"  ><img src="assets/img/refresh.png" alt="Mountain View" style="width:60px;height:60px" ></button></td>';
 											print '</tr>';
 										   }
 										   
