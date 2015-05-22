@@ -45,7 +45,6 @@
 								   
 								   <?php										
 										   // iterate result array to display the values
-										  $k=0;
 										  foreach($parameterdata as $i => $row){
 																					 
 											print '<tr id="row'.$i.'">';												
@@ -96,26 +95,6 @@
     </div>
 	
 <script type="text/javascript">
-	  
-/*$(document).on('click', 'img', function () {
-	var row_id = this.id;
-	var merge=$('#'+row_id).attr('class');
-	//var test=document.getElementById(merge).value;
-	$("#wait"+row_id).css("display", "block");
-	//alert($('#'+row_id).attr('class'));
-	$.ajax({
-  url: "view/ajaxload.php",
-  method: "POST",
-  data: { id : this.id,cnt : merge},
-  dataType: "html",
-  success: function (res) {
-  //alert(res);
-  //$("#this.id").html(res);
-  console.log(res);
-       $('#'+row_id).replaceWith(res);
-  }
-});
-});*/
 
 function loadData(id)
 {
