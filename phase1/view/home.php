@@ -119,7 +119,6 @@
 
 function loadData(id)
 {
-	alert(id);
     document.getElementById('submit'+id).disabled = 'disabled';
     var t = this.parentNode;
     tagName = "td";
