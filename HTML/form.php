@@ -58,13 +58,13 @@
 											<th>URL</th>
                                         </tr>
                                     </thead>
-                                    <tbody>
+                                    <tbody id="load">
 										<?php										
 										   $collection = $db->websites;
 										   $cursor = $collection->find();
 										   // iterate cursor to display title of documents
-										   foreach ($cursor as $document) {
-											print '<tr class="odd gradeX">';												
+										   foreach ($cursor as $i => $document) {
+											print '<tr class="odd gradeX" >';												
 											print '<td class="center">'.$document["_id"].'</td>';
 											print '<td class="center">'.$document["parent_page_id"].'</td>';
 											print '<td class="center">'.$document["URL"].'</td>';
