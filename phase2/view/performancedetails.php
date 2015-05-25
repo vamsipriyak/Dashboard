@@ -65,6 +65,26 @@
 								{
 									getWebsiteDetails('EnableGzipCompression', $cursor);
 								}
+								if($heading == 6) 
+								{
+									getWebsiteDetails('AvoidLandingPageRedirects', $cursor);
+								}
+								if($heading == 7) 
+								{
+									getWebsiteDetails('OptimizeImages', $cursor);
+								}
+								if($heading == 8) 
+								{
+									getWebsiteDetails('MinifyJavaScript', $cursor);
+								}
+								if($heading == 9) 
+								{
+									getWebsiteDetails('MinifyCss', $cursor);
+								}
+								if($heading == 10) 
+								{
+									getWebsiteDetails('MinifyHTML', $cursor);
+								}
 								
 							?>
                         </div>
