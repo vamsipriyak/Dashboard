@@ -49,7 +49,7 @@
                     <!-- Advanced Tables -->
 					
                     <div class="panel panel-default" id="pagespeed">
-                        <div class="panel-heading-detailed">
+                        <div class="panel-body">
                              <?php 
 								$heading = $_GET['param'];
 								echo  "<b style=\"font-size:25px;font-weight: lighter;text-decoration: none;color:black;\">".$paramArray[$param-1].": ".$paramValues[$param-1]." ".$paramUnitArray[$param-1]."</b>";
