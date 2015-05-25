@@ -50,7 +50,7 @@
 											print '<tr id="row'.$i.'">';												
 											print '<td class="center" id="row1'.$i.'" >';
 											print '<div  id="wait'.$i.'" style="display:none;"><img src="view/assets/img/demo_wait.gif" width="64" height="64" /></div>';											
-											print '<a href=performancedetails.php?param=1&pageid='.$row['_id'].'">'.$row['value']['URL'].'</td>';
+											print '<a href=performancedetails.php?param=1&pageid='.$row['_id'].'>'.$row['value']['URL'].'</td>';
 											for($j=0; $j<5; $j++) {
 											$paramValue = $row['value']["Param".($j+1)];
 											if($j != 1 && $j != 2) {
