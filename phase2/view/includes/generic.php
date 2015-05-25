@@ -26,7 +26,8 @@ function getWebsiteDetails($parameter, $cursor, $paramName) {
 			{
 				if(!count($header['header']['args']))
 				{
-					echo $header['header']['format'];
+					echo '<b>'.$header['header']['format'].'</b>';
+					echo '<br>';
 				}
 				else
 				{
