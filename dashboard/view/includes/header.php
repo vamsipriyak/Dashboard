@@ -37,7 +37,7 @@
                 </button>
                 <a class="navbar-brand" href="index.php">Dashboard</a>
             </div>
-            <div style="float:right" ><a href="" class="navbar-help">Help </a></div> 
+            <div style="float:right" ><a href="help.php" class="navbar-help">Help </a></div> 
            <!-- <ul class="nav navbar-top-links navbar-right">
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">

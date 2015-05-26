@@ -4,15 +4,7 @@ function __autoload($class_name)
 {
     require_once  "model/Model.php";
 }
-	$functName = $_REQUEST['foo'];
-	$url = mysql_escape_string($_POST['webPageUrl']);
-  $parentSiteId = mysql_escape_string($_POST['parentSiteId']);
-if($functName !='')
-{
 
-$controller = new Controller();
-	$controller->addWebpageURL($url,$parentSiteId);
-}
 
 class Controller {
 
@@ -34,21 +26,22 @@ class Controller {
 	   include 'view/home.php';
 	   include 'view/includes/footer.php';
 	}
-	public function addWebpageURL($url,$parentSiteId)
+	public function addWebpageURL($url,$isParentTrue,$parentSiteId)
 	{
-	
 
 	   if($url != '')
-	   {	
-	   echo "url==".$url;
-   $user_collection = $this->model->addWebsiteurls($url,$parentSiteId);	   
-  
-    }
-
-
+	   {
+       $user_collection = $this->model->addWebsiteurls($url,$isParentTrue,$parentSiteId);	 
+	   
+       }	   
+	   else
+	   {
+	   
 	   $websites = $this->model->getWebsites();
+	    $parentwebsites = $this->model->getparentWebsites();
 	   include 'view/form.php';
 	   include 'view/includes/footer.php';
+	   }
 	}
 	public function getPerformanceDetails($pageid)
 	{
@@ -68,6 +61,19 @@ class Controller {
 	{	
 	    $parameters = $this->model->getParameter();
 	   include 'view/parameters.php';
+	   include 'view/includes/footer.php';
+	}
+	public function getParameters()
+	{	
+	    $parameters = $this->model->getParameter();
+	   include 'view/editparameters.php';
+	   include 'view/includes/footer.php';
+	}
+	public function updateParam($id,$minvalue,$maxvalue,$desc)
+	{	
+	    $parameters11 = $this->model->updateParam($id,$minvalue,$maxvalue,$desc);
+		$parameters = $this->model->getParameter();
+	   include 'view/editparameters.php';
 	   include 'view/includes/footer.php';
 	}
 	

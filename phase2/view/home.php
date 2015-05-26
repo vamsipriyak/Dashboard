@@ -45,35 +45,45 @@
 								   
 								   <?php										
 										   // iterate result array to display the values
-										  foreach($parameterdata as $i => $row){
-																					 
-											print '<tr id="row'.$i.'">';												
-											print '<td class="center" id="row1'.$i.'" >';
-											print '<div  id="wait'.$i.'" style="display:none;"><img src="view/assets/img/demo_wait.gif" width="64" height="64" /></div>';											
-											print '<a href=performancedetails.php?param=1&pageid='.$row['_id'].'>'.$row['value']['URL'].'</td>';
-											for($j=0; $j<5; $j++) {
+										  $k=0;
+										  foreach($parameterdata as $row){
+											?>										 
+											<tr id="<?php echo $row['_id'];?>">
+											<?php										
+											print '<td class="center">';
+											print ' 
+												<div  id="wait'.$row['_id'].'" style="display:none;"><img src="view/assets/img/demo_wait.gif" width="64" height="64" /></div>	
+												
+											<a href="performancedetails.php?param=1&pageid='.$row['_id'].'">'.$row['value']['URL'].'</td>';
+											for($j=0; $j<10; $j++) {
 											$paramValue = $row['value']["Param".($j+1)];
 											if($j != 1 && $j != 2) {
 											if($paramValue > $maxarr[$j]) {
-												print '<td class="Green" id="row1'.$i.'">'.$paramValue.'</td>';
+												print '<td class="Green">'.$paramValue.'</td>';
 											} else if($paramValue < $maxarr[$j] && $paramValue > $minarr[$j]) {
-												print '<td class="Yellow" id="row1'.$i.'">'.$paramValue.'</td>';
+												print '<td class="Yellow">'.$paramValue.'</td>';
 											} else {
-												print '<td class="Red" id="row1'.$i.'">'.$paramValue.'</td>';
+												print '<td class="Red">'.$paramValue.'</td>';
 											}
 											} else {
 												if($paramValue < $minarr[$j]) {
-												print '<td class="Green" id="row1'.$i.'">'.$paramValue.'</td>';
+												print '<td class="Green">'.$paramValue.'</td>';
 											} else if($paramValue > $minarr[$j] && $paramValue < $maxarr[$j]) {
-												print '<td class="Yellow" id="row1'.$i.'">'.$paramValue.'</td>';
+												print '<td class="Yellow">'.$paramValue.'</td>';
 											} else {
-												print '<td class="Red" id="row1'.$i.'">'.$paramValue.'</td>';
+												print '<td class="Red">'.$paramValue.'</td>';
 											}
 											}
 											
 											}
-											print '<td id="row1'.$i.'" ><button id="submit'.$i.'" onclick="loadData.call(this, '.$i.')" style="background-color: Transparent;background-repeat:no-repeat;border: none;cursor:pointer;overflow: hidden;outline:none;"  ><img src="view/assets/img/refresh.png" alt="Mountain View" style="width:60px;height:60px" ></button></td>';
-											print '</tr>';
+
+											print '<td align="center">   
+												<img src="view/assets/img/refresh.png" alt="Mountain View" style="width:40px;height:40px;cursor:pointer;" id="'.$row['_id'].'" class="refresh" onclick="postWebsiteParams()"> 
+												</td>';
+											?>	
+										
+											</tr>
+											<?php
 										   }
 										   // End of for loop//
 								?>		
@@ -94,24 +104,28 @@
              
     </div>
 	
-<script type="text/javascript">
-
-function loadData(id)
+	      <script type="text/javascript">
+$(document).on('click', '.refresh', function() 
 {
-    document.getElementById('submit'+id).disabled = 'disabled';
-    var t = this.parentNode;
-    tagName = "td";
+	var row_id = this.id;
+	alert(row_id);
+	var merge=$('#'+row_id).attr('class');
+	//var test=document.getElementById(merge).value;
+	$("#wait"+row_id).css("display", "block");
+	//alert($('#'+row_id).attr('class'));
+	$.ajax({
+  url: "view/ajaxload.php",
+  method: "POST",
+  data: { id : this.id,cnt : merge},
+  dataType: "html",
+  success: function (res) {
+  //alert(res);
+  //$("#this.id").html(res);
+  console.log(res);
+       $('#'+row_id).replaceWith(res);
+  }
+});
+});	  
+	  
 
-	ajaxImageLoadId = "#wait"+id;
-	tableRowId = "#row"+id;
-	submitButtonId = t.id;
-    $("#wait"+id).css("display", "block");
-	setTimeout('hide(ajaxImageLoadId, submitButtonId, '+id+')',2000);
-
-}
-function hide(ajaxImageLoadId, imageId, id) {
-   $(ajaxImageLoadId).css("display", "none");
-   $("#row"+id).load("index.php "+"#"+imageId);
-}
-
-</script>	  
+      </script>

@@ -38,6 +38,6 @@
                 </button>
                 <a class="navbar-brand" href="index.php">Dashboard</a>
             </div>
-            <div style="float:right" ><a href="" class="navbar-help">Help </a></div> 
+            <div style="float:right" ><a href="help.php" class="navbar-help">Help </a></div> 
         </nav>
        

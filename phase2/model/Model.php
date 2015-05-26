@@ -13,16 +13,16 @@ class Model extends Database{
 			 
 			 $mapWebsites = new MongoCode("function () {
 
-					var output= {pageid : this._id,Param1:null, Param2:null, Param3:null, Param4:null, Param5:null , URL:this.URL}
+					var output= {pageid : this._id,Param1:null, Param2:null, Param3:null, Param4:null, Param5:null ,Param6:null ,Param7:null ,Param8:null ,Param9:null ,Param10:null , URL:this.URL}
 						emit(this._id, output);
 					};");
 		$mapParam = new MongoCode("function () {
 
-				   var output= {pageid : this.page_id,Param1:this.Param1, Param2:this.Param2, Param3:this.Param3,Param4:this.Param4,Param5:this.Param5  }
+				   var output= {pageid : this.page_id,Param1:this.Param1, Param2:this.Param2, Param3:this.Param3,Param4:this.Param4,Param5:this.Param5,Param6:this.Param6, Param7:this.Param7, Param8:this.Param8,Param9:this.Param9,Param10:this.Param10  }
 							emit(this.page_id, output);
 					};");
 
-		$reduceF = new MongoCode("function(key, values) { var outs = {Param1:null, Param2:null, Param3:null, Param4:null, Param5:null };
+		$reduceF = new MongoCode("function(key, values) { var outs = {Param1:null, Param2:null, Param3:null, Param4:null, Param5:null,Param6:null ,Param7:null ,Param8:null ,Param9:null ,Param10:null };
 
 		values.forEach(function(v){
 
@@ -40,6 +40,21 @@ class Model extends Database{
 						}
 						 if(outs.Param5 ==null){
 							outs.Param5 = v.Param5
+						}
+						if(outs.Param6 ==null){
+							outs.Param6 = v.Param6
+						}
+						if(outs.Param7 ==null){
+							outs.Param7 = v.Param7
+						}
+						 if(outs.Param8 ==null){
+							outs.Param8 = v.Param8
+						}
+						 if(outs.Param9 ==null){
+							outs.Param9 = v.Param9
+						}
+						 if(outs.Param10 ==null){
+							outs.Param10 = v.Param10
 						}
 						if(outs.URL ==null){
 							outs.URL = v.URL
@@ -86,10 +101,36 @@ class Model extends Database{
 		$results = $this->db->websites->find()->sort(array('_id' => 1));
 		 return $results;
 	}
-	public function addWebsiteurls($url,$parentSiteId)
+	public function addWebsiteurls($url,$isParentTrue,$parentSiteId)
 	{	
-	  echo "basics";
 		$collection = $this->db->website_counters; 
+		$retval = $collection->findAndModify(
+			 array('_id' => "websiteid"),
+			 array('$inc' => array("seq" => 1)),
+			 null,
+			 array(
+				"new" => true,
+			)
+		);
+		$user_collection = $this->db->websites;
+		if($isParentTrue != "Yes")
+		{
+		   $document = array( 
+				"_id" => $retval['seq'],
+			  "parent_page_id" => $parentSiteId,
+			  "URL" =>$url     	  
+		   );
+		}
+	   else
+	   {
+			$document = array( 
+				"_id" => $retval['seq'],
+			  "parent_page_id" => $retval['seq'],
+			  "URL" =>$url     	  
+		   );
+	   }
+   $user_collection->insert($document);
+   return "Document inserted successfully";
 	}	
 		
 	public function getPerformanceDetails($pageid)
@@ -97,7 +138,6 @@ class Model extends Database{
 
 		$collection = $this->db->parameterdata;
 		$cursor = $collection->find(array('datasource_id' => 1,'page_id' => $pageid))->sort(array('_id' => -1))->limit(1);
-
 		return $cursor;
 	}
 	public function getLeftPanelDetails()
@@ -133,7 +173,25 @@ class Model extends Database{
 	{	 
 		$websites = $this->db->websites->find();
 		return $websites;
-	}		
+	}	
+	public function getparentWebsites()
+	{	 
+		$websites = $this->db->websites;
+		 $js = "function() {
+				return this._id == this.parent_page_id;
+			}";
+		$urls = $websites->find(array('$where' => $js));
+		return $urls;
+	}	
+	
+public function updateParam($id,$minvalue,$maxvalue,$desc)
+	{	
+		$user_collection = $this->db->parameters;
+				
+		$user_collection->update(array("_id"=>$id), array('$set'=>array("minimum_value"=>$minvalue,"maximum_value"=>$maxvalue,"description"=>$desc)));
+
+		return "Document updated successfully";
+}	
 }
 
 ?>

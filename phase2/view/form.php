@@ -2,7 +2,7 @@
             <div id="page-inner">
 			 <div class="row">
                     <div class="col-md-12">
-                                    <form role="form" action="controller/Controller.php?foo=addWebpageURL" method="POST" id="webPageForm">
+                                    <form role="form" action="" method="POST" id="webPageForm">
                                         <div class="form-group">
                                             <label>Web page URL</label>
                                             <input class="form-control" name = "webPageUrl" id = "webPageUrl" value = "">
@@ -10,22 +10,32 @@
                                         <div class="form-group">
                                             <label>Is it a parent site</label>
                                             <label class="radio-inline">
-                                                <input type="radio" name="isParent" id="isParentTrue" value="" checked="">Yes
+                                                <input type="radio" name="isParent" id="isParentTrue" value="Yes" checked>Yes
                                             </label>
                                             <label class="radio-inline">
-                                                <input type="radio" name="isParent" id="isParentFalse" value="">No
+                                                <input type="radio" name="isParent" id="isParentFalse" value="No">No
                                             </label>
                                         </div>
                                         <div class="form-group" id="parentSite" style="display:none;">
                                             <label>Choose a parent site</label>
 											
                                             <select class="form-control" id="parentSiteId">
-                                                <option value=1>http://www.timeinc.com/about/</option>
-                                                <option value=2>http://www.timeinc.com/experiences/</option>
-                                                <option value=3>http://www.timeinc.com/brands/</option>
+											<option value="">- Select -</option>
+                                              <?php
+											 
+										   // iterate cursor to display title of documents
+										   foreach ($parentwebsites as $document) {
+										   if($document["_id"]!='')
+										   {
+											?>
+                                                <option value="<?php echo $document["_id"]; ?>"><?php echo $document["URL"]; ?></option>
+                                            <?php 
+											}
+												}											
+											?>
                                             </select>
                                         </div>
-										<input id="submitForm" name="submitForm" class="btn btn-default"  type="submit" value="Submit">
+										<input id="submitForm" name="submitForm" class="btn btn-default" onclick="postWebsiteParams()"  type="button" value="Submit">
                                         <input id="submitForm" name="submitForm" class="btn btn-default" onclick="resetValues()" type="button" value="Reset">
                                     </form>
                     </div>
