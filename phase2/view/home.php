@@ -108,7 +108,7 @@
 $(document).on('click', '.refresh', function() 
 {
 	var row_id = this.id;
-	alert(row_id);
+	//alert(row_id);
 	var merge=$('#'+row_id).attr('class');
 	//var test=document.getElementById(merge).value;
 	$("#wait"+row_id).css("display", "block");
