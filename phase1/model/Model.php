@@ -86,10 +86,36 @@ class Model extends Database{
 		$results = $this->db->websites->find()->sort(array('_id' => 1));
 		 return $results;
 	}
-	public function addWebsiteurls($url,$parentSiteId)
+	public function addWebsiteurls($url,$isParentTrue,$parentSiteId)
 	{	
-	  echo "basics";
 		$collection = $this->db->website_counters; 
+		$retval = $collection->findAndModify(
+			 array('_id' => "websiteid"),
+			 array('$inc' => array("seq" => 1)),
+			 null,
+			 array(
+				"new" => true,
+			)
+		);
+		$user_collection = $this->db->websites;
+		if($isParentTrue != "Yes")
+		{
+		   $document = array( 
+				"_id" => $retval['seq'],
+			  "parent_page_id" => $parentSiteId,
+			  "URL" =>$url     	  
+		   );
+		}
+	   else
+	   {
+			$document = array( 
+				"_id" => $retval['seq'],
+			  "parent_page_id" => $retval['seq'],
+			  "URL" =>$url     	  
+		   );
+	   }
+   $user_collection->insert($document);
+   return "Document inserted successfully";
 	}	
 		
 	public function getPerformanceDetails($pageid)
@@ -97,7 +123,6 @@ class Model extends Database{
 
 		$collection = $this->db->parameterdata;
 		$cursor = $collection->find(array('datasource_id' => 1,'page_id' => $pageid))->sort(array('_id' => -1))->limit(1);
-
 		return $cursor;
 	}
 	public function getLeftPanelDetails()
@@ -133,7 +158,25 @@ class Model extends Database{
 	{	 
 		$websites = $this->db->websites->find();
 		return $websites;
-	}		
+	}	
+	public function getparentWebsites()
+	{	 
+		$websites = $this->db->websites;
+		 $js = "function() {
+				return this._id == this.parent_page_id;
+			}";
+		$urls = $websites->find(array('$where' => $js));
+		return $urls;
+	}	
+	
+public function updateParam($id,$minvalue,$maxvalue,$desc)
+	{	
+		$user_collection = $this->db->parameters;
+				
+		$user_collection->update(array("_id"=>$id), array('$set'=>array("minimum_value"=>$minvalue,"maximum_value"=>$maxvalue,"description"=>$desc)));
+
+		return "Document updated successfully";
+}			
 }
 
 ?>
