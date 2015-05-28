@@ -45,7 +45,7 @@ foreach ($websites as $site) { ?>
 							//alert(response);
 							var params = response.split(',');
 							var pageid = params[0];
-							alert(pageid);
+							//alert(pageid);
 							$.each( params, function( index, value ){
 								
 								//alert(pageid);
