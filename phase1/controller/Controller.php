@@ -21,7 +21,7 @@ class Controller {
 	public function __construct()  
     {  
         $this->model = new Model();
-	   include 'view/includes/header.php';
+	   include 'view/includes/header.php';	   
 
     } 
 	
@@ -31,8 +31,10 @@ class Controller {
 	
 	    $parameterdata = $this->model->getParameterdata();
 	   $parameters = $this->model->getParameters();
+	   $websites = $this->model->getWebsites();
 	   include 'view/home.php';
 	   include 'view/includes/footer.php';
+	   include 'view/updateDB.php';
 	}
 	public function addWebpageURL($url,$parentSiteId)
 	{

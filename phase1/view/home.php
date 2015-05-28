@@ -14,7 +14,7 @@
                          <div class="panel-heading">
                             Website Performance
 						    <div class="col-md-1" id="image" >
-					<img src="view/assets/img/refresh.png" alt="Mountain View" style="width:60px;height:60px">
+					<img src="view/assets/img/refresh.png" alt="Refresh Data" style="width:60px;height:60px" id="refreshData">
                     </div>
                         </div>
                         <div class="panel-body">
@@ -50,24 +50,24 @@
 											print '<tr id="row'.$i.'">';												
 											print '<td class="center" id="row1'.$i.'" >';
 											print '<div  id="wait'.$i.'" style="display:none;"><img src="view/assets/img/demo_wait.gif" width="64" height="64" /></div>';											
-											print '<a href=performancedetails.php?param=1&pageid='.$row['_id'].'">'.$row['value']['URL'].'</td>';
+											print '<a href=performancedetails.php?param=1&pageid='.$row['_id'].'>'.$row['value']['URL'].'</td>';
 											for($j=0; $j<5; $j++) {
 											$paramValue = $row['value']["Param".($j+1)];
 											if($j != 1 && $j != 2) {
 											if($paramValue > $maxarr[$j]) {
-												print '<td class="Green" id="row1'.$i.'">'.$paramValue.'</td>';
+												print '<td class="Green" id="tdrow'.$row['_id'].$j.'">'.$paramValue.'</td>';
 											} else if($paramValue < $maxarr[$j] && $paramValue > $minarr[$j]) {
-												print '<td class="Yellow" id="row1'.$i.'">'.$paramValue.'</td>';
+												print '<td class="Yellow" id="tdrow'.$row['_id'].$j.'">'.$paramValue.'</td>';
 											} else {
-												print '<td class="Red" id="row1'.$i.'">'.$paramValue.'</td>';
+												print '<td class="Red" id="tdrow'.$row['_id'].$j.'">'.$paramValue.'</td>';
 											}
 											} else {
 												if($paramValue < $minarr[$j]) {
-												print '<td class="Green" id="row1'.$i.'">'.$paramValue.'</td>';
+												print '<td class="Green" id="tdrow'.$row['_id'].$j.'">'.$paramValue.'</td>';
 											} else if($paramValue > $minarr[$j] && $paramValue < $maxarr[$j]) {
-												print '<td class="Yellow" id="row1'.$i.'">'.$paramValue.'</td>';
+												print '<td class="Yellow" id="tdrow'.$row['_id'].$j.'">'.$paramValue.'</td>';
 											} else {
-												print '<td class="Red" id="row1'.$i.'">'.$paramValue.'</td>';
+												print '<td class="Red" id="tdrow'.$row['_id'].$j.'">'.$paramValue.'</td>';
 											}
 											}
 											
@@ -114,4 +114,4 @@ function hide(ajaxImageLoadId, imageId, id) {
    $("#row"+id).load("index.php "+"#"+imageId);
 }
 
-</script>	  
+</script>
