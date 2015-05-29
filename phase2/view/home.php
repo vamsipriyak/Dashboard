@@ -29,7 +29,7 @@
 											$maxarr=array();
 											$i=0;
 											 foreach($parameters as $row){
-											   print '<th style="text-align: center;">'.$row['name'].' <br>
+											   print '<th class="header-width">'.$row['name'].' <br>
 											   <span id="units">('.$row['units'].')</span>
 											   </td>';
 											   $minarr[$i] = $row['minimum_value'];
@@ -49,8 +49,9 @@
 										  foreach($parameterdata as $row){
 											?>										 
 											<tr id="<?php echo $row['_id'];?>">
-											<?php										
-											print '<td class="center">';
+											<?php							
+
+											print '<td class="center"  >';
 											print ' 
 												<div  id="wait'.$row['_id'].'" style="display:none;"><img src="view/assets/img/demo_wait.gif" width="64" height="64" /></div>	
 												
@@ -59,19 +60,19 @@
 											$paramValue = $row['value']["Param".($j+1)];
 											if($j != 1 && $j != 2) {
 											if($paramValue > $maxarr[$j]) {
-												print '<td class="Green">'.$paramValue.'</td>';
+												print '<td class="green-new" >'.$paramValue.'</td>';
 											} else if($paramValue < $maxarr[$j] && $paramValue > $minarr[$j]) {
-												print '<td class="Yellow">'.$paramValue.'</td>';
+												print '<td class="yellow-new" >'.$paramValue.'</td>';
 											} else {
-												print '<td class="Red">'.$paramValue.'</td>';
+												print '<td class="red-new" >'.$paramValue.'</td>';
 											}
 											} else {
 												if($paramValue < $minarr[$j]) {
-												print '<td class="Green">'.$paramValue.'</td>';
+												print '<td class="green-new" >'.$paramValue.'</td>';
 											} else if($paramValue > $minarr[$j] && $paramValue < $maxarr[$j]) {
-												print '<td class="Yellow">'.$paramValue.'</td>';
+												print '<td class="yellow-new" >'.$paramValue.'</td>';
 											} else {
-												print '<td class="Red">'.$paramValue.'</td>';
+												print '<td class="red-new" >'.$paramValue.'</td>';
 											}
 											}
 											
