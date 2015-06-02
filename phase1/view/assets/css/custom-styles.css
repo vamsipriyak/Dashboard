@@ -634,3 +634,11 @@ padding:30px;
 
 }
 
+.panel-body-detailed {
+word-wrap: break-word;
+}
+.panel-chart {
+width: 90%;
+height: 30%;
+}
+
