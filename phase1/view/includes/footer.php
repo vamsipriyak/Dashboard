@@ -63,12 +63,18 @@
 			series: {
 				0: { color: '#39C6F0' }
 			},
+			chartArea: {
+				left: "10%",
+				top: "4%",
+				height: "60%",
+				width: "70%"
+			},
 			hAxis: {
 			  title: 'Date', textStyle:{color: 'black', fontName: 'Arial Black'}
 			},
 			vAxis: {
 			  title: '<?php print $paramUnitArray[$param-1]; ?>'
-			}, 'width':'60%', 'height':'30%', 'min':0
+			}, 'min':0
 		  };
 
 			var chart = new google.visualization.LineChart(document.getElementById('chart_div'));

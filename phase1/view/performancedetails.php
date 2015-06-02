@@ -49,24 +49,26 @@
                     <!-- Advanced Tables -->
 					
                     <div class="panel panel-default" id="pagespeed">
-                        <div class="panel-heading-detailed">
-                             <?php 
-								$heading = $_GET['param'];
-								echo  "<b style=\"font-size:25px;font-weight: lighter;text-decoration: none;color:black;\">".$paramArray[$param-1].": ".$paramValues[$param-1]." ".$paramUnitArray[$param-1]."</b>";
-								echo '<br><br>';
+                        <div class="panel-body">
+							<div class="panel-body-detailed">
+								 <?php 
+									$heading = $_GET['param'];
+									echo  "<b style=\"font-size:25px;font-weight: lighter;text-decoration: none;color:black;\">".$paramArray[$param-1].": ".$paramValues[$param-1]." ".$paramUnitArray[$param-1]."</b>";
+									echo '<br><br>';
 
-								echo  "Description".": <b style=\"font-weight: lighter;text-decoration: none;color:black;\">".$paramDescriptionArray[$param-1]."</b>";
-								echo '<br><br>';
-								if($heading == 5) 
-								{
-									getWebsiteDetails('LeverageBrowserCaching', $cursor);
-								}
-								if($heading == 4) 
-								{
-									getWebsiteDetails('EnableGzipCompression', $cursor);
-								}
-								
-							?>
+									echo  "Description".": <b style=\"font-weight: lighter;text-decoration: none;color:black;\">".$paramDescriptionArray[$param-1]."</b>";
+									echo '<br><br>';
+									if($heading == 5) 
+									{
+										getWebsiteDetails('LeverageBrowserCaching', $cursor);
+									}
+									if($heading == 4) 
+									{
+										getWebsiteDetails('EnableGzipCompression', $cursor);
+									}
+									
+								?>
+							</div>
                         </div>
 						<?php if($heading == 1) { ?>
                         <div class="panel-body" id="test">
@@ -86,7 +88,7 @@
                      <!--    Hover Rows  -->
                    <div class="panel panel-default">
                         <div class="panel-body">
-							<div id="chart_div" ></div>
+							<div id="chart_div" class="panel-chart"></div>
 						</div>
                     </div>
                     <!-- End  Hover Rows  -->
