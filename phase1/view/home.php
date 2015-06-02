@@ -22,7 +22,7 @@
                                 <table class="table table-striped table-bordered table-hover" id="dataTables-example">
                                     <thead>
                                         <tr>
-                                            <th>Web Page</th>
+                                            <th >Web Page</th>
 											<?php
 											// Display the Parameters
 											$minarr=array();
@@ -32,8 +32,8 @@
 											   print '<th style="text-align: center;">'.$row['name'].' <br>
 											   <span id="units">('.$row['units'].')</span>
 											   </td>';
-											   $minarr[$i] = $row['minimum_value'];
-											   $maxarr[$i] = $row['maximum_value'];
+											   $minarr[$i] = intval($row['minimum_value']);
+											   $maxarr[$i] = intval($row['maximum_value']);
 											   $i++;										   
 											 }
 										    ?>
@@ -52,11 +52,11 @@
 											print '<div  id="wait'.$i.'" style="display:none;"><img src="view/assets/img/demo_wait.gif" width="64" height="64" /></div>';											
 											print '<a href=performancedetails.php?param=1&pageid='.$row['_id'].'>'.$row['value']['URL'].'</td>';
 											for($j=0; $j<5; $j++) {
-											$paramValue = $row['value']["Param".($j+1)];
+											$paramValue = intval($row['value']["Param".($j+1)]);
 											if($j != 1 && $j != 2) {
-											if($paramValue > $maxarr[$j]) {
+											if($paramValue >= $maxarr[$j]) {
 												print '<td class="Green" id="tdrow'.$row['_id'].$j.'">'.$paramValue.'</td>';
-											} else if($paramValue < $maxarr[$j] && $paramValue > $minarr[$j]) {
+											} else if($paramValue < $maxarr[$j] && $paramValue >= $minarr[$j]) {
 												print '<td class="Yellow" id="tdrow'.$row['_id'].$j.'">'.$paramValue.'</td>';
 											} else {
 												print '<td class="Red" id="tdrow'.$row['_id'].$j.'">'.$paramValue.'</td>';

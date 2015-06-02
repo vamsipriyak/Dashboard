@@ -69,7 +69,7 @@ class Model extends Database{
 
 			'map' => $mapParam,
 			'reduce' => $reduceF,
-		   'sort' =>array('_id' => 1),
+		   'sort' =>array('_id' => -1),
 			"out" => array('reduce'=>'parameters_Collection') // new collection name
 		));
 	 

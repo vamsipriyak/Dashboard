@@ -38,6 +38,13 @@
                 </button>
                 <a class="navbar-brand" href="index.php">Dashboard</a>
             </div>
-            <div style="float:right" ><a href="" class="navbar-help">Help </a></div> 
+			<?php
+			$url = 'http://' . $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI'];
+			if (strpos($url,'help.php') == false) {
+			?>
+            <div style="float:right" ><a href="help.php" class="navbar-help">Help </a></div> 
+			<?php
+			}
+			?>
         </nav>
        
