@@ -49,12 +49,15 @@
 				if(!in_array($chartData['date'][$i], $existingDates))
 				{
 					$existingDates[] = $chartData['date'][$i];
+					$limiter = '-';
 				}
 				else
 				{
 					$existingDates[] = '';
+					$limiter = '';
 				}
-				print "["."'".$existingDates[$i]."'	,".$chartData['param'][$i]."]".$delimiter ;						
+				$formattedDate = date_parse($existingDates[$i]);
+				print "["."'".$formattedDate[month].$limiter.$formattedDate[day]."'	,".$chartData['param'][$i]."]".$delimiter ;						
 			  }
 			  
 			  ?>
