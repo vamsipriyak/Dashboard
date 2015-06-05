@@ -76,3 +76,11 @@ function editWebsiteParams(id) {
 			}
 			return false;
 		}
+		
+		
+		function pageRefresh()
+		{
+			
+			location.reload();
+			
+		}
