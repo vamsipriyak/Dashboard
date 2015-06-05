@@ -42,7 +42,7 @@
 			$url = 'http://' . $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI'];
 			if (strpos($url,'help.php') == false) {
 			?>
-            <div style="float:right" ><a href="help.php" class="navbar-help">Help </a></div> 
+            <div style="float:right" ><a href="help.php" class="navbar-help">Websites </a> | <a href="help.php" class="navbar-help">Help </a> | <a href="help.php" class="navbar-help">Help </a></div> 
 			<?php
 			}
 			?>
