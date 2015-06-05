@@ -48,6 +48,9 @@
 										   // iterate result array to display the values
 										  $k=0;
 										  foreach($parameterdata as $row){
+										  	$url = $row['value']['URL'];
+										  	if($url!='')
+											{
 											?>										 
 											<tr id="<?php echo $row['_id'];?>">
 											<?php							
@@ -92,6 +95,7 @@
 										
 											</tr>
 											<?php
+											}
 										   }
 										   // End of for loop//
 								?>		
