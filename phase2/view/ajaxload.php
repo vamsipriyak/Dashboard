@@ -32,24 +32,25 @@ print '<td class="center">';
 											for($j=0; $j<10; $j++) {
 											$paramValue = $row['value']["Param".($j+1)];
 											if($j != 1 && $j != 2) {
-											if($paramValue > $maxarr[$j]) {
-												print '<td class="Green">'.$paramValue.'</td>';
-											} else if($paramValue < $maxarr[$j] && $paramValue > $minarr[$j]) {
-												print '<td class="Yellow">'.$paramValue.'</td>';
+											if($paramValue >= $maxarr[$j]) {
+												print '<td class="green-new" >'.$paramValue.'</td>';
+											} else if($paramValue < $maxarr[$j] && $paramValue >= $minarr[$j]) {
+												print '<td class="yellow-new" >'.$paramValue.'</td>';
 											} else {
-												print '<td class="Red">'.$paramValue.'</td>';
+												print '<td class="red-new" >'.$paramValue.'</td>';
 											}
 											} else {
-												if($paramValue < $minarr[$j]) {
-												print '<td class="Green">'.$paramValue.'</td>';
-											} else if($paramValue > $minarr[$j] && $paramValue < $maxarr[$j]) {
-												print '<td class="Yellow">'.$paramValue.'</td>';
+												if($paramValue <= $minarr[$j]) {
+												print '<td class="green-new" >'.$paramValue.'</td>';
+											} else if($paramValue > $minarr[$j] && $paramValue <= $maxarr[$j]) {
+												print '<td class="yellow-new" >'.$paramValue.'</td>';
 											} else {
-												print '<td class="Red">'.$paramValue.'</td>';
+												print '<td class="red-new" >'.$paramValue.'</td>';
 											}
 											}
 											
 											}
+
 												print '<td align="center" >   
 												<img src="view/assets/img/refresh.png" alt="Mountain View" style="width:40px;height:40px;cursor:pointer;" class="refresh" id="'.$row['_id'].'">						
 												

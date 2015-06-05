@@ -14,7 +14,8 @@
                          <div class="panel-heading">
                             Website Performance
 						    <div class="col-md-1" id="image" >
-					<img src="view/assets/img/refresh.png" alt="Mountain View" style="width:60px;height:60px">
+							<a href="index.php" >
+					<img src="view/assets/img/refresh.png" alt="Mountain View" style="width:60px;height:60px"></a>
                     </div>
                         </div>
                         <div class="panel-body">
@@ -58,10 +59,12 @@
 											<a href="performancedetails.php?param=1&pageid='.$row['_id'].'">'.$row['value']['URL'].'</td>';
 											for($j=0; $j<10; $j++) {
 											$paramValue = $row['value']["Param".($j+1)];
+											if($paramValue!='')
+											{
 											if($j != 1 && $j != 2) {
-											if($paramValue > $maxarr[$j]) {
+											if($paramValue >= $maxarr[$j]) {
 												print '<td class="green-new" >'.$paramValue.'</td>';
-											} else if($paramValue < $maxarr[$j] && $paramValue > $minarr[$j]) {
+											} else if($paramValue < $maxarr[$j] && $paramValue >= $minarr[$j]) {
 												print '<td class="yellow-new" >'.$paramValue.'</td>';
 											} else {
 												print '<td class="red-new" >'.$paramValue.'</td>';
@@ -75,7 +78,11 @@
 												print '<td class="red-new" >'.$paramValue.'</td>';
 											}
 											}
-											
+											}
+											else
+											{
+											print '<td class="yellow-new" >NA</td>';
+											}
 											}
 
 											print '<td align="center">   
