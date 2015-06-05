@@ -1,3 +1,4 @@
+	
 <?php 
 
 	$paramValues = array();
@@ -39,7 +40,8 @@
 					<a href="index.php"><img src="view/assets/img/back.jpg" alt="Mountain View" style="width:80px;height:80px"></a>
                     </div>
                     <div class="col-md-1" id="image">
-					<img src="view/assets/img/refresh.png" alt="Mountain View" style="width:80px;height:80px" id="refreshData">
+					<!--<img src="view/assets/img/refresh.png" alt="Mountain View" style="width:80px;height:80px" id="refreshPage">-->
+					<button id="refreshPage" onclick="pageRefresh()" style="background-color: Transparent;background-repeat:no-repeat;border: none;cursor:pointer;overflow: hidden;outline:none;"  ><img src="view/assets/img/refresh.png" alt="Mountain View" style="width:60px;height:60px" ></button>
                     </div>
                 </div> 
                  <!-- /. ROW  -->
