@@ -5,7 +5,7 @@ class Database {
    $m = new MongoClient();
   // echo "Connection to database successfully";
    // select a database
-   $this->db = $m->dashboard_old;
+   $this->db = $m->dashboard;
    //echo "Database mydb selected";
    
       /******************Function to auto increment seq******************/
