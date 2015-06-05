@@ -43,7 +43,7 @@ function getWebsiteDetails($parameter, $cursor, $paramName) {
 			}			
 		}
 
-		if($parameter == "LeverageBrowserCaching") 
+		if($parameter == "LeverageBrowserCaching" || $parameter == "AvoidLandingPageRedirects" || $parameter == "OptimizeImages" || $parameter == "MinifyJavaScript" || $parameter == "MinifyCss" || $parameter == "MinifyHTML") 
 		{
 			foreach ($document["data"]['formattedResults']['ruleResults'][$parameter]['urlBlocks'] as $i => $header)
 			{

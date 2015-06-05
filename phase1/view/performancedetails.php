@@ -1,10 +1,9 @@
-	
 <?php 
 
 	$paramValues = array();
 	$i=0;
 	foreach ($values as $value) {
-		for($i=0; $i<5; $i++){
+		for($i=0; $i<10; $i++){
 			$paramValues[$i] = $value["Param".($i+1)];
 		}
 	}
@@ -52,7 +51,7 @@
 					
                     <div class="panel panel-default" id="pagespeed">
                         <div class="panel-body">
-							<div class="panel-body-detailed">
+							<div class="panel-body-detailed">						
 								 <?php 
 									$heading = $_GET['param'];
 									echo  "<b style=\"font-size:25px;font-weight: lighter;text-decoration: none;color:black;\">".$paramArray[$param-1].": ".$paramValues[$param-1]." ".$paramUnitArray[$param-1]."</b>";
@@ -68,10 +67,30 @@
 									{
 										getWebsiteDetails('EnableGzipCompression', $cursor);
 									}
+									if($heading == 6) 
+									{
+										getWebsiteDetails('AvoidLandingPageRedirects', $cursor);
+									}
+									if($heading == 7) 
+									{
+										getWebsiteDetails('OptimizeImages', $cursor);
+									}
+									if($heading == 8) 
+									{
+										getWebsiteDetails('MinifyJavaScript', $cursor);
+									}
+									if($heading == 9) 
+									{
+										getWebsiteDetails('MinifyCss', $cursor);
+									}
+									if($heading == 10) 
+									{
+										getWebsiteDetails('MinifyHTML', $cursor);
+									}
 									
 								?>
 							</div>
-                        </div>
+						</div>
 						<?php if($heading == 1) { ?>
                         <div class="panel-body" id="test">
                             <div class="table-responsive">

@@ -643,3 +643,37 @@ width: 90%;
 height: 35%;
 }
 
+/* Not being used anywhere currently */
+.border-shade {
+  border-right-color:#F0FCFF;
+  border-top-color:#F0FCFF;
+  border-bottom-color:#F0FCFF;
+  border-left-color:#F0FCFF;
+}
+.header-width {
+  text-align: center;
+  min-width:65px;
+}
+
+
+td.yellow-new {
+  background: url(../img/yellow.png);
+  background-size: 100% 54px;
+  background-repeat	:no-repeat;
+  text-align: center;
+  vertical-align: middle!important;
+}
+.green-new {
+  background: url(../img/green.png);
+  background-size: 100% 54px;
+  background-repeat	:no-repeat;
+  text-align: center;
+  vertical-align: middle!important;
+}
+.red-new {
+  background: url(../img/red.png);
+  background-size: 100% 54px;
+  background-repeat	:no-repeat;
+  text-align: center;
+  vertical-align: middle!important;
+}

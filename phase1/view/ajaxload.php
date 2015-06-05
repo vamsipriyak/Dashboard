@@ -19,7 +19,6 @@ $i=0;
    $i++;										   
  }
  $result = $db->parameters_Collection->find(array('_id' => $pageid));
-		 $k=1;
 		 foreach($result as $row){
 		 ?>
 		 
@@ -30,39 +29,45 @@ print '<td class="center">';
 												<div  id="wait'.$row['_id'].'" style="display:none;"><img src="view/assets/img/demo_wait.gif" width="64" height="64" /></div>	
 												
 											<a href="performancedetails.php?param=1&pageid='.$row['_id'].'">'.$row['value']['URL'].'</td>';
-											for($j=0; $j<5; $j++) {
+											for($j=0; $j<10; $j++) {
 											$paramValue = $row['value']["Param".($j+1)];
-											if($j != 1 && $j != 2) {
-											if($paramValue > $maxarr[$j]) {
-												print '<td class="Green">'.$paramValue.'</td>';
-											} else if($paramValue < $maxarr[$j] && $paramValue > $minarr[$j]) {
-												print '<td class="Yellow">'.$paramValue.'</td>';
+											if($paramValue!='')
+											{
+											if($j == 0 || $j == 3 || $j == 4) {
+											if($paramValue >= $maxarr[$j]) {
+												print '<td class="green-new" >'.$paramValue.'</td>';
+											} else if($paramValue < $maxarr[$j] && $paramValue >= $minarr[$j]) {
+												print '<td class="yellow-new" >'.$paramValue.'</td>';
 											} else {
-												print '<td class="Red">'.$paramValue.'</td>';
+												print '<td class="red-new" >'.$paramValue.'</td>';
 											}
 											} else {
 												if($paramValue < $minarr[$j]) {
-												print '<td class="Green">'.$paramValue.'</td>';
+												print '<td class="green-new" >'.$paramValue.'</td>';
 											} else if($paramValue > $minarr[$j] && $paramValue < $maxarr[$j]) {
-												print '<td class="Yellow">'.$paramValue.'</td>';
+												print '<td class="yellow-new" >'.$paramValue.'</td>';
 											} else {
-												print '<td class="Red">'.$paramValue.'</td>';
+												print '<td class="red-new" >'.$paramValue.'</td>';
 											}
 											}
-											
 											}
-												print '<td align="center">   
-												<img src="view/assets/img/refresh.png" alt="Mountain View" style="width:40px;height:40px;cursor:pointer;" id="'.$row['_id'].'">';
-print '<div  id="wait'.$row['_id'].'" style="display:none;"><img src="assets/img/demo_wait.gif" width="64" height="64" /></div>												
+											else
+											{
+											print '<td class="yellow-new" >NA</td>';
+											}
+											}
+
+												print '<td align="center" >   
+												<img src="view/assets/img/refresh.png" alt="Mountain View" style="width:40px;height:40px;cursor:pointer;" class="refresh" id="'.$row['_id'].'">						
 												
 												</td>
 												';
 ?>	
-											<input type="hidden" name="cnt" id="cnt-<?php echo $cnt;?>" value="<?php  echo $cnt; ?>">
+										
 
 											</tr>
 											<?php
-											$k++;
+											
 										   }
 
 ?>

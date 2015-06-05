@@ -19,8 +19,8 @@
                             <div class="table-responsive">
                                 <table class="table table-striped table-bordered table-hover" id="dataTables-example">
                                     <thead>
-                                        <tr style="height:0px">
-                                            <th >Parameter Name</th>
+                                        <tr>
+                                            <th>Parameter Name</th>
 											  <th width="30%">Description</th>
                                             <th>Min Value</th>
 											<th>Max Value</th>

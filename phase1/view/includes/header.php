@@ -40,11 +40,10 @@
             </div>
 			<?php
 			$url = 'http://' . $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI'];
-			if (strpos($url,'help.php') == false) {
 			?>
-            <div style="float:right" ><a href="help.php" class="navbar-help">Websites </a> | <a href="help.php" class="navbar-help">Help </a> | <a href="help.php" class="navbar-help">Help </a></div> 
-			<?php
-			}
-			?>
+              <div style="float:right" >
+			  <?php if (strpos($url,'form.php') == false) { ?>
+			  <a href="form.php" class="navbar-help">Add a webpage </a> | <?php   } ?> <?php if (strpos($url,'parameters.php') == false) { ?><a href="parameters.php" class="navbar-help">Edit Parameters </a> <?php if (strpos($url,'help.php') == false) { ?> | <?php } } ?> <?php if (strpos($url,'help.php') == false) { ?> <a href="help.php" class="navbar-help">Help </a> <?php } ?></div>
+			
         </nav>
        
