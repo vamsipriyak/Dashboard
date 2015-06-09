@@ -45,6 +45,7 @@
 											print '<td class="center">'.$row["maximum_value"].' '.$row["units"].'</td>';
 												print '<td align="center">   
 												<input type="button" value="Edit" id="'.$row['_id'].'" class="refresh" > 
+												
 												</td>';
 											print '</tr>';
 											?>											
@@ -55,7 +56,8 @@
 											print '<td class="center"> <input type="text" name="minvalue" id="minvalue'.$row['_id'].'" value="'.$row["minimum_value"].'"></td>';
 												print '<td class="center"> <input type="text" name="maxvalue" id="maxvalue'.$row['_id'].'" value="'.$row["maximum_value"].'"></td>';
 												print '<td align="center">  
-												<input type="button" value="Update" id="'.$row['_id'].'"  onclick="editWebsiteParams('.$row['_id'].')"> 
+												<input type="button" value="Update" id="'.$row['_id'].'"  onclick="editWebsiteParams('.$row['_id'].')">
+											<input type="button" value="Cancel" id="'.$row['_id'].'" class="cancel" > 
 												</td>';
 											print '</tr>';
 											?>
@@ -90,5 +92,12 @@ var row_id = this.id;
 //$(".test").css("display", "none");
 $(".test-"+row_id).hide();
 $(".wait-"+row_id).show();
+});
+	$(document).on('click', '.cancel', function() 
+{
+var row_id = this.id;
+//$(".test").css("display", "none");
+$(".test-"+row_id).show();
+$(".wait-"+row_id).hide();
 });
 	</script>

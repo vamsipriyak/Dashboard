@@ -43,7 +43,7 @@
 			 <div class="row">
                     <div class="col-md-12">
                         <h1 class="page-header">
-                            Web Page Test
+                            Web Page URL
                         </h1>
                     </div>
              </div> 
@@ -54,7 +54,7 @@
                     <!-- Advanced Tables -->
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            Website Performance
+                            Webpages
                         </div>
                         <div class="panel-body">
                             <div class="table-responsive">
