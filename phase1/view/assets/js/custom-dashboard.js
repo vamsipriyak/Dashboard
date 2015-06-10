@@ -35,7 +35,7 @@
 				data: dataString,
 				cache: false,
 				success: function(data) {
-				alert ("Document updated successfully");
+				alert (data);
 				webPageForm.submit();
 			}
 			});
@@ -68,7 +68,7 @@ function editWebsiteParams(id) {
 				data: dataString,
 				cache: false,
 				success: function(data) {
-				alert ("Document updated successfully");
+				alert ("Parameter values updated successfully");
 				webPageForm.submit();
 				
 			}

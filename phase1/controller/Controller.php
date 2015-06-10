@@ -13,7 +13,7 @@ class Controller {
 	public function __construct()  
     {  
         $this->model = new Model();
-	   include 'view/includes/header.php';
+	   
 
     } 
 	
@@ -24,6 +24,7 @@ class Controller {
 	    $parameterdata = $this->model->getParameterdata();
 	   $parameters = $this->model->getParameters();
 	    $websites = $this->model->getWebsites();
+		include 'view/includes/header.php';
 	   include 'view/home.php';
 	   include 'view/includes/footer.php';
 	   include 'view/updateDB.php';
@@ -41,6 +42,7 @@ class Controller {
 	   
 	   $websites = $this->model->getWebsites();
 	    $parentwebsites = $this->model->getparentWebsites();
+		include 'view/includes/header.php';
 	   include 'view/form.php';
 	   include 'view/includes/footer.php';
 	   }
@@ -54,6 +56,7 @@ class Controller {
 	   $pageUrl = $this->model->getUrls($pageid);
 	   $parameters = $this->model->getParameter($pageid);
 	   $websites = $this->model->getWebsite();
+	   include 'view/includes/header.php';
 	   include 'view/includes/leftpanel.php'; 
 	   include 'view/includes/generic.php'; 
 	   include 'view/performancedetails.php';	   
@@ -62,12 +65,14 @@ class Controller {
 	public function getHelp()
 	{	
 	    $parameters = $this->model->getParameter();
+		include 'view/includes/header.php';
 	   include 'view/parameters.php';
 	   include 'view/includes/footer.php';
 	}
 	public function getParameters()
 	{	
 	    $parameters = $this->model->getParameter();
+		include 'view/includes/header.php';
 	   include 'view/editparameters.php';
 	   include 'view/includes/footer.php';
 	}
@@ -75,6 +80,7 @@ class Controller {
 	{	
 	    $parameters11 = $this->model->updateParam($id,$minvalue,$maxvalue,$desc);
 		$parameters = $this->model->getParameter();
+		include 'view/includes/header.php';
 	   include 'view/editparameters.php';
 	   include 'view/includes/footer.php';
 	}

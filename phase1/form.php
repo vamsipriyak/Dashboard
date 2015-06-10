@@ -9,11 +9,11 @@
 	else if ($_REQUEST['action']=='addWebpageURL')
 	{
 	 $url = mysql_escape_string($_POST['webPageUrl']);
-	 $isParentTrue = mysql_escape_string($_POST['isParentTrue']);
+	 $isParentTrue = mysql_escape_string($_POST['isParent']);
      $parentSiteId = mysql_escape_string($_POST['parentSiteId']);
 	 
 	 
-	  $controller->addWebpageURL($url,$isParentTrue,$parentSiteId);
+	  $urls=$controller->addWebpageURL($url,$isParentTrue,$parentSiteId);
 	 
 	}
 else if ($_REQUEST['action']=='updateparameters')

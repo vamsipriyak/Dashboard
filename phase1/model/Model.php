@@ -129,8 +129,18 @@ class Model extends Database{
 			  "URL" =>$url     	  
 		   );
 	   }
+	$url = $user_collection->find(array("URL" => $url));
+	$count=$url->count();  
+if($count == 0)
+{	
    $user_collection->insert($document);
-   return "Document inserted successfully";
+    echo  "Web page inserted successfully";
+  }
+  else
+  {
+  echo "Web page already exists";
+  }
+  
 	}	
 		
 	public function getPerformanceDetails($pageid)
