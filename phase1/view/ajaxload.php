@@ -31,7 +31,7 @@ print '<td class="center">';
 											<a href="performancedetails.php?param=1&pageid='.$row['_id'].'">'.$row['value']['URL'].'</td>';
 											for($j=0; $j<10; $j++) {
 											$paramValue = $row['value']["Param".($j+1)];
-											if($paramValue!='' || $paramValue == 0)
+											if(!is_null($paramValue))
 											{
 											if($j == 0 || $j == 3 || $j == 4) {
 											if($paramValue >= $maxarr[$j]) {
@@ -53,7 +53,7 @@ print '<td class="center">';
 											}
 											else
 											{
-											print '<td class="yellow-new" >NA</td>';
+											print '<td class="grey-new" >NA</td>';
 											}
 											}
 

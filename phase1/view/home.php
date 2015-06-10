@@ -65,6 +65,7 @@
 											if(!is_null($paramValue))
 											{
 											if($j == 0 || $j == 3 || $j == 4) {
+											//positive logic
 											if($paramValue >= $maxarr[$j]) {
 												print '<td class="green-new" >'.$paramValue.'</td>';
 											} else if($paramValue < $maxarr[$j] && $paramValue >= $minarr[$j]) {
@@ -73,9 +74,10 @@
 												print '<td class="red-new" >'.$paramValue.'</td>';
 											}
 											} else {
+											//reverse logic
 												if($paramValue < $minarr[$j]) {
 												print '<td class="green-new" >'.$paramValue.'</td>';
-											} else if($paramValue > $minarr[$j] && $paramValue < $maxarr[$j]) {
+											} else if($paramValue >= $minarr[$j] && $paramValue < $maxarr[$j]) {
 												print '<td class="yellow-new" >'.$paramValue.'</td>';
 											} else {
 												print '<td class="red-new" >'.$paramValue.'</td>';
@@ -84,7 +86,7 @@
 											}
 											else
 											{
-											print '<td class="yellow-new" >NA</td>';
+											print '<td class="grey-new" >NA</td>';
 											}
 											}
 
