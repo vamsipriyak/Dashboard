@@ -35,8 +35,8 @@
 											?>
                                             </select>
                                         </div>
-										<input id="submitForm" name="submitForm" class="btn btn-default" onclick="postWebsiteParams()"  type="button" value="Submit">
-                                        <input id="submitForm" name="submitForm" class="btn btn-default" onclick="resetValues()" type="button" value="Reset">
+										<input id="submitForm" name="submitForm" class="btn btn-default" onclick="postWebsiteParams()"  type="submit" value="Submit">
+                                        <input id="reset" name="reset" class="btn btn-default" onclick="resetValues()" type="button" value="Reset">
                                     </form>
                     </div>
              </div> 
