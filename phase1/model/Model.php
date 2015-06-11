@@ -113,7 +113,7 @@ class Model extends Database{
 			)
 		);
 		$user_collection = $this->db->websites;
-		if($isParentTrue != "Yes")
+		if($isParentTrue != "Yes" || $isParentTrue =='' )
 		{
 		   $document = array( 
 				"_id" => $retval['seq'],
@@ -124,7 +124,7 @@ class Model extends Database{
 	   else
 	   {
 			$document = array( 
-				"_id" => $retval['seq'],
+			   "_id" => $retval['seq'],
 			  "parent_page_id" => $retval['seq'],
 			  "URL" =>$url     	  
 		   );

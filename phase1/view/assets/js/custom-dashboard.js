@@ -1,20 +1,27 @@
 		//To show and hide 'is parent div'
 		$(document).ready(function() {
-            $('#isParentFalse').click(function(){
-                
-                $("#parentSite").show(); 
-            });
-            $('#isParentTrue').click(function(){
-                
-                $("#parentSite").hide(); 
-            });
+		
+		 $("input:radio[name=isParent]").click(function() {
+			var value = $(this).val();			
+			if(value == 'No')
+			{
+			  $("#parentSite").show(); 
+			}
+			else
+			{
+			 $("#parentSite").hide(); 
+			}
+			
+		});
+		
+           
         });
 		////To post data of websites to form-backend.php
 	function postWebsiteParams() {
 		//alert("hii");
 			var webPageUrl = document.getElementById("webPageUrl").value;
 			var parentSiteId = document.getElementById("parentSiteId").value;
-			var isParentTrue = document.getElementById("isParentTrue").value;
+			var isParentTrue = $("input[name=isParent]:checked").val();			
 			var regexp = /(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/;
 			isValid = regexp.test(webPageUrl);
 			if(!isValid)

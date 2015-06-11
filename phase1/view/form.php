@@ -13,7 +13,7 @@
                                                 <input type="radio" name="isParent" id="isParentTrue" value="Yes" checked>Yes
                                             </label>
                                             <label class="radio-inline">
-                                                <input type="radio" name="isParent" id="isParentFalse" value="No">No
+                                                <input type="radio" name="isParent" id="isParentTrue" value="No">No
                                             </label>
                                         </div>
                                         <div class="form-group" id="parentSite" style="display:none;">

@@ -8,9 +8,9 @@
 	}
 	else if ($_REQUEST['action']=='addWebpageURL')
 	{
-	 $url = mysql_escape_string($_POST['webPageUrl']);
-	 $isParentTrue = mysql_escape_string($_POST['isParent']);
-     $parentSiteId = mysql_escape_string($_POST['parentSiteId']);
+	 $url = $_POST['webPageUrl'];
+	 $isParentTrue = $_POST['isParentTrue'];
+     $parentSiteId = $_POST['parentSiteId'];
 	 
 	 
 	  $urls=$controller->addWebpageURL($url,$isParentTrue,$parentSiteId);
@@ -18,9 +18,9 @@
 	}
 else if ($_REQUEST['action']=='updateparameters')
 	{
-	 $minvalue = mysql_escape_string($_POST['minvalue']);
-	 $maxvalue = mysql_escape_string($_POST['maxvalue']);
-     $desc = mysql_escape_string($_POST['desc']);
+	 $minvalue = $_POST['minvalue'];
+	 $maxvalue = $_POST['maxvalue'];
+     $desc = $_POST['desc'];
 	 $id = intval($_POST['id']);
 	 
 	  $controller->updateParam($id,$minvalue,$maxvalue,$desc);
