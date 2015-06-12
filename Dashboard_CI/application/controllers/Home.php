@@ -10,7 +10,7 @@ class Home extends CI_Controller {
          $this->load->library('mongo_db');
 		$this->load->helper(array('form', 'url'));
 		$this->load->library('form_validation');
-		 $this->load->model('Formmodel');
+		 $this->load->model('Homemodel');
 	}
 	/**
 	 * Index Page for this controller.
@@ -32,9 +32,9 @@ class Home extends CI_Controller {
 	{
 		
  	    $this->load->view('includes/header');		
-	   $parameterdata['parameterdata'] = $this->Formmodel->getParameterdata();
-	   $parameterdata['parameters'] = $this->Formmodel->getParameters();
-	   //$websites['websites'] = $this->Formmodel->getWebsites();
+	   $parameterdata['parameterdata'] = $this->Homemodel->getParameterdata();
+	   $parameterdata['parameters'] = $this->Homemodel->getParameters();
+	   //$websites['websites'] = $this->Homemodel->getWebsites();
 		
 		$this->load->view('home', $parameterdata);
 		$this->load->view('includes/footer');
@@ -42,13 +42,13 @@ class Home extends CI_Controller {
 	
 	public function ajaxload()
 	{
-	  $this->load->model('Formmodel');
+	  $this->load->model('Homemodel');
 	  $inputValues = $this->input->post();
 	  $pageid=intval($_POST['id']);
 	  $cnt=$_POST['cnt'];
 
-	 $parameters = $this->Formmodel->getParameters();
-	 $results = $this->Formmodel->getParameterscollection($pageid);
+	 $parameters = $this->Homemodel->getParameters();
+	 $results = $this->Homemodel->getParameterscollection($pageid);
 
 			$minarr=array();
 			$maxarr=array();
