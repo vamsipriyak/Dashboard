@@ -40,8 +40,6 @@ class Form extends CI_Controller {
 		$this->load->view('includes/footer');
 	}
 	
-	
-	
 	public function ajaxload()
 	{
 	  $this->load->model('Formmodel');
@@ -52,14 +50,14 @@ class Form extends CI_Controller {
 	 $parameters = $this->Formmodel->getParameters();
 	 $results = $this->Formmodel->getParameterscollection($pageid);
 
-	$minarr=array();
-	$maxarr=array();
-	$i=0;
-	 foreach($parameters as $row){
-	   $minarr[$i] = $row['minimum_value'];
-	   $maxarr[$i] = $row['maximum_value'];
-	   $i++;										   
-	 }	
+			$minarr=array();
+			$maxarr=array();
+			$i=0;
+			 foreach($parameters as $row){
+			   $minarr[$i] = $row['minimum_value'];
+			   $maxarr[$i] = $row['maximum_value'];
+			   $i++;										   
+			 }	
 			foreach($results as $row){
 			 ?>		 
 			<tr id="<?php echo $row['_id'] ; ?>" class="<?php echo $cnt; ?>">';		
@@ -79,7 +77,7 @@ class Form extends CI_Controller {
 				} else if($paramValue < $maxarr[$j] && $paramValue >= $minarr[$j]) {
 					print '<td class="yellow-new" >'.$paramValue.'</td>';
 				} else {
-					print '<td class="red-new" >3232323</td>';
+					print '<td class="red-new" >'.$paramValue.'</td>';
 				}
 				} else {
 					if($paramValue < $minarr[$j]) {
@@ -96,19 +94,15 @@ class Form extends CI_Controller {
 				print '<td class="grey-new" >NA</td>';
 				}
 				}
-
-					print '<td align="center" >   
+					/*print '<td align="center" >   
 					<img src="application/views/assets/img/refresh.png" alt="Mountain View" style="width:40px;height:40px;cursor:pointer;" class="refresh" id="'.$row['_id'].'">						
 					
 					</td>
-					';
-	            ?>		
-
+					';*/
+	            ?>
 				</tr>
-				<?php
-				
-			   }
-
+			<?php				
+		 }
 	}
 	
 	public function submitForm()

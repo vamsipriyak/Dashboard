@@ -38,7 +38,7 @@
 											   $i++;										   
 											 }
 										    ?>
-											<th></td>
+											<!-- <th></td> -->
                                         </tr>
                                     </thead>
                                    <tbody>
@@ -55,7 +55,7 @@
 											<tr id="<?php echo $row['_id'];?>">
 											<?php							
 
-											print '<td class="center"  >';
+											print '<td class="center"  style="width:40px;height:60px;">';
 											print ' 
 												<div  id="wait'.$row['_id'].'" style="display:none;"><img src="application/views/assets/img/demo_wait.gif" width="64" height="64" /></div>	
 												
@@ -90,9 +90,9 @@
 											}
 											}
 
-											print '<td align="center">   
+											/*print '<td align="center">   
 												<img src="application/views/assets/img/refresh.png" alt="Mountain View" style="width:40px;height:40px;cursor:pointer;" id="'.$row['_id'].'" class="refresh" onclick="postWebsiteParams()"> 
-												</td>';
+												</td>'; */
 											?>	
 										
 											</tr>
@@ -117,12 +117,11 @@
         </div>
              
     </div>
-	
-	      <script type="text/javascript">
+<script type="text/javascript">
 $(document).on('click', '.refresh', function() 
 {
 	var row_id = this.id;
-	alert(row_id);
+	//alert(row_id);
 	var merge=$('#'+row_id).attr('class');
 	//var test=document.getElementById(merge).value;
 	$("#wait"+row_id).css("display", "block");
@@ -139,7 +138,5 @@ $(document).on('click', '.refresh', function()
        $('#'+row_id).replaceWith(res);
   }
 });
-});	  
-	  
-
-      </script>
+});	 
+ </script>
