@@ -71,95 +71,54 @@ class PerformanceDetailsModel extends CI_Model {
 			foreach ($cursor as $l =>  $document) {
 				//print '<pre>';
 				$headercount=sizeof($document["data"]['formattedResults']['ruleResults'][$parameter]['urlBlocks']);
-				/*foreach ($document["data"]['formattedResults']['ruleResults'][$parameter]['urlBlocks'] as $i => $header)
-				{
-					if(count(!empty($header['header']['args'])))
+				foreach ($document["data"]['formattedResults']['ruleResults'][$parameter]['urlBlocks'] as $j => $header)
+				{	
+					$headerFormat = $header['header']['format'];
+					if(array_key_exists('args', $header['header']))
 					{
-						//echo $header['header']['format'];
-					}
-					else
-					{
-						$headerFormat = $header['header']['format'];
-						for($j=0;$j<count($header['header']['args']);$j++)
+						$count = count($header['header']['args']);
+						for($i=0;$i<$count;$i++)
 						{
-							$k=$j+1;
-							$headerFormat = str_replace("$".$k."", $header['header']['args'][$j]['value'], $headerFormat);
-							if($j == count($header['header']['args'])-1)
+							$k = $i+1;
+							$headerFormat = str_replace("$".$k."", $header['header']['args'][$i]['value'], $headerFormat);								
+							if($i == count($header['header']['args'])-1)
 							{
-								//echo '<a href = '.$header['header']['args'][0]['value'].' style="font-weight: lighter;text-decoration: none;color:black;" target="_blank">'.$headerFormat.'</a>';
-								echo '<br>';
+								#echo $headerFormat;
+								$headerFormat = '<a href = '.$header['header']['args'][0]['value'].' style="font-weight: lighter;text-decoration: none;color:black;" target="_blank">'.$headerFormat.'</a>';
+								$headerFormatArray[] = $headerFormat;		
 							}
 						}
 					}
-					echo "<br>";
-					//print_r($document["data"]['formattedResults']['ruleResults'][$parameter]['urlBlocks']);
-					/*if(array_key_exists('urls', $document["data"]['formattedResults']['ruleResults'][$parameter]['urlBlocks'][$i]))
+					else
 					{
-						foreach ($document["data"]['formattedResults']['ruleResults'][$parameter]['urlBlocks'][$i]['urls'] as $j => $urlsList)
-						{
-							if(array_key_exists(0, $urlsList['result']['args']))
-							{								
-								$copyToFormatFieldOne[] = str_replace("$1", '<a href = '.$urlsList['result']['args'][0]['value'].' style="font-weight: lighter;text-decoration: none;color:black;">'.$urlsList['result']['args'][0]['value'].'</a>', '<b style="font-weight: lighter;text-decoration: none;color:black;"> '.$urlsList['result']['format'] .' </b>');
-							}
-							if(array_key_exists(1, $urlsList['result']['args']))
-							{								
-								$copyToFormatFieldTwo[] = str_replace("$2", $urlsList['result']['args'][1]['value'], $urlsList['result']['format']);								
-							}
-							
-							
-							print_R($copyToFormatFieldOne);
-							//echo $copyToFormatFieldThree = str_replace("$3", $urlsList['result']['args'][1]['value'], $copyToFormatFieldTwo);
-							echo "<br>";
-						}				
-					}*/	
-						foreach ($document["data"]['formattedResults']['ruleResults'][$parameter]['urlBlocks'] as $j => $header)
-						{	
-							$headerFormat = $header['header']['format'];
-							if(array_key_exists('args', $header['header']))
-							{
-								$count = count($header['header']['args']);
-								for($i=0;$i<$count;$i++)
-								{
-									$k = $i+1;
-									$headerFormat = str_replace("$".$k."", $header['header']['args'][$i]['value'], $headerFormat);								
-									if($i == count($header['header']['args'])-1)
-									{
-										#echo $headerFormat;
-										$headerFormat = '<a href = '.$header['header']['args'][0]['value'].' style="font-weight: lighter;text-decoration: none;color:black;" target="_blank">'.$headerFormat.'</a>';
-										$headerFormatArray[] = $headerFormat;		
-									}
-								}
-							}
-							else
-							{
-								$headerFormatArray[] = $headerFormat;		
-							}
-						}					
-						if(array_key_exists(1, $document["data"]['formattedResults']['ruleResults'][$parameter]['urlBlocks']))
-						{
-							foreach ($document["data"]['formattedResults']['ruleResults'][$parameter]['urlBlocks'][1]['urls'] as $j => $urlsList)
-							{	
-								$headerFormat = $urlsList['result']['format'];
-								if(array_key_exists('args', $urlsList['result']))
-								{
-									$count = count($urlsList['result']['args']);
-									for($i=0;$i<$count;$i++)
-									{
-										$k = $i+1;
-										$headerFormat = str_replace("$".$k."", $urlsList['result']['args'][$i]['value'], $headerFormat);								
-										if($i == count($urlsList['result']['args'])-1)
-										{
-											$headerFormat = '<a href = '.$urlsList['result']['args'][0]['value'].' style="font-weight: lighter;text-decoration: none;color:black;" target="_blank">'.$headerFormat.'</a>';
-											$headerFormatArray[] = $headerFormat;		
-										}
-									}
-								}
-							}					
-						}	
+						$headerFormatArray[] = $headerFormat;		
 					}
-				}		
-			return $headerFormatArray;
-		}
+				}					
+				if(array_key_exists(1, $document["data"]['formattedResults']['ruleResults'][$parameter]['urlBlocks']))
+				{
+					foreach ($document["data"]['formattedResults']['ruleResults'][$parameter]['urlBlocks'][1]['urls'] as $j => $urlsList)
+					{	
+						$headerFormat = $urlsList['result']['format'];
+						if(array_key_exists('args', $urlsList['result']))
+						{
+							$count = count($urlsList['result']['args']);
+							for($i=0;$i<$count;$i++)
+							{
+								$k = $i+1;
+								$headerFormat = str_replace("$".$k."", $urlsList['result']['args'][$i]['value'], $headerFormat);								
+								if($i == count($urlsList['result']['args'])-1)
+								{
+									$headerFormat = '<a href = '.$urlsList['result']['args'][0]['value'].' style="font-weight: lighter;text-decoration: none;color:black;" target="_blank">'.$headerFormat.'</a>';
+									$headerFormatArray[] = $headerFormat;		
+								}
+							}
+						}
+					}					
+				}	
+			}
+		}		
+		return $headerFormatArray;
 	}
+}
 
 ?>
