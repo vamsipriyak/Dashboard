@@ -1,9 +1,14 @@
-<?php 
 
+<?php 
+if(empty($_REQUEST['param'])){
+    $param = '';
+} else {
+    $param = $_REQUEST['param'];
+}
 	$paramValues = array();
 	$i=0;
-	foreach ($values as $value) {
-		for($i=0; $i<5; $i++){
+	foreach ($parameterValues as $value) {
+		for($i=0; $i<10; $i++){
 			$paramValues[$i] = $value["Param".($i+1)];
 		}
 	}
@@ -16,58 +21,55 @@
 <div id="page-wrapper" >
             <div id="page-inner">
 			 <div class="row">
-                    <div class="col-md-10">
+                    <div class="col-md-8">
                         <h2 >
 						<?php
 							$paramArray = array();
 							$i=0;
-							foreach ($parameters as $parameter) {
+							foreach ($getLeftPanelDetailsData as $parameter) {
 								$paramArray[$i] = $parameter['name'];
 								$paramUnitArray[$i] = $parameter['units'];
 								$paramDescriptionArray[$i] = $parameter['description'];
 								$i++;
 							}
-                            print "Insights for ".$pageUrl['URL'].""; 
+                            print "Insights for ".$pageUrl['URL']."";
+
 						?>
+
                         </h2>
                     </div>
-                    <div class="col-md-1">
-                    </div>
-                    <div class="col-md-1">
-                    </div>
-                    <div class="col-md-1">
-					<a href="index.php"><img src="view/assets/img/back.jpg" alt="Mountain View" style="width:80px;height:80px"></a>
-                    </div>
-                    <div class="col-md-1" id="image">
-					<img src="view/assets/img/refresh.png" alt="Mountain View" style="width:80px;height:80px" id="refreshData">
-                    </div>
-                </div> 
-                 <!-- /. ROW  -->
+                    <div class="col-md-1"></div>
+					<a href="home"><img src="../application/views/assets/img/back.jpg" alt="Mountain View" style="width:80px;height:80px"></a>
+					<button id="refreshPage" onclick="pageRefresh()" style="background-color: Transparent;background-repeat:no-repeat;border: none;cursor:pointer;overflow: hidden;outline:none;"  ><img src="../application/views/assets/img/refresh.png" alt="Mountain View" style="width:60px;height:60px" ></button>
+            </div> 
+            <!-- /. ROW  -->
                
             <div class="row">
                 <div class="col-md-12">
                     <!-- Advanced Tables -->
 					
                     <div class="panel panel-default" id="pagespeed">
-                        <div class="panel-heading-detailed">
-                             <?php 
-								$heading = $_GET['param'];
-								echo  "<b style=\"font-size:25px;font-weight: lighter;text-decoration: none;color:black;\">".$paramArray[$param-1].": ".$paramValues[$param-1]." ".$paramUnitArray[$param-1]."</b>";
-								echo '<br><br>';
+                        <div class="panel-body">
+							<div class="panel-body-detailed">						
+								 <?php 
+									$heading = $_GET['param'];
+									echo  "<b style=\"font-size:25px;font-weight: lighter;text-decoration: none;color:black;\">".$paramArray[$param-1].": ".$paramValues[$param-1]." ".$paramUnitArray[$param-1]."</b>";
+									echo '<br><br>';
 
-								echo  "Description".": <b style=\"font-weight: lighter;text-decoration: none;color:black;\">".$paramDescriptionArray[$param-1]."</b>";
-								echo '<br><br>';
-								if($heading == 5) 
-								{
-									getWebsiteDetails('LeverageBrowserCaching', $cursor);
-								}
-								if($heading == 4) 
-								{
-									getWebsiteDetails('EnableGzipCompression', $cursor);
-								}
-								
-							?>
-                        </div>
+									echo  "Description".": <b style=\"font-weight: lighter;text-decoration: none;color:black;\">".$paramDescriptionArray[$param-1]."</b>";
+									echo '<br><br>';
+									if($heading == 4 || $heading == 5 || $heading == 7 || $heading == 8 || $heading == 9 || $heading == 10 )
+									{
+										foreach($cursor as $document)
+										{
+											print $document;
+											print '<br>';
+										}
+									}
+									
+								?>
+							</div>
+						</div>
 						<?php if($heading == 1) { ?>
                         <div class="panel-body" id="test">
                             <div class="table-responsive">
@@ -86,7 +88,7 @@
                      <!--    Hover Rows  -->
                    <div class="panel panel-default">
                         <div class="panel-body">
-							<div id="chart_div" ></div>
+							<div id="chart_div" class="panel-chart"></div>
 						</div>
                     </div>
                     <!-- End  Hover Rows  -->
@@ -95,7 +97,7 @@
                 <!-- /. ROW  -->
         </div>
     </div>
-   <?php include 'updateDB.php'; ?>
+   <?php //include 'updateDB.php'; ?>
    <script>
 // Specify your actual API key here:
 var API_KEY = 'AIzaSyCXhzHMvNj8HdLiOQ6DX9EwJ7O9yXtOjaA';

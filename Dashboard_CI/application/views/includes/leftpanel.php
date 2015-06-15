@@ -14,7 +14,6 @@ if(empty($_REQUEST['param'])){
           <div class="sidebar-collapse">
                 <ul class="nav" id="main-menu">
 					<?php								
-						
 					   // iterate cursor to display title of documents
 					   foreach ($getLeftPanelDetailsData as $document) {
 						 //If the panel is clicked then include 'active-menu' class.		
@@ -26,7 +25,7 @@ if(empty($_REQUEST['param'])){
 							 $activeMenu =  '';
 						 }
 						print '<li>';
-						print '<a href="performancedetails.php?pageid='.$pageid.'&param='.$document['_id'].'" '.$activeMenu.' >'.$document['name'].'</a>';
+						print '<a href="performancedetails?pageid='.$pageid.'&param='.$document['_id'].'" '.$activeMenu.' >'.$document['name'].'</a>';
 						print '</li>';
 					   }
 					?>										

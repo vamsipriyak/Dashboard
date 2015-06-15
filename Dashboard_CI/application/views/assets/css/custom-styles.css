@@ -658,29 +658,41 @@ height: 35%;
 
 td.yellow-new {
   background: url(../img/yellow.png);
-  background-size: 100% 54px;
+  background-size: 80px 54px;
+  width: 100px;
+  background-position: center;
+  min-width: 90px;
   background-repeat	:no-repeat;
   text-align: center;
   vertical-align: middle!important;
 }
 td.grey-new {
-  background: url(../img/light-grey.png);
-  background-size: 100% 54px;
+  background: url(../img/light-grey.png); 
+  background-size: 80px 54px;
+  width: 100px;
+  background-position: center;
+  min-width: 90px;
   background-repeat	:no-repeat;
   text-align: center;
   vertical-align: middle!important;
 }
 .green-new {
   background: url(../img/green.png);
-  background-size: 100% 54px;
+  background-size: 80px 54px;
+  width: 100px;
+  background-position: center;
+  min-width: 90px;
   background-repeat	:no-repeat;
   text-align: center;
   vertical-align: middle!important;
 }
 .red-new {
   background: url(../img/red.png);
-  background-size: 100% 54px;
   background-repeat	:no-repeat;
   text-align: center;
   vertical-align: middle!important;
+  background-size: 80px 54px;
+  width: 100px;
+  background-position: center;
+  min-width: 90px;
 }

@@ -7,14 +7,14 @@
         <!-- /. PAGE WRAPPER  -->
     <!-- JS Scripts-->
     <!-- jQuery Js -->
-     <script src="application/views/assets/js/jquery-1.10.2.js"></script>
+     <script src="../application/views/assets/js/jquery-1.10.2.js"></script>
       <!-- Bootstrap Js -->
-    <script src="application/views/assets/js/bootstrap.min.js"></script>
+    <script src="../application/views/assets/js/bootstrap.min.js"></script>
     <!-- Metis Menu Js -->
-	<script src="application/views/assets/js/jquery.metisMenu.js"></script>
+	<script src="assets/js/jquery.metisMenu.js"></script>
      <!-- DATA TABLE SCRIPTS -->
-    <script src="application/views/assets/js/dataTables/jquery.dataTables.js"></script>
-    <script src="application/views/assets/js/dataTables/dataTables.bootstrap.js"></script>
+    <script src="../application/views/assets/js/dataTables/jquery.dataTables.js"></script>
+    <script src="../application/views/assets/js/dataTables/dataTables.bootstrap.js"></script>
         <script>
             $(document).ready(function () {
                 $('#dataTables-example').dataTable({
@@ -26,13 +26,27 @@
             });
     </script>
 	
- 	  <script type="text/javascript" src="views/assets/js/local-google-chart.js"></script>
+ 	  <script type="text/javascript" src="../application/views/assets/js/local-google-chart.js"></script>
 
 		<script type="text/javascript">
 		  google.load("visualization", "1", {packages:["corechart", "line"]});
 		  google.setOnLoadCallback(drawChart);
 		  function drawChart() {
-			var data = google.visualization.arrayToDataTable([
+<?php
+$paramArray = array();
+			foreach ($getLeftPanelDetailsData as $i => $parameter) {
+				$paramArray[$i] = $parameter['name'];
+				$paramUnitArray[$i] = $parameter['units'];
+				$paramDescriptionArray[$i] = $parameter['description'];
+				$i++;
+			}
+	$param = 2;
+	foreach ($parameterChartData as $paramData) {
+		$chartData['param'][] = $paramData['Param'.$param.''];
+		$chartData['date'][] = date('Y-m-d',$paramData['updated_time']->sec);
+	}
+	
+?>			var data = google.visualization.arrayToDataTable([
 			  ['Dates', <?php print "'".$paramArray[$param-1]."'"; ?>],
 			  <?php
 			  $existingDates = array();
@@ -57,7 +71,7 @@
 					$limiter = '';
 				}
 				$formattedDate = date_parse($existingDates[$i]);
-				print "["."'".$formattedDate[month].$limiter.$formattedDate[day]."'	,".$chartData['param'][$i]."]".$delimiter ;						
+				print "["."'".$formattedDate['month'].$limiter.$formattedDate['day']."'	,".$chartData['param'][$i]."]".$delimiter ;						
 			  }
 			  
 			  ?>
@@ -116,7 +130,7 @@
     </script>
          <!-- Custom Js -->
 
-    <script src="application/views/assets/js/custom-scripts.js"></script>
+    <script src="../application/views/assets/js/custom-scripts.js"></script>
 
    
 </body>

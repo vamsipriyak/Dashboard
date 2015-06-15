@@ -71,13 +71,13 @@ function editWebsiteParams(id) {
 			//AJAX code to submit form.
 			$.ajax({
 				type: "POST",
-				url: "form.php?action=updateparameters",
+				url: "edit/updateParam",
+				//url: "form.php?action=updateparameters",
 				data: dataString,
 				cache: false,
 				success: function(data) {
 				alert ("Parameter values updated successfully");
-				webPageForm.submit();
-				
+				webPageForm.submit();				
 			}
 			});
 			}
@@ -87,7 +87,6 @@ function editWebsiteParams(id) {
 		
 		function pageRefresh()
 		{
-			
 			location.reload();
 			
 		}
