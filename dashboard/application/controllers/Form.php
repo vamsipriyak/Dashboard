@@ -15,6 +15,7 @@ class Form extends CI_Controller {
 		#$this->load->view('includes/leftpanel');	
 		$this->load->model('Formmodel');
  	    $websites['websites'] = $this->Formmodel->getWebsite();
+		$websites['parentwebsites'] = $this->Formmodel->getparentWebsites();
 		$this->load->helper(array('form', 'url'));
 		$this->load->library('form_validation');
 		$this->form_validation->set_rules('webPageUrl', 'Web Page Url', 'required');
@@ -24,6 +25,8 @@ class Form extends CI_Controller {
 		}
 		else
 		{
+			$inputValues = $this->input->post();
+			$this->Formmodel->insertData($inputValues);
 			$this->load->view('form', $websites);
 		}
 		$this->load->view('includes/footer');

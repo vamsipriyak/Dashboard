@@ -17,7 +17,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | environments.
 |
 */
-$config['base_url'] = 'http://mindtree.dashboard.com';
+$config['base_url'] = 'http://localhost/dashboard_CI/dashboard/';
 
 /*
 |--------------------------------------------------------------------------
