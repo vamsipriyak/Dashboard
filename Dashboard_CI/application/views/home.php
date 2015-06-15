@@ -15,7 +15,7 @@
                             Website Performance
 						    <div class="col-md-1" id="image" >
 							<a href="home" >
-					<img src="../application/views/assets/img/refresh.png" alt="Mountain View" style="width:60px;height:60px"></a>
+					<img src="<?php echo $this->config->base_url(); ?>application/views/assets/img/refresh.png" alt="Mountain View" style="width:60px;height:60px"></a>
                     </div>
                         </div>
                         <div class="panel-body">
@@ -59,7 +59,7 @@
 											print ' 
 												<div  id="wait'.$row['_id'].'" style="display:none;"><img src="application/views/assets/img/demo_wait.gif" width="64" height="64" /></div>	
 												
-											<a href="performancedetails?param=1&pageid='.$row['_id'].'">'.$row['value']['URL'].'</td>';
+											<a href="performancedetails/index/1/'.$row['_id'].'">'.$row['value']['URL'].'</td>';
 											for($j=0; $j<10; $j++) {
 											$paramValue = $row['value']["Param".($j+1)];
 											if(!is_null($paramValue))

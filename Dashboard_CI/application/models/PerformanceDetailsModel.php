@@ -112,8 +112,31 @@ class PerformanceDetailsModel extends CI_Model {
 							echo "<br>";
 						}				
 					}*/	
-						//if(array_key_exists('urls', $document["data"]['formattedResults']['ruleResults'][$parameter]['urlBlocks'][1]))
-						//{
+						foreach ($document["data"]['formattedResults']['ruleResults'][$parameter]['urlBlocks'] as $j => $header)
+						{	
+							$headerFormat = $header['header']['format'];
+							if(array_key_exists('args', $header['header']))
+							{
+								$count = count($header['header']['args']);
+								for($i=0;$i<$count;$i++)
+								{
+									$k = $i+1;
+									$headerFormat = str_replace("$".$k."", $header['header']['args'][$i]['value'], $headerFormat);								
+									if($i == count($header['header']['args'])-1)
+									{
+										#echo $headerFormat;
+										$headerFormat = '<a href = '.$header['header']['args'][0]['value'].' style="font-weight: lighter;text-decoration: none;color:black;" target="_blank">'.$headerFormat.'</a>';
+										$headerFormatArray[] = $headerFormat;		
+									}
+								}
+							}
+							else
+							{
+								$headerFormatArray[] = $headerFormat;		
+							}
+						}					
+						if(array_key_exists(1, $document["data"]['formattedResults']['ruleResults'][$parameter]['urlBlocks']))
+						{
 							foreach ($document["data"]['formattedResults']['ruleResults'][$parameter]['urlBlocks'][1]['urls'] as $j => $urlsList)
 							{	
 								$headerFormat = $urlsList['result']['format'];
@@ -126,16 +149,17 @@ class PerformanceDetailsModel extends CI_Model {
 										$headerFormat = str_replace("$".$k."", $urlsList['result']['args'][$i]['value'], $headerFormat);								
 										if($i == count($urlsList['result']['args'])-1)
 										{
+											$headerFormat = '<a href = '.$urlsList['result']['args'][0]['value'].' style="font-weight: lighter;text-decoration: none;color:black;" target="_blank">'.$headerFormat.'</a>';
 											$headerFormatArray[] = $headerFormat;		
 										}
 									}
 								}
 							}					
-						//}	
-				}
-			}				
-		return $headerFormatArray;
+						}	
+					}
+				}		
+			return $headerFormatArray;
+		}
 	}
-}
 
 ?>

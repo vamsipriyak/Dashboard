@@ -1,13 +1,3 @@
- <?php
-if(empty($_REQUEST['param'])){
-    $param = '';
-} else {
-    $param = $_REQUEST['param'];
-}
-	//Capture pageid passed from home page
-	$pageid=(int)$_REQUEST['pageid'];
-
- ?>
  <!--/. NAV TOP  -->
  
         <nav class="navbar-default navbar-side" role="navigation">
@@ -25,7 +15,7 @@ if(empty($_REQUEST['param'])){
 							 $activeMenu =  '';
 						 }
 						print '<li>';
-						print '<a href="performancedetails?pageid='.$pageid.'&param='.$document['_id'].'" '.$activeMenu.' >'.$document['name'].'</a>';
+						print '<a href="'.$this->config->base_url().'/index.php/performancedetails/index/'.$pageid.'/'.$document['_id'].'" '.$activeMenu.' >'.$document['name'].'</a>';
 						print '</li>';
 					   }
 					?>										

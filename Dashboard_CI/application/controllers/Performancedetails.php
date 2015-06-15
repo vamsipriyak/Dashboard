@@ -11,10 +11,13 @@ class Performancedetails extends CI_Controller {
 
 	public function index()
 	{
-		$pageid = mysql_escape_string($this->input->get('pageid'));
-		$param = mysql_escape_string($this->input->get('param'));
+		$pageid = $this->uri->segment(3);//mysql_escape_string($this->input->get('pageid'));
+		$param = $this->uri->segment(4);
+		//$param = mysql_escape_string($this->input->get('param'));
 		$this->load->model('PerformanceDetailsModel');
  	    $values['getLeftPanelDetailsData'] = $this->PerformanceDetailsModel->getLeftPanelDetails();
+		$values['pageid'] = $pageid;
+		$values['param'] = $param;
  	    $this->load->view('includes/header');
 		$this->load->view('includes/leftpanel', $values);
  	    $values['parameterValues'] = $this->PerformanceDetailsModel->getParameterCollectionValues($pageid);
