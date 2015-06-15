@@ -11,19 +11,18 @@ class Performancedetails extends CI_Controller {
 
 	public function index()
 	{
-		$pageid = $this->uri->segment(3);//mysql_escape_string($this->input->get('pageid'));
+		$pageid = $this->uri->segment(3);
 		$param = $this->uri->segment(4);
-		//$param = mysql_escape_string($this->input->get('param'));
-		$this->load->model('PerformanceDetailsModel');
- 	    $values['getLeftPanelDetailsData'] = $this->PerformanceDetailsModel->getLeftPanelDetails();
+		$this->load->model('performance_details_model');
+ 	    $values['getLeftPanelDetailsData'] = $this->performance_details_model->getLeftPanelDetails();
 		$values['pageid'] = $pageid;
 		$values['param'] = $param;
  	    $this->load->view('includes/header');
 		$this->load->view('includes/leftpanel', $values);
- 	    $values['parameterValues'] = $this->PerformanceDetailsModel->getParameterCollectionValues($pageid);
- 	    $values['parameterChartData'] = $this->PerformanceDetailsModel->getParameterCollectionValues($pageid);
- 	    $values['pageUrl'] = $this->PerformanceDetailsModel->getUrls($pageid);
-		$values['cursor'] = $this->PerformanceDetailsModel->getWebsiteDetails($param, $pageid);
+ 	    $values['parameterValues'] = $this->performance_details_model->getParameterCollectionValues($pageid);
+ 	    $values['parameterChartData'] = $this->performance_details_model->getParameterCollectionValues($pageid);
+ 	    $values['pageUrl'] = $this->performance_details_model->getUrls($pageid);
+		$values['cursor'] = $this->performance_details_model->getWebsiteDetails($param, $pageid);
 		$this->load->view('performancedetails', $values);
 		$this->load->view('includes/footer');
 	}

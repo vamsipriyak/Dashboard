@@ -20,10 +20,10 @@ class Edit extends CI_Controller {
 	public function updateParam()
 	{	
 		$this->load->model('Editmodel');		
-		$id = mysql_escape_string($this->input->post('id'));
-		$minvalue = mysql_escape_string($this->input->post('minvalue'));
-		$maxvalue = mysql_escape_string($this->input->post('maxvalue'));
-		$desc = mysql_escape_string($this->input->post('desc'));		
+		$id = $this->input->post('id');
+		$minvalue = $this->input->post('minvalue');
+		$maxvalue = $this->input->post('maxvalue');
+		$desc = $this->input->post('desc');		
 		$this->Editmodel->updateParam($id,$minvalue,$maxvalue,$desc);
 	}
 	

@@ -7,14 +7,14 @@
         <!-- /. PAGE WRAPPER  -->
     <!-- JS Scripts-->
     <!-- jQuery Js -->
-     <script src="../application/views/assets/js/jquery-1.10.2.js"></script>
+     <script src="<?php echo $this->config->base_url(); ?>application/views/assets/js/jquery-1.10.2.js"></script>
       <!-- Bootstrap Js -->
-    <script src="../application/views/assets/js/bootstrap.min.js"></script>
+    <script src="<?php echo $this->config->base_url(); ?>application/views/assets/js/bootstrap.min.js"></script>
     <!-- Metis Menu Js -->
 	<script src="assets/js/jquery.metisMenu.js"></script>
      <!-- DATA TABLE SCRIPTS -->
-    <script src="../application/views/assets/js/dataTables/jquery.dataTables.js"></script>
-    <script src="../application/views/assets/js/dataTables/dataTables.bootstrap.js"></script>
+    <script src="<?php echo $this->config->base_url(); ?>application/views/assets/js/dataTables/jquery.dataTables.js"></script>
+    <script src="<?php echo $this->config->base_url(); ?>application/views/assets/js/dataTables/dataTables.bootstrap.js"></script>
         <script>
             $(document).ready(function () {
                 $('#dataTables-example').dataTable({
@@ -26,7 +26,7 @@
             });
     </script>
 	
- 	  <script type="text/javascript" src="../application/views/assets/js/local-google-chart.js"></script>
+ 	  <script type="text/javascript" src="<?php echo $this->config->base_url(); ?>application/views/assets/js/local-google-chart.js"></script>
 
 		<script type="text/javascript">
 		  google.load("visualization", "1", {packages:["corechart", "line"]});
@@ -130,7 +130,7 @@ $paramArray = array();
     </script>
          <!-- Custom Js -->
 
-    <script src="../application/views/assets/js/custom-scripts.js"></script>
+    <script src="<?php echo $this->config->base_url(); ?>application/views/assets/js/custom-scripts.js"></script>
 
    
 </body>
