@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -6,13 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Dashboard</title>
 	<!-- Bootstrap Styles-->
-    <link href="application/views/assets/css/bootstrap.css" rel="stylesheet" />
+    <link href="<?php echo $this->config->base_url(); ?>application/views/assets/css/bootstrap.css" rel="stylesheet" />
      <!-- FontAwesome Styles-->
-    <link href="application/views/assets/css/font-awesome.css" rel="stylesheet" />
+    <link href="<?php echo $this->config->base_url(); ?>application/views/assets/css/font-awesome.css" rel="stylesheet" />
      <!-- Morris Chart Styles-->
    
         <!-- Custom Styles-->
-    <link href="application/views/assets/css/custom-styles.css" rel="stylesheet" />
+    <link href="<?php echo $this->config->base_url(); ?>application/views/assets/css/custom-styles.css" rel="stylesheet" />
      <!-- Google Fonts-->
    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
      <!-- TABLE STYLES-->
@@ -22,8 +21,8 @@
     <script src="http://code.highcharts.com/highcharts.js"></script>
     <!-- 2. You can add print and export feature by adding this line -->
     <script src="http://code.highcharts.com/modules/exporting.js"></script>
-	<script src="views/assets/js/custom-dashboard.js"></script>
-    <link href="views/assets/css/dashboard-styles.css" rel="stylesheet" />
+	<script src="<?php echo $this->config->base_url(); ?>application/views/assets/js/custom-dashboard.js"></script>
+    <link href="<?php echo $this->config->base_url(); ?>application/views/assets/css/dashboard-styles.css" rel="stylesheet" />
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 </head>
 <body>
@@ -36,21 +35,29 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.php">Dashboard</a>
+                <a class="navbar-brand" href="<?php echo $this->config->base_url(); ?>index.php/home">Dashboard</a>
             </div>
-			<?php
+			<?php		
 			$url = 'http://' . $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI'];
+			echo "hiii".$_SESSION['authentication'];
+			if($_SESSION['authentication']==1)
+		     {
 			?>
               <div style="float:right" >
 			  <?php if (strpos($url,'help.php') == false) { ?>
 			  <?php if (strpos($url,'form.php') == false) { ?>
-			  <a href="form.php" class="navbar-help">Add a webpage </a> | <?php   } ?> 
+			  <a href="<?php echo $this->config->base_url(); ?>index.php/form" class="navbar-help">Add a webpage </a> | <?php   } ?> 
 			  <?php if (strpos($url,'parameters.php') == false) { ?>
-			  <a href="parameters.php" class="navbar-help">Edit Parameters </a> 
+			  <a href="<?php echo $this->config->base_url(); ?>index.php/edit" class="navbar-help">Edit Parameters </a> 
 			  <?php if (strpos($url,'help.php') == false) { ?> | <?php } } } ?> 
 			  <?php if (strpos($url,'help.php') == false) { ?> 
-			  <a href="help.php" class="navbar-help">Help </a> 
-			  <?php } ?></div>
+			  <a href="<?php echo $this->config->base_url(); ?>index.php/help" class="navbar-help">Help </a> 
+			  <?php } ?>
+			  <a href="<?php echo $this->config->base_url(); ?>index.php/admin/logout" class="navbar-help">Logout </a> 
+			  </div>
+			  <?php
+			  }
+			  ?>
 			
         </nav>
        

@@ -7,10 +7,16 @@ class Home extends CI_Controller {
 
          parent::__construct();
          //loading  the mongodb library
-         $this->load->library('mongo_db');
+         $this->load->library('mongo_db');	
+		$this->load->library('session');		 
 		$this->load->helper(array('form', 'url'));
 		$this->load->library('form_validation');
 		 $this->load->model('Homemodel');
+		  
+		 if($_SESSION['authentication']!= 1)
+		{
+		 header('Location: ../Admin/index');
+		}
 	}
 	/**
 	 * Index Page for this controller.
@@ -29,8 +35,8 @@ class Home extends CI_Controller {
 	 */
 
 	public function index()
-	{
-		
+	{	
+
  	    $this->load->view('includes/header');		
 	   $parameterdata['parameterdata'] = $this->Homemodel->getParameterdata();
 	   $parameterdata['parameters'] = $this->Homemodel->getParameters();

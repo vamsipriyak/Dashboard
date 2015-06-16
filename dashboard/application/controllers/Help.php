@@ -7,6 +7,11 @@ class Help extends CI_Controller {
          parent::__construct();
          //loading  the mongodb library
         $this->load->library('mongo_db');
+		$this->load->library('session');	
+		if($_SESSION['authentication']!= 1)
+		{
+		 header('Location: ../Admin/index');
+		}
 	}
 
 	public function index()
