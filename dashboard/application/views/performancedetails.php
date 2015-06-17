@@ -39,7 +39,7 @@
                         </h2>
                     </div>
                     <div class="col-md-1"></div>
-					<a href="<?php echo $this->config->base_url(); ?>index.php/home"><img src="<?php echo $this->config->base_url(); ?>application/views/assets/img/back.jpg" alt="Mountain View" style="width:80px;height:80px"></a>
+					<a href="<?php echo $this->config->base_url(); ?>"><img src="<?php echo $this->config->base_url(); ?>application/views/assets/img/back.jpg" alt="Mountain View" style="width:80px;height:80px"></a>
 					<button id="refreshPage" onclick="pageRefresh()" style="background-color: Transparent;background-repeat:no-repeat;border: none;cursor:pointer;overflow: hidden;outline:none;"  ><img src="<?php echo $this->config->base_url(); ?>application/views/assets/img/refresh.png" alt="Mountain View" style="width:60px;height:60px" ></button>
             </div> 
             <!-- /. ROW  -->
