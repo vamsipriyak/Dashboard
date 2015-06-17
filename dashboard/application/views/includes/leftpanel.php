@@ -15,7 +15,7 @@
 							 $activeMenu =  '';
 						 }
 						print '<li>';
-						print '<a href="'.$this->config->base_url().'/index.php/performancedetails/index/'.$pageid.'/'.$document['_id'].'" '.$activeMenu.' >'.$document['name'].'</a>';
+						print '<a href="'.$this->config->base_url().'/index.php/performancedetails/index/'.$document['_id'].'/'.$pageid.'" '.$activeMenu.' >'.$document['name'].'</a>';
 						print '</li>';
 					   }
 					?>										
