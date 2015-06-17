@@ -16,9 +16,8 @@ class Performancedetails extends CI_Controller {
 
 	public function index()
 	{
-		$pageid = $this->uri->segment(3);//mysql_escape_string($this->input->get('pageid'));
-		$param = $this->uri->segment(4);
-		//$param = mysql_escape_string($this->input->get('param'));
+		$param = $this->uri->segment(3);
+		$pageid = $this->uri->segment(4);
 		$this->load->model('performance_details_model');
  	    $values['getLeftPanelDetailsData'] = $this->performance_details_model->getLeftPanelDetails();
 		$values['pageid'] = $pageid;
