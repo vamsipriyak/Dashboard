@@ -14,7 +14,7 @@
                          <div class="panel-heading">
                             Website Performance
 						    <div class="col-md-1" id="image" >
-							<a href="home" >
+							<a href="" >
 					<img src="<?php echo $this->config->base_url(); ?>application/views/assets/img/refresh.png" alt="Mountain View" style="width:60px;height:60px"></a>
                     </div>
                         </div>
@@ -48,6 +48,7 @@
 										   // iterate result array to display the values
 										  $k=0;
 										  foreach($parameterdata as $row){
+
 										  	$url = $row['value']['URL'];
 										  	if($url!='')
 											{
