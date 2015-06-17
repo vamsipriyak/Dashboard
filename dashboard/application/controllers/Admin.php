@@ -49,7 +49,7 @@ class Admin extends CI_Controller {
 		$adminlogin=$this->Adminmodel->adminlogin($this->input->post('username'), $this->input->post('password'));
 		if($_SESSION['authentication']==1)
 		{
-		 header('Location: ../home/index');
+		 header('Location: ../form/index');
 		}
 		else
 		{

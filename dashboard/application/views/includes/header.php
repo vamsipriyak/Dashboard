@@ -62,7 +62,7 @@
 			  <?php if (strpos($url,'/help') == false) { ?>
 			  <a href="<?php echo $this->config->base_url(); ?>index.php/help" class="navbar-help">Help </a> |
 			  <?php } ?>
-		      <a href="<?php echo $this->config->base_url(); ?>index.php/admin/index" class="navbar-help">Admin Login </a>
+		      <a href="<?php echo $this->config->base_url(); ?>index.php/admin/index" class="navbar-help" target="_blank">Admin </a>
 </div>			  
 			 <?php
 			  }
