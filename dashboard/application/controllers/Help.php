@@ -1,6 +1,5 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-
 class Help extends CI_Controller {
 	function __construct(){
 
@@ -8,10 +7,7 @@ class Help extends CI_Controller {
          //loading  the mongodb library
         $this->load->library('mongo_db');
 		$this->load->library('session');	
-		if($_SESSION['authentication']!= 1)
-		{
-		 header('Location: ../Admin/index');
-		}
+		
 	}
 
 	public function index()

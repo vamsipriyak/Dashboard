@@ -13,10 +13,7 @@ class Home extends CI_Controller {
 		$this->load->library('form_validation');
 		 $this->load->model('Homemodel');
 		  
-		 if($_SESSION['authentication']!= 1)
-		{
-		 header('Location: ../Admin/index');
-		}
+		 
 	}
 	/**
 	 * Index Page for this controller.

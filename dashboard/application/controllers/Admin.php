@@ -40,12 +40,8 @@ class Admin extends CI_Controller {
 		}
 		else
 		{
-		?>
-		<script type="text/javascript">
-		<!--
-		window.location = "index.php/home/index"
-		//-->
-		</script> <?php
+		header('Location: ../../index.php/home/index');
+		
 		}
 	}
 	public function login()

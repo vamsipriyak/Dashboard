@@ -10,7 +10,7 @@ class Performancedetails extends CI_Controller {
 		$this->load->library('session');	
 		if($_SESSION['authentication']!= 1)
 		{
-		 header('Location: ../Admin/index');
+		 		 header('Location: ../index.php/Admin/index');
 		}
 	}
 

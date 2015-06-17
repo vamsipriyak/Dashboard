@@ -38,6 +38,7 @@
                 <a class="navbar-brand" href="<?php echo $this->config->base_url(); ?>index.php/home">Dashboard</a>
             </div>
 			<?php		
+			error_reporting(1);
 			$url = 'http://' . $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI'];
 			if($_SESSION['authentication']==1)
 		     {
@@ -49,12 +50,21 @@
 			  <?php if (strpos($url,'/edit') == false) { ?>
 			  <a href="<?php echo $this->config->base_url(); ?>index.php/edit" class="navbar-help">Edit Parameters </a> 
 			  <?php if (strpos($url,'/help') == false) { ?> | <?php } } } ?> 
-			  <?php if (strpos($url,'/help') == false) { ?> 
-			  <a href="<?php echo $this->config->base_url(); ?>index.php/help" class="navbar-help">Help </a> |
-			  <?php } ?>
+			 
 			  <a href="<?php echo $this->config->base_url(); ?>index.php/admin/logout" class="navbar-help">Logout </a> 
 			  </div>
 			  <?php
+			  }
+			  else
+			  {
+			  ?>
+              <div style="float:right" >
+			  <?php if (strpos($url,'/help') == false) { ?>
+			  <a href="<?php echo $this->config->base_url(); ?>index.php/help" class="navbar-help">Help </a> |
+			  <?php } ?>
+		      <a href="<?php echo $this->config->base_url(); ?>index.php/admin/index" class="navbar-help">Admin Login </a>
+</div>			  
+			 <?php
 			  }
 			  ?>
 			
