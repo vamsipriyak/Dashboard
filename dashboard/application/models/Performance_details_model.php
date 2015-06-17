@@ -76,6 +76,7 @@ class Performance_details_model extends CI_Model {
 			$headerFormatArray = array();
 			foreach ($cursor as $l =>  $document) {
 				//print '<pre>';
+				//print_r($document);
 				$headercount=sizeof($document["data"]['formattedResults']['ruleResults'][$parameter]['urlBlocks']);
 				foreach ($document["data"]['formattedResults']['ruleResults'][$parameter]['urlBlocks'] as $j => $header)
 				{	
