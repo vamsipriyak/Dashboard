@@ -27,7 +27,7 @@ class Formmodel extends CI_Model {
 		}
 		  $document = array( 
 			"_id" => $id,
-			"parent_page_id" => 1,
+			"parent_page_id" => $inputValues['parentSiteId'],
 			"URL" =>$inputValues['webPageUrl']      	  
 	     );
 
@@ -37,13 +37,22 @@ class Formmodel extends CI_Model {
 	}	
 	public function getparentWebsites()
 	{	 
-		$websites = $this->mongo_db->db->selectCollection('websites');
+		$websites = $this->mongo_db->db->selectCollection('websites');  
 		 $js = "function() {
 				return this._id == this.parent_page_id;
 			}";
 		$urls = $websites->find(array('$where' => $js));
 		return $urls;
 	}	
+	public function isWebsiteExists($link)
+	{
+		$collection = $this->mongo_db->db->selectCollection('websites');
+		$website = $collection->find(array('URL' => $link));
+		foreach($website as $url) {
+		}				
+		return $url;
+	}	
+	
 }
 
 ?>

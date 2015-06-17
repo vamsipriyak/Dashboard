@@ -20,7 +20,7 @@
                                         <div class="form-group" id="parentSite" style="display:none;">
                                             <label>Choose a parent site</label>
 											
-                                            <select class="form-control" id="parentSiteId">
+                                            <select class="form-control" name="parentSiteId">
 											<option value="">- Select -</option>
                                               <?php
 											 
