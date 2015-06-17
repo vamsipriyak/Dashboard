@@ -6,7 +6,7 @@
                                         <div class="form-group">
                                             <label>Web page URL</label>
 											<?php echo form_error('webPageUrl'); ?>
-                                            <input class="form-control" name = "webPageUrl" id = "webPageUrl" value = "" required>
+                                            <input class="form-control" name = "webPageUrl" id = "webPageUrl" value = "" >
                                         </div>
                                         <div class="form-group">
                                             <label>Is it a parent site</label>

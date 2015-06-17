@@ -23,7 +23,8 @@ class Form extends CI_Controller {
 		$websites['parentwebsites'] = $this->Formmodel->getparentWebsites();
 		$this->load->helper(array('form', 'url'));
 		$this->load->library('form_validation');
-		$this->form_validation->set_rules('webPageUrl', 'Web Page Url', 'required');
+		$this->form_validation->set_error_delimiters('<div style="color:red;">', '</div>');
+		$this->form_validation->set_rules('webPageUrl', 'Web Page Url', 'required|callback_valid_url_format');
 		if ($this->form_validation->run() == FALSE)
 		{
 			$this->load->view('form', $websites);
@@ -36,5 +37,15 @@ class Form extends CI_Controller {
 		}
 		$this->load->view('includes/footer');
 	}
-
+	function valid_url_format($str){
+			//$pattern = "|^http(s)?://[a-z0-9-]+(.[a-z0-9-]+)*(:[0-9]+)?(/.*)?$|i";
+			$pattern = "/(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/";
+			
+			if (!preg_match($pattern, $str)){
+				$this->form_validation->set_message('valid_url_format', 'The URL you entered is not correctly formatted.');
+				return FALSE;
+			}
+	 
+			return TRUE;
+	}   	
 }
