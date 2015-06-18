@@ -19,7 +19,7 @@
 ?>
 
 <div id="page-wrapper" >
-            <div id="page-inner">
+            <div id="page-inner-custom">
 			 <div class="row">
                     <div class="col-md-8">
                         <h2 >
