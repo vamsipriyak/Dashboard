@@ -32,7 +32,10 @@
 											 foreach($parameters as $row){
 											   print '<th class="header-width">'.$row['name'].' <br>
 											   <span id="units">('.$row['units'].')</span>
-											   </td>';						   
+											   </td>';
+											   $minarr[$i] = $row['minimum_value'];
+											   $maxarr[$i] = $row['maximum_value'];
+											   $i++;										   
 											 }
 											 if($_SESSION['authentication']==1)
 												{
@@ -67,28 +70,25 @@
 											$paramValue = $row['value']["Param".($j+1)];
 											if(!is_null($paramValue))
 											{
-												 $min = $row['value']["param".($j+1)."_minvalue"];
-											   $max = $row['value']["param".($j+1)."_maxvalue"];
 											if($j == 0 || $j == 3 || $j == 4) {
 											//positive logic
-											if($paramValue >= $max) {
+											if($paramValue >= $maxarr[$j]) {
 												print '<td class="green-new" >'.$paramValue.'</td>';
-											} else if($paramValue < $max && $paramValue >= $min) {
+											} else if($paramValue < $maxarr[$j] && $paramValue >= $minarr[$j]) {
 												print '<td class="yellow-new" >'.$paramValue.'</td>';
 											} else {
 												print '<td class="red-new" >'.$paramValue.'</td>';
 											}
 											} else {
 											//reverse logic
-												if($paramValue < $min) {
+												if($paramValue < $minarr[$j]) {
 												print '<td class="green-new" >'.$paramValue.'</td>';
-											} else if($paramValue >= $min && $paramValue < $max) {
+											} else if($paramValue >= $minarr[$j] && $paramValue < $maxarr[$j]) {
 												print '<td class="yellow-new" >'.$paramValue.'</td>';
 											} else {
 												print '<td class="red-new" >'.$paramValue.'</td>';
 											}
 											}
-											
 											}
 											else
 											{
