@@ -4,7 +4,7 @@ $i=0;
 
 foreach($parameters as $row){
 	$websiteParams[$i]["param_name"] = $row["name"];
-	
+	$websiteParams[$i]["units"] = $row["units"];
 	$minval = "param".($i+1)."_minvalue";
 	$maxval = "param".($i+1)."_maxvalue";
 	$websiteParams[$i]["_id"] = ($i+1);
