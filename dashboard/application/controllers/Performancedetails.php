@@ -8,10 +8,7 @@ class Performancedetails extends CI_Controller {
          //loading  the mongodb library
         $this->load->library('mongo_db');
 		$this->load->library('session');	
-		if($_SESSION['authentication']!= 1)
-		{
-		 		 header('Location: ../index.php/Admin/index');
-		}
+		
 	}
 
 	public function index()

@@ -82,7 +82,36 @@ function editWebsiteParams(id) {
 			}
 			return false;
 		}
-		
+	function editThresholdParams(id) {
+		var id=id;
+			var minvalue = document.getElementById("minvalue"+id).value;
+			var maxvalue = document.getElementById("maxvalue"+id).value;
+			var parampageid = document.getElementById("parampageid").value;
+			var baseurl = document.getElementById("baseurl").value;
+			// Returns successful data submission message when the entered information is stored in database.
+			var dataString = "minvalue=" + minvalue + "&maxvalue=" + maxvalue +  "&id=" + id +  "&parampageid=" + parampageid;
+			//alert(baseurl);
+			//alert(dataString);
+			if (minvalue == '' || maxvalue == '' ) {
+				alert("Please Fill All Fields");
+			} else {
+			//AJAX code to submit form.
+			$.ajax({
+				type: "POST",
+				url: baseurl+"index.php/editThreshold/updateThreshold",
+				//url: "form.php?action=updateparameters",
+				data: dataString,
+				cache: false,
+				success: function(data) {
+				alert ("Parameter values updated successfully");
+				//alert(data);
+				webPageForm.submit();				
+			}
+			});
+			}
+			return false;
+		}
+			
 		
 		function pageRefresh()
 		{

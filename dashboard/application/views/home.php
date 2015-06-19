@@ -37,8 +37,13 @@
 											   $maxarr[$i] = $row['maximum_value'];
 											   $i++;										   
 											 }
-										    ?>
-											<!-- <th></td> -->
+											 if($_SESSION['authentication']==1)
+												{
+										       ?>
+											<th></td> 
+											<?php
+											}
+											?>
                                         </tr>
                                     </thead>
                                    <tbody>
@@ -60,7 +65,7 @@
 											print ' 
 												<div  id="wait'.$row['_id'].'" style="display:none;"><img src="application/views/assets/img/demo_wait.gif" width="64" height="64" /></div>	
 												
-											<a href="performancedetails/index/1/'.$row['_id'].'">'.$row['value']['URL'].'</td>';
+											<a href="'.$this->config->base_url().'index.php/performancedetails/index/1/'.$row['_id'].'">'.$row['value']['URL'].' </td>';
 											for($j=0; $j<10; $j++) {
 											$paramValue = $row['value']["Param".($j+1)];
 											if(!is_null($paramValue))
@@ -90,10 +95,12 @@
 											print '<td class="grey-new" >NA</td>';
 											}
 											}
-
-											/*print '<td align="center">   
-												<img src="application/views/assets/img/refresh.png" alt="Mountain View" style="width:40px;height:40px;cursor:pointer;" id="'.$row['_id'].'" class="refresh" onclick="postWebsiteParams()"> 
-												</td>'; */
+											if($_SESSION['authentication']==1)
+											{
+											print '<td align="center">   
+												<a href="'.$this->config->base_url().'index.php/edit/editthreshold/'.$row['_id'].'"">Edit Threshold</a>
+												</td>'; 
+												}
 											?>	
 										
 											</tr>
