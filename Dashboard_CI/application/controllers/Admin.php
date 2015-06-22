@@ -30,7 +30,7 @@ class Admin extends CI_Controller {
 
 	public function index()
 	{
-		if($_SESSION['authentication']!= 1)
+		if(!$_SESSION['authentication']!= 1)
 		{
  	    $this->load->view('includes/header');		
 	    $this->load->view('adminlogin');
@@ -62,7 +62,7 @@ class Admin extends CI_Controller {
 	}
 	public function logout()
 	{
-	 session_destroy();
+	  session_destroy();
 	  unset($_SESSION["authentication"]);
 	   unset($_SESSION["adminid"]);	 
 	  header('Location: index');

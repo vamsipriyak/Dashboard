@@ -14,15 +14,17 @@
 	<script src="assets/js/jquery.metisMenu.js"></script>
      <!-- DATA TABLE SCRIPTS -->
     <script src="<?php echo $this->config->base_url(); ?>application/views/assets/js/dataTables/jquery.dataTables.js"></script>
-    <script src="<?php echo $this->config->base_url(); ?>application/views/assets/js/dataTables/dataTables.bootstrap.js"></script>
+	<script src="<?php echo $this->config->base_url(); ?>application/views/assets/js/dataTables/jquery.dataTables.js"></script>
+    <script src="<?php echo $this->config->base_url(); ?>application/views/assets/js/dataTables/dataTables.fixedHeader.js"></script>
         <script>
             $(document).ready(function () {
-                $('#dataTables-example').dataTable({
+                var dataTable = $('#dataTables-example').dataTable({
 				 "bInfo" : false,
 				 "bFilter": false,
 				 "bPaginate": false,
 				 "bSort" : false
 				});
+				//new $.fn.dataTable.FixedHeader( dataTable );
             });
     </script>
 	

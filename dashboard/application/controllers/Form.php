@@ -22,6 +22,7 @@ class Form extends CI_Controller {
 		$this->load->model('Formmodel');
  	    $websites['websites'] = $this->Formmodel->getWebsite();
 		$websites['parentwebsites'] = $this->Formmodel->getparentWebsites();
+		$websites['params'] = $this->Formmodel->getParams();
 		$this->load->helper(array('form', 'url'));
 		$this->load->library('form_validation');
 		$this->form_validation->set_error_delimiters('<div style="color:red;">', '</div>');

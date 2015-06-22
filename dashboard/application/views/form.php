@@ -5,7 +5,7 @@
                                     <form role="form" action="" method="POST" id="webPageForm">
                                         <div class="form-group">
                                             <label>Web page URL</label>
-											<?php echo form_error('webPageUrl'); ?>
+											<?php  echo form_error('webPageUrl'); ?>
                                             <input class="form-control" name = "webPageUrl" id = "webPageUrl" value = "" >
                                         </div>
                                         <div class="form-group">
@@ -36,7 +36,51 @@
 											?>
                                             </select>
                                         </div>
-										<input id="submitForm" name="submitForm" class="btn btn-default" onclick="postWebsiteParams()"  type="submit" value="Submit">
+										
+										<div class="panel panel-default">
+                         
+                        <div class="panel-body">
+                            <div class="table-responsive">
+							    
+                                <table class="table table-striped table-bordered table-hover" id="dataTables-example">
+                                    <thead>
+                                        <tr>
+                                            <th>Parameter Name</th>
+											<th width="20%">Min Value</th>
+											<th width="20%">Max Value</th>
+											<th width="20%">Units</th>
+                                        </tr>
+                                    </thead>
+                                   <tbody>
+					
+								   
+								   <?php										
+										   // iterate result array to display the values
+										  
+										   foreach($params as $row){
+											?>
+											<tr width="100%" id="<?php echo $row['_id'];?>" class="test-<?php echo $row['_id'];?>">
+											
+											<?php												
+											print '<td class="center" width="10%">'.$row["name"].'</td>';
+											print '<td class="center"><input type="text" width="20%" id="param'.$row['_id'].'_minvalue" name="param'.$row['_id'].'_minvalue" value= "'.$row["minimum_value"].'"> </td>';
+											print '<td class="center"><input type="text" width="20%" id="param'.$row['_id'].'_maxvalue" name="param'.$row['_id'].'_maxvalue" value= "'.$row["maximum_value"].'"> </td>';
+											print '<td class="center">'.$row["units"].'</td>';
+											print '</tr>';
+											
+										   }
+										   
+										   // End of for loop//
+								?>		
+                                       
+                                      
+                                    </tbody>
+                                </table>							
+                 </div>
+                            
+                        </div>
+                    </div>
+										<input id="submitForm" name="submitForm" class="btn btn-default" type="submit" value="Submit">
                                         <input id="reset" name="reset" class="btn btn-default" onclick="resetValues()" type="button" value="Reset">
                                     </form>
                     </div>

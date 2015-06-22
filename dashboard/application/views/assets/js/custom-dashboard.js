@@ -18,9 +18,18 @@
         });
 		////To post data of websites to form-backend.php
 	function postWebsiteParams() {
+			
 			var webPageUrl = document.getElementById("webPageUrl").value;
 			var parentSiteId = document.getElementById("webPageUrl").value;
-			var isParentTrue = $("input[name=isParent]:checked").val();			
+			var isParentTrue = $("input[name=isParent]:checked").val();	
+			var paramsMinArray = new Array();  			
+			var paramsMaxArray = new Array();
+			for (paramindex = 0; paramindex < 10; paramindex++) {				
+				paramsMinArray[paramindex] = $("#param"+(paramindex+1)+"_minvalue").val();
+				paramsMaxArray[paramindex] = $("#param"+(paramindex+1)+"_maxvalue").val();
+			}
+			var paramsMinJSON = JSON.stringify(paramsMinArray);			
+			var paramsMaxJSON = JSON.stringify(paramsMaxArray);
 			/*var regexp = /(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/;
 			isValid = regexp.test(webPageUrl);
 			if(!isValid)
@@ -29,7 +38,8 @@
 				return;						
 			}*/							
 			// Returns successful data submission message when the entered information is stored in database.
-			var dataString = "webPageUrl=" + webPageUrl + "&parentSiteId=" + isParentTrue;
+			var dataString = "webPageUrl=" + webPageUrl + "&parentSiteId=" + isParentTrue + "&paramsMin="+ paramsMinJSON + "&paramsMax="+ paramsMaxJSON;
+			alert(dataString);
 			//alert(dataString);
 			if (webPageUrl == '') {
 				alert("Please Fill All Fields");
@@ -38,7 +48,7 @@
 			$.ajax({
 				type: "POST",
 				url: "form.php",
-				//data: dataString1,
+		//		data: dataString,
 				cache: false,
 				success: function(data) {
 				alert (data);
