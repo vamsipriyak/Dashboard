@@ -94,6 +94,7 @@ function editWebsiteParams(id) {
 		}
 	function editThresholdParams(id) {
 		var id=id;
+		 
 			var minvalue = document.getElementById("minvalue"+id).value;
 			var maxvalue = document.getElementById("maxvalue"+id).value;
 			var parampageid = document.getElementById("parampageid").value;
@@ -103,8 +104,38 @@ function editWebsiteParams(id) {
 			//alert(baseurl);
 			//alert(dataString);
 			if (minvalue == '' || maxvalue == '' ) {
-				alert("Please Fill All Fields");
-			} else {
+				//alert("Please Fill All Fields");
+				$("#minvalue"+id).css("border-color" , "");
+				$("#maxvalue"+id).css("border-color" , "");
+				if(minvalue == '' && maxvalue != '')
+				{
+				$("#minvalue"+id).focus();
+				$("#minvalue"+id).css("border-color" , "red");
+				}
+				else if(maxvalue == '' && minvalue != '')
+				{
+				$("#maxvalue"+id).focus();
+				$("#maxvalue"+id).css("border-color" , "red");
+				}
+				else
+				{
+				
+				$("#minvalue"+id).focus();
+				$("#minvalue"+id).css("border-color" , "red");
+				$("#maxvalue"+id).focus();
+				$("#maxvalue"+id).css("border-color" , "red");
+				}
+				$("#errmsg").html("Please fill all fields");
+				$("#errmsg").css( "color", "red" );
+				
+				
+			} 
+			else if(minvalue >= maxvalue )
+			{
+			$("#errmsg").html("Minimum value should not be greater than maximum value");
+		    $("#errmsg").css( "color", "red" );
+			}			
+			else {
 			//AJAX code to submit form.
 			$.ajax({
 				type: "POST",

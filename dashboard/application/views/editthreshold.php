@@ -33,6 +33,7 @@ foreach($parameters as $row){
 						 
                         </div>
                         <div class="panel-body">
+						<div id="errmsg"></div>
                             <div class="table-responsive">
 							    <form role="form" action="" method="POST" id="webPageForm">
                                 <table class="table table-striped table-bordered table-hover" id="dataTables-example">

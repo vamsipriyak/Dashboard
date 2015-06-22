@@ -167,6 +167,12 @@ public function getParameterdata()
 		 $results = $parameters->find(array('_id' => $pageid));
 		 return $results;
 	}
+	public function getLastcrontime()
+	{	 
+		 $parameters = $this->mongo_db->db->selectCollection('cron');
+		 $results = $parameters->find()->sort(array('_id' => -1))->limit(1);		
+		 return $results;
+	}
 		
 }
 

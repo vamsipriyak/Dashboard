@@ -38,7 +38,7 @@ class Home extends CI_Controller {
 	   $parameterdata['parameterdata'] = $this->Homemodel->getParameterdata();
 	   $parameterdata['parameters'] = $this->Homemodel->getParameters();
 	   //$websites['websites'] = $this->Homemodel->getWebsites();
-		
+		$parameterdata['crontime'] = $this->Homemodel->getLastcrontime();
 		$this->load->view('home', $parameterdata);
 		$this->load->view('includes/footer');
 	}
