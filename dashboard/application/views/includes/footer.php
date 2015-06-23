@@ -48,9 +48,10 @@ $paramArray = array();
 	}
 	
 ?>			var data = google.visualization.arrayToDataTable([
-			  ['Dates', <?php print "'".$paramArray[$param-1]."'"; ?>],
+			  ['Dates', <?php print "'".$paramArray[$param]."'"; ?>],
 			  <?php
 			  $existingDates = array();
+			  //print 'count'.count($chartData['param']);
 			  for($i=0;$i<count($chartData['param']);$i++) 
 			  {
 				if($i == count($chartData['param'])-1)
