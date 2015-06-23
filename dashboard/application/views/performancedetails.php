@@ -52,7 +52,7 @@
                         <div class="panel-body">
 							<div class="panel-body-detailed">						
 								 <?php 
-									if($param <= count($paramArray) && $pageid <= count($paramArray)) 
+									if($feedExists > 0) 
 									{										
 									$heading = $param; //$_GET['param'];
 									echo  "<b style=\"font-size:25px;font-weight: lighter;text-decoration: none;color:black;\">".$paramArray[$param-1].": ".$paramValues[$param-1]." ".$paramUnitArray[$param-1]."</b>";

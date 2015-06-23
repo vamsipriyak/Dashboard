@@ -20,6 +20,12 @@ class Performance_details_model extends CI_Model {
 		$cursor = $collection->find(array('page_id' => (int)$pageid))->sort(array('_id' => -1))->limit(1);
 		return $cursor;
 	}	
+	public function checkFeedExists($pageid)
+	{	 
+		$collection = $this->mongo_db->db->selectCollection('parametersCollection');
+		$cursor = $collection->find(array('page_id' => (int)$pageid))->sort(array('_id' => -1))->limit(1);
+		return $cursor->count();
+	}
 	public function getParameterChartData($pageid)
 	{	 
 		$mongotime = New Mongodate(time());

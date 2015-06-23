@@ -25,6 +25,7 @@ class Performancedetails extends CI_Controller {
  	    $values['parameterChartData'] = $this->performance_details_model->getParameterCollectionValues($pageid);
  	    $values['pageUrl'] = $this->performance_details_model->getUrls($pageid);
 		$values['cursor'] = $this->performance_details_model->getWebsiteDetails($param, $pageid);
+		$values['feedExists'] = $this->performance_details_model->checkFeedExists($pageid);
 		$this->load->view('performancedetails', $values);
 		$this->load->view('includes/footer');
 	}
