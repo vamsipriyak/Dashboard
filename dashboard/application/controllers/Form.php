@@ -39,9 +39,9 @@ class Form extends CI_Controller {
 		$this->load->view('includes/footer');
 	}
 	function valid_url_format($str){
-			$pattern = "/(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/";
-			
-			if (!preg_match($pattern, $str)){
+			if (!filter_var($str, FILTER_VALIDATE_URL) === false) {
+				return TRUE;
+			} else {
 				$this->form_validation->set_message('valid_url_format', 'The URL you entered is not correctly formatted.');
 				return FALSE;
 			}
