@@ -31,7 +31,7 @@ class Performance_details_model extends CI_Model {
 		$mongotime = New Mongodate(time());
 		$mongoendtime = New Mongodate(time()-30*24*3600);
 		$collection = $this->mongo_db->db->selectCollection('parametersCollection');
-       	$cursor = $collection->find(array('updated_time' => array('$lte'=>$mongotime, '$gte'=>$mongoendtime), 'page_id' => $pageid))->sort(array('updated_time' => 1));
+       	$cursor = $collection->find(array('updated_time' => array('$lte'=>$mongotime, '$gte'=>$mongoendtime), 'page_id' => (int) $pageid))->sort(array('updated_time' => 1));
 		return $cursor;
 	}	
 	public function getUrls($pageid)

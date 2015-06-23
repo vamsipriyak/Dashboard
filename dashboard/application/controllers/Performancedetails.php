@@ -22,7 +22,7 @@ class Performancedetails extends CI_Controller {
  	    $this->load->view('includes/header');
 		$this->load->view('includes/leftpanel', $values);
  	    $values['parameterValues'] = $this->performance_details_model->getParameterCollectionValues($pageid);
- 	    $values['parameterChartData'] = $this->performance_details_model->getParameterCollectionValues($pageid);
+ 	    $values['parameterChartData'] = $this->performance_details_model->getParameterChartData($pageid);
  	    $values['pageUrl'] = $this->performance_details_model->getUrls($pageid);
 		$values['cursor'] = $this->performance_details_model->getWebsiteDetails($param, $pageid);
 		$values['feedExists'] = $this->performance_details_model->checkFeedExists($pageid);
