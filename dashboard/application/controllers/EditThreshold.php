@@ -53,8 +53,8 @@ class EditThreshold extends CI_Controller {
 		$id = $this->input->post('id');
 		$minvalue = $this->input->post('minvalue');
 		$maxvalue = $this->input->post('maxvalue');
-		echo "hiii".$parampageid = $this->input->post('parampageid');
-		$this->Editmodel->updateThreshold($id,$minvalue,$maxvalue,$parampageid);
+		 $parampageid = $this->input->post('parampageid');
+		 $result=$this->Editmodel->updateThreshold($id,$minvalue,$maxvalue,$parampageid);
 	}
 	
 }

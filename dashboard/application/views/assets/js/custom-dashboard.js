@@ -85,7 +85,15 @@ function editWebsiteParams(id) {
 				data: dataString,
 				cache: false,
 				success: function(data) {
-				alert ("Parameter values updated successfully");
+				//alert ("Parameter values updated successfully");
+				if(data =='Parameter values updated successfully')
+				{
+				alert("Parameter values updated successfully")
+				}
+				else
+				{
+				alert("Updation failed");
+				}
 				webPageForm.submit();				
 			}
 			});
@@ -144,8 +152,15 @@ function editWebsiteParams(id) {
 				data: dataString,
 				cache: false,
 				success: function(data) {
-				alert ("Parameter values updated successfully");
-				//alert(data);
+				//alert ("Parameter values updated successfully");
+				if(data =='Parameter values updated successfully')
+				{
+				alert("Parameter values updated successfully")
+				}
+				else
+				{
+				alert("Updation failed");
+				}
 				webPageForm.submit();				
 			}
 			});

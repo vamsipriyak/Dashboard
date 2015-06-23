@@ -1,9 +1,9 @@
 <?php
 $websiteParams = array();
 $i=0;
-
 foreach($parameters as $row){
 	$websiteParams[$i]["param_name"] = $row["name"];
+	
 	$websiteParams[$i]["units"] = $row["units"];
 	$minval = "param".($i+1)."_minvalue";
 	$maxval = "param".($i+1)."_maxvalue";
@@ -29,7 +29,7 @@ foreach($parameters as $row){
                     <!-- Advanced Tables -->
                     <div class="panel panel-default">
                          <div class="panel-heading">
-                           Threshold
+                           Threshold values for <?php echo $threshold["URL"]; ?>
 						 
                         </div>
                         <div class="panel-body">
@@ -75,7 +75,7 @@ foreach($parameters as $row){
 												<input type="hidden" name="parampageid" id="parampageid" value="'.$parampageid.'">
 												<input type="hidden" name="baseurl" id="baseurl" value="'.$this->config->base_url().'">
 												<input type="button" value="Update" id="'.$row['_id'].'"  onclick="editThresholdParams('.$row['_id'].')">
-											<input type="button" value="Cancel" id="'.$row['_id'].'" class="cancel" > 
+											<input type="button" value="Cancel" id="'.$row['_id'].'" class="cancel" onClick="history.go(0)"> 
 												</td>';
 											print '</tr>';
 											?>
@@ -111,11 +111,14 @@ var row_id = this.id;
 $(".test-"+row_id).hide();
 $(".wait-"+row_id).show();
 });
-	$(document).on('click', '.cancel', function() 
+/*	$(document).on('click', '.cancel', function() 
 {
 var row_id = this.id;
 //$(".test").css("display", "none");
+var minvalue=document.getElementById("minvalue"+row_id).value;
+
+document.getElementById("minvalue"+row_id).value=minvalue;
 $(".test-"+row_id).show();
 $(".wait-"+row_id).hide();
-});
+});*/
 	</script>
