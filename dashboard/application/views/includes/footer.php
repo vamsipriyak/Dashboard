@@ -42,7 +42,6 @@ $paramArray = array();
 				$paramDescriptionArray[$i] = $parameter['description'];
 				$i++;
 			}
-	$param = 2;
 	foreach ($parameterChartData as $paramData) {
 		$chartData['param'][] = $paramData['Param'.$param.''];
 		$chartData['date'][] = date('Y-m-d',$paramData['updated_time']->sec);
