@@ -1,5 +1,10 @@
         <div id="page-wrapper-home" >		
             <div id="page-inner">
+			 <div class="panel panel-default">
+			<div class="panel-heading">
+                          Add a Webpage
+						 
+                        </div></div>
 			 <div class="row">
                     <div class="col-md-12">
                                     <form role="form" action="" method="POST" id="webPageForm">

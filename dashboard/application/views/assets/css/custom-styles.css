@@ -704,6 +704,13 @@ td.grey-new {
   background-position: center;
   min-width: 90px;
 }
+.last-updated
+{
+color: #fff;
+  font-size: 14px;
+  width:220px;
+  line-height:40px;
+}
 /* Admin Login */
 
 

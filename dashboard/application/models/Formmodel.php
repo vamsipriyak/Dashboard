@@ -26,7 +26,8 @@ class Formmodel extends CI_Model {
 			$id = $count['_id']+1;
 		}
 		  
-
+		if($_SESSION['authentication']==1)
+		 {
 		$user_collection = $this->mongo_db->db->websites;
 		$websiteID = $this->getNextSequence("websiteid");
 		if($inputValues['isParent'] == "Yes")
@@ -58,7 +59,15 @@ class Formmodel extends CI_Model {
 			"param10_minvalue" => $inputValues['param10_minvalue'],			
 			"param10_maxvalue" => $inputValues['param10_maxvalue'],
 	     );
-		return $user_collection->insert($document);
+		 		return $user_collection->insert($document);
+
+		 }
+		 else
+		 {
+		  return -1;
+		 }
+		
+
 		#redirect();	
 	}	
 	public function getparentWebsites()

@@ -12,7 +12,7 @@
                     <!-- Advanced Tables -->
                     <div class="panel panel-default">
                          <div class="panel-heading">
-                           Parameters
+                          Edit Parameters
 						 
                         </div>
                         <div class="panel-body">

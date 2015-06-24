@@ -170,7 +170,7 @@ public function getParameterdata()
 	public function getLastcrontime()
 	{	 
 		 $parameters = $this->mongo_db->db->selectCollection('cron');
-		 $results = $parameters->find()->sort(array('_id' => -1))->limit(1);		
+		 $results = $parameters->find(array('inProgress' => 'N'))->sort(array('_id' => -1))->limit(1);		
 		 return $results;
 	}
 		

@@ -8,9 +8,10 @@ class Form extends CI_Controller {
          //loading  the mongodb library
         $this->load->library('mongo_db');
 		$this->load->library('session');	
+		$redirecturl=$this->config->base_url()."index.php/Admin/index";
 		if($_SESSION['authentication']!= 1)
 		{
-		 header('Location: ../index.php/Admin/index');
+		 		 header('Location:'.$redirecturl);
 		}
 	}
 
