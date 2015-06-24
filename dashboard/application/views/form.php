@@ -11,6 +11,13 @@
                                         <div class="form-group">
                                             <label>Web page URL</label>
 											<?php  echo form_error('webPageUrl'); ?>
+											<?php
+												if(!empty($success))
+												{
+													print '<br><span style="color:green;">Web page added successfully</span>';
+												}
+											?>
+                                            											
                                             <input class="form-control" name = "webPageUrl" id = "webPageUrl" value = "" >
                                         </div>
                                         <div class="form-group">

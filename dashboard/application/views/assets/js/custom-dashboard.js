@@ -63,11 +63,19 @@
 		function resetValues()
 		{
 			document.getElementById("webPageUrl").value = '';
-			document.getElementById("parentSiteId").value = '';
+			var container = document.getElementById('parentSite');
+				var children = container.getElementsByTagName('select');
+				for (var i = 0; i < children.length; i++) {
+					children[i].selectedIndex = 0;
+				}			
 			document.getElementById("isParentTrue").checked = true;
+			if(document.getElementById("isParentTrue").checked)
+			{
+				document.getElementById("parentSite").style.display = 'none';
+			}
 		}		
-function editWebsiteParams(id) {
-		var id=id;
+		function editWebsiteParams(id) {
+			var id=id;
 			var minvalue = document.getElementById("minvalue"+id).value;
 			var maxvalue = document.getElementById("maxvalue"+id).value;
 			var desc = document.getElementById("desc"+id).value;

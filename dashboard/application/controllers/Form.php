@@ -35,6 +35,7 @@ class Form extends CI_Controller {
 		else
 		{
 			$this->Formmodel->insertData($inputValues);
+			$websites['success'] = 'success';
 			$this->load->view('form', $websites);
 		}
 		$this->load->view('includes/footer');
