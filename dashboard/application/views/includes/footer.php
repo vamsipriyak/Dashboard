@@ -51,7 +51,6 @@ $paramArray = array();
 			  ['Dates', <?php print "'".$paramArray[$param]."'"; ?>],
 			  <?php
 			  $existingDates = array();
-			  //print 'count'.count($chartData['param']);
 			  for($i=0;$i<count($chartData['param']);$i++) 
 			  {
 				if($i == count($chartData['param'])-1)
@@ -72,7 +71,7 @@ $paramArray = array();
 					$existingDates[] = '';
 					$limiter = '';
 				}
-				if($existingDates[$i] != '' || $chartData['param'][$i] != '')
+				if($existingDates[$i] != '' && $chartData['param'][$i] != '')
 				{	
 					$formattedDate = date_parse($existingDates[$i]);
 					print "["."'".$formattedDate['month'].$limiter.$formattedDate['day']."'	,".$chartData['param'][$i]."]".$delimiter ;						
