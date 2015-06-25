@@ -72,8 +72,11 @@ $paramArray = array();
 					$existingDates[] = '';
 					$limiter = '';
 				}
-				$formattedDate = date_parse($existingDates[$i]);
-				print "["."'".$formattedDate['month'].$limiter.$formattedDate['day']."'	,".$chartData['param'][$i]."]".$delimiter ;						
+				if($existingDates[$i] != '' || $chartData['param'][$i] != '')
+				{	
+					$formattedDate = date_parse($existingDates[$i]);
+					print "["."'".$formattedDate['month'].$limiter.$formattedDate['day']."'	,".$chartData['param'][$i]."]".$delimiter ;						
+				}	
 			  }
 			  
 			  ?>
