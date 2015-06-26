@@ -33,8 +33,8 @@
 								$i++;
 							}
                             print "Insights for ".$pageUrl['URL']."";
-							echo $min = $pageUrl["param".($this->uri->segment(3))."_minvalue"];
-							echo $max = $pageUrl["param".($this->uri->segment(3))."_maxvalue"];
+							 $min = $pageUrl["param".($this->uri->segment(3))."_minvalue"];
+							 $max = $pageUrl["param".($this->uri->segment(3))."_maxvalue"];
 							
 
 						?>
