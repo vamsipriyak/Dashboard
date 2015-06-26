@@ -104,30 +104,30 @@
 											//positive logic
 											if($paramValue >= $max) {
 												print '<td class="green-new" >
-												<a href="'.$this->config->base_url().$url.'">
+												<a href="'.$this->config->base_url().$url.'" class="link">
 												'.$paramValue.' </a></td>';
 											} else if($paramValue < $max && $paramValue >= $min) {
 												print '<td class="yellow-new" >
-												<a href="'.$this->config->base_url().$url.'">
+												<a href="'.$this->config->base_url().$url.'" class="link">
 												'.$paramValue.'</a></td>';
 											} else {
 												print '<td class="red-new" >
-												<a href="'.$this->config->base_url().$url.'">
+												<a href="'.$this->config->base_url().$url.'" class="link">
 												'.$paramValue.'</a></td>';
 											}
 											} else {
 											//reverse logic
 												if($paramValue < $min) {
 												print '<td class="green-new" >
-												<a href="'.$this->config->base_url().$url.'">
+												<a href="'.$this->config->base_url().$url.'" class="link">
 												'.$paramValue.'</a></td>';
 											} else if($paramValue >= $min && $paramValue < $max) {
 												print '<td class="yellow-new" >
-												<a href="'.$this->config->base_url().$url.'">
+												<a href="'.$this->config->base_url().$url.'" class="link">
 												'.$paramValue.'</a></td>';
 											} else {
 												print '<td class="red-new" >
-												<a href="'.$this->config->base_url().$url.'">
+												<a href="'.$this->config->base_url().$url.'" class="link">
 												'.$paramValue.'</a></td>';
 											}
 											}

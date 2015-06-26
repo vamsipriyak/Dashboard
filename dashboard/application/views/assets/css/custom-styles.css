@@ -694,6 +694,12 @@ td.grey-new {
   text-align: center;
   vertical-align: middle!important;
 }
+ .link {
+ color:#333;
+ 
+}
+
+
 .red-new {
   background: url(../img/red.png);
   background-repeat	:no-repeat;
