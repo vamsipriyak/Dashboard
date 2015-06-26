@@ -103,31 +103,31 @@
 											if($j == 0 || $j == 3 || $j == 4) {
 											//positive logic
 											if($paramValue >= $max) {
-												print '<td class="green-new" >
-												<a href="'.$this->config->base_url().$url.'" class="link">
+												print '<td class="center green-new" >
+												<a href="'.$this->config->base_url().$url.'" >
 												'.$paramValue.' </a></td>';
 											} else if($paramValue < $max && $paramValue >= $min) {
-												print '<td class="yellow-new" >
-												<a href="'.$this->config->base_url().$url.'" class="link">
+												print '<td class="center yellow-new" >
+												<a href="'.$this->config->base_url().$url.'" >
 												'.$paramValue.'</a></td>';
 											} else {
-												print '<td class="red-new" >
-												<a href="'.$this->config->base_url().$url.'" class="link">
+												print '<td class="center red-new" >
+												<a href="'.$this->config->base_url().$url.'" >
 												'.$paramValue.'</a></td>';
 											}
 											} else {
 											//reverse logic
 												if($paramValue < $min) {
-												print '<td class="green-new" >
-												<a href="'.$this->config->base_url().$url.'" class="link">
+												print '<td class="center green-new" >
+												<a href="'.$this->config->base_url().$url.'" >
 												'.$paramValue.'</a></td>';
 											} else if($paramValue >= $min && $paramValue < $max) {
-												print '<td class="yellow-new" >
-												<a href="'.$this->config->base_url().$url.'" class="link">
+												print '<td class="center yellow-new" >
+												<a href="'.$this->config->base_url().$url.'" >
 												'.$paramValue.'</a></td>';
 											} else {
-												print '<td class="red-new" >
-												<a href="'.$this->config->base_url().$url.'" class="link">
+												print '<td class="center red-new" >
+												<a href="'.$this->config->base_url().$url.'" >
 												'.$paramValue.'</a></td>';
 											}
 											}
@@ -140,7 +140,7 @@
 											}
 											if($_SESSION['authentication']==1)
 											{
-											print '<td align="center">   
+											print '<td class="center" align="center">   
 												<a href="'.$this->config->base_url().'index.php/edit/editthreshold/'.$row['_id'].'"">Edit Threshold</a>
 												</td>'; 
 												}
