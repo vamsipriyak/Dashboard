@@ -24,7 +24,8 @@
 				 "bPaginate": false,
 				 "bSort" : false
 				});
-				//new $.fn.dataTable.FixedHeader( dataTable );
+				
+				//$('#dataTables-example').children('table:eq(1)').addClass('stuff');
             });
     </script>
 	

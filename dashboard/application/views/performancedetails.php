@@ -33,6 +33,9 @@
 								$i++;
 							}
                             print "Insights for ".$pageUrl['URL']."";
+							echo $min = $pageUrl["param".($this->uri->segment(3))."_minvalue"];
+							echo $max = $pageUrl["param".($this->uri->segment(3))."_maxvalue"];
+							
 
 						?>
 
@@ -55,7 +58,29 @@
 									if($feedExists > 0) 
 									{										
 									$heading = $param; //$_GET['param'];
-									echo  "<b style=\"font-size:25px;font-weight: lighter;text-decoration: none;color:black;\">".$paramArray[$param-1].": ".$paramValues[$param-1]." ".$paramUnitArray[$param-1]."</b>";
+									
+									if($this->uri->segment(3) == 1 || $this->uri->segment(3) == 4 || $this->uri->segment(3) == 5 ) {
+								//positive logic
+								if($paramValues[$param-1] >= $max) {
+								
+										echo  "<b style=\"font-size:25px;font-weight: lighter;text-decoration: none;\">".$paramArray[$param-1].": <span style=\"color:green;\">".$paramValues[$param-1]." ".$paramUnitArray[$param-1]."</span></b>";
+									
+								} else if($paramValues[$param-1] < $max && $paramValue >= $min) {
+									echo  "<b style=\"font-size:25px;font-weight: lighter;text-decoration: none;\">".$paramArray[$param-1].": <span style=\"color:yellow;\">".$paramValues[$param-1]." ".$paramUnitArray[$param-1]."</span></b>";
+								} else {
+								echo  "<b style=\"font-size:25px;font-weight: lighter;text-decoration: none;\">".$paramArray[$param-1].": <span style=\"color:red;\">".$paramValues[$param-1]." ".$paramUnitArray[$param-1]."</span></b>";
+								}
+								} else {
+								//reverse logic
+									if($paramValues[$param-1] < $min) {
+									echo  "<b style=\"font-size:25px;font-weight: lighter;text-decoration: none;\">".$paramArray[$param-1].": <span style=\"color:green;\">".$paramValues[$param-1]." ".$paramUnitArray[$param-1]."</span></b>";
+								
+								} else if($paramValues[$param-1] >= $min && $paramValues[$param-1] < $max) {
+									echo  "<b style=\"font-size:25px;font-weight: lighter;text-decoration: none;\">".$paramArray[$param-1].": <span style=\"color:yellow;\">".$paramValues[$param-1]." ".$paramUnitArray[$param-1]."</span></b>";
+								} else {
+									echo  "<b style=\"font-size:25px;font-weight: lighter;text-decoration: none;\">".$paramArray[$param-1].": <span style=\"color:red;\">".$paramValues[$param-1]." ".$paramUnitArray[$param-1]."</span></b>";
+								}
+								}
 									echo '<br><br>';
 
 									echo  "Description".": <b style=\"font-weight: lighter;text-decoration: none;color:black;\">".$paramDescriptionArray[$param-1]."</b>";

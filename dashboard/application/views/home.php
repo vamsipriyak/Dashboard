@@ -91,6 +91,10 @@
 												
 											<a href="'.$this->config->base_url().'index.php/performancedetails/index/1/'.$row['_id'].'">'.$row['value']['URL'].' </td>';
 											for($j=0; $j<10; $j++) {
+											
+											 $url="index.php/performancedetails/index/".($j+1)."/".$row['_id'];
+											
+											
 											$paramValue = $row['value']["Param".($j+1)];
 											if(!is_null($paramValue))
 											{
@@ -99,20 +103,32 @@
 											if($j == 0 || $j == 3 || $j == 4) {
 											//positive logic
 											if($paramValue >= $max) {
-												print '<td class="green-new" >'.$paramValue.'</td>';
+												print '<td class="green-new" >
+												<a href="'.$this->config->base_url().$url.'">
+												'.$paramValue.' </a></td>';
 											} else if($paramValue < $max && $paramValue >= $min) {
-												print '<td class="yellow-new" >'.$paramValue.'</td>';
+												print '<td class="yellow-new" >
+												<a href="'.$this->config->base_url().$url.'">
+												'.$paramValue.'</a></td>';
 											} else {
-												print '<td class="red-new" >'.$paramValue.'</td>';
+												print '<td class="red-new" >
+												<a href="'.$this->config->base_url().$url.'">
+												'.$paramValue.'</a></td>';
 											}
 											} else {
 											//reverse logic
 												if($paramValue < $min) {
-												print '<td class="green-new" >'.$paramValue.'</td>';
+												print '<td class="green-new" >
+												<a href="'.$this->config->base_url().$url.'">
+												'.$paramValue.'</a></td>';
 											} else if($paramValue >= $min && $paramValue < $max) {
-												print '<td class="yellow-new" >'.$paramValue.'</td>';
+												print '<td class="yellow-new" >
+												<a href="'.$this->config->base_url().$url.'">
+												'.$paramValue.'</a></td>';
 											} else {
-												print '<td class="red-new" >'.$paramValue.'</td>';
+												print '<td class="red-new" >
+												<a href="'.$this->config->base_url().$url.'">
+												'.$paramValue.'</a></td>';
 											}
 											}
 											
