@@ -2,7 +2,7 @@
             </div>
          <!-- /. PAGE WRAPPER  -->
      <!-- /. WRAPPER  -->
-	   <footer><p>Copyright © 2015 Time Inc. All rights reserved. </p></footer>
+	   <footer><p>Copyright © 2015 Mindtree Ltd. All rights reserved. </p></footer>
 	   </div>
         <!-- /. PAGE WRAPPER  -->
     <!-- JS Scripts-->
@@ -71,7 +71,9 @@ $paramArray = array();
 					$existingDates[] = '';
 					$limiter = '';
 				}
-				if($existingDates[$i] != '' && $chartData['param'][$i] != '')
+
+				if((!is_null($existingDates[$i])) && (!is_null($chartData['param'][$i])) )
+
 				{	
 					$formattedDate = date_parse($existingDates[$i]);
 					print "["."'".$formattedDate['month'].$limiter.$formattedDate['day']."'	,".$chartData['param'][$i]."]".$delimiter ;						
