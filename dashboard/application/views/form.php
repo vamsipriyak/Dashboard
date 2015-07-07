@@ -54,7 +54,7 @@
                         <div class="panel-body">
                             <div class="table-responsive">
 							    
-                                <table class="table table-striped table-bordered table-hover" id="dataTables-example">
+                                <table class="table table-striped table-bordered table-hover" id="dataTables-example1">
                                     <thead>
                                         <tr>
                                             <th>Parameter Name</th>

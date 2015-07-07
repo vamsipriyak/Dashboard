@@ -63,22 +63,22 @@
 								//positive logic
 								if($paramValues[$param-1] >= $max) {
 								
-										echo  "<b style=\"font-size:25px;font-weight: lighter;text-decoration: none;\">".$paramArray[$param-1].": <span style=\"color:green;\">".$paramValues[$param-1]." ".$paramUnitArray[$param-1]."</span></b>";
+										echo  "<b style=\"font-size:25px;font-weight: lighter;text-decoration: none;\"><div style=\"float:left\">".$paramArray[$param-1].": </div> <div style=\"float:left\" class=\"green-new\">".$paramValues[$param-1]." </div>".$paramUnitArray[$param-1]."</b>";
 									
 								} else if($paramValues[$param-1] < $max && $paramValue >= $min) {
-									echo  "<b style=\"font-size:25px;font-weight: lighter;text-decoration: none;\">".$paramArray[$param-1].": <span style=\"color:yellow;\">".$paramValues[$param-1]." ".$paramUnitArray[$param-1]."</span></b>";
+									echo  "<b style=\"font-size:25px;font-weight: lighter;text-decoration: none;\"><div style=\"float:left\">".$paramArray[$param-1].": </div> <div style=\"float:left\" class=\"red-new\">".$paramValues[$param-1]." </div>".$paramUnitArray[$param-1]."</b>";
 								} else {
-								echo  "<b style=\"font-size:25px;font-weight: lighter;text-decoration: none;\">".$paramArray[$param-1].": <span style=\"color:red;\">".$paramValues[$param-1]." ".$paramUnitArray[$param-1]."</span></b>";
+								echo  "<b style=\"font-size:25px;font-weight: lighter;text-decoration: none;\"><div style=\"float:left\">".$paramArray[$param-1].":</div> <div style=\"float:left\" class=\"red-new\">".$paramValues[$param-1]." </div>".$paramUnitArray[$param-1]."</b>";
 								}
 								} else {
 								//reverse logic
 									if($paramValues[$param-1] < $min) {
-									echo  "<b style=\"font-size:25px;font-weight: lighter;text-decoration: none;\">".$paramArray[$param-1].": <span style=\"color:green;\">".$paramValues[$param-1]." ".$paramUnitArray[$param-1]."</span></b>";
+									echo  "<b style=\"font-size:25px;font-weight: lighter;text-decoration: none;\"><div style=\"float:left\">".$paramArray[$param-1].": </div> <div style=\"float:left\" class=\"green-new\">".$paramValues[$param-1]." </div>".$paramUnitArray[$param-1]."</b>";
 								
 								} else if($paramValues[$param-1] >= $min && $paramValues[$param-1] < $max) {
-									echo  "<b style=\"font-size:25px;font-weight: lighter;text-decoration: none;\">".$paramArray[$param-1].": <span style=\"color:yellow;\">".$paramValues[$param-1]." ".$paramUnitArray[$param-1]."</span></b>";
+									echo  "<b style=\"font-size:25px;font-weight: lighter;text-decoration: none;\"><div style=\"float:left\">".$paramArray[$param-1].": </div> <div style=\"float:left\" class=\"yellow-new\">".$paramValues[$param-1]." </div>".$paramUnitArray[$param-1]."</b>";
 								} else {
-									echo  "<b style=\"font-size:25px;font-weight: lighter;text-decoration: none;\">".$paramArray[$param-1].": <span style=\"color:red;\">".$paramValues[$param-1]." ".$paramUnitArray[$param-1]."</span></b>";
+									echo  "<b style=\"font-size:25px;font-weight: lighter;text-decoration: none;\"><div style=\"float:left\">".$paramArray[$param-1].": </div> <div style=\"float:left\" class=\"red-new\">".$paramValues[$param-1]." </div>".$paramUnitArray[$param-1]."</b>";
 								}
 								}
 									echo '<br><br>';

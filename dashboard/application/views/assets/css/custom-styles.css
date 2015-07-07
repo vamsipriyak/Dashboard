@@ -614,6 +614,13 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f2825b', end
 #dataTables-example .center a {
     color: grey;
 	}
+	#dataTables-example1 thead {
+    background: none repeat scroll 0 0 dimgrey;
+    color: #fff;
+}
+#dataTables-example1 .center a {
+    color: grey;
+	}
 #units
 {
 font-size:12px;
@@ -628,7 +635,12 @@ font-size:12px;
 #dataTables-example .even {
     background: #F0FCFF;
 }
-
+#dataTables-example1 td {
+    border: 8px solid #fff;
+}
+#dataTables-example1 .even {
+    background: #F0FCFF;
+}
 a.navbar-help {
 color: #fff;
 width: 260px;
@@ -664,7 +676,7 @@ height: 35%;
 }
 
 
-td.yellow-new {
+.yellow-new {
   background: url(../img/yellow.png);
   background-size: 80px 54px;
   width: 100px;

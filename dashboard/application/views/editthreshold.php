@@ -18,6 +18,16 @@ foreach($parameters as $row){
 ?>
         <div id="page-wrapper-home" >
             <div id="page-inner">
+			<?php
+			if($_REQUEST['update'] == 'success')
+			{
+			 print '<span style="color:green">Parameter values updated successfully </span>';
+			}
+			else if($_REQUEST['update'] == 'failed')
+			{
+			 print '<span style="color:green">Updation failed </span>';
+			}
+			?>
 			 <div class="row">
                   						
                     </div>

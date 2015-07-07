@@ -1,12 +1,22 @@
 
         <div id="page-wrapper-home" >
             <div id="page-inner">
+			<?php
+			if($_REQUEST['update'] == 'success')
+			{
+			 print '<span style="color:green">Parameter values updated successfully </span>';
+			}
+			else if($_REQUEST['update'] == 'failed')
+			{
+			 print '<span style="color:green">Updation failed </span>';
+			}
+			?>
 			 <div class="row">
                   						
                     </div>
                 </div> 
                  <!-- /. ROW  -->
-               
+               <span></span>
             <div class="row">
                 <div class="col-md-12">
                     <!-- Advanced Tables -->
@@ -54,10 +64,12 @@
 											print '<td class="center" width="10%">'.$row["name"].'</td>';
 											print '<td class="center" width="30%"><textarea name="desc" id="desc'.$row['_id'].'" rows="10" cols="30">'.$row["description"].'</textarea></td>';
 											print '<td class="center"> <input type="text" name="minvalue" id="minvalue'.$row['_id'].'" value="'.$row["minimum_value"].'"></td>';
+											
 												print '<td class="center"> <input type="text" name="maxvalue" id="maxvalue'.$row['_id'].'" value="'.$row["maximum_value"].'"></td>';
-												print '<td align="center">  
+												print '<td align="center">
+												<input type="hidden" name="baseurl" id="baseurl" value="'.$this->config->base_url().'">												
 												<input type="button" value="Update" id="'.$row['_id'].'"  onclick="editWebsiteParams('.$row['_id'].')">
-											<input type="button" value="Cancel" id="'.$row['_id'].'" class="cancel" > 
+										<input type="button" value="Cancel" id="'.$row['_id'].'" class="cancel" > 
 												</td>';
 											print '</tr>';
 											?>

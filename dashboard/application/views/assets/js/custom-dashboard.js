@@ -79,6 +79,8 @@
 			var minvalue = document.getElementById("minvalue"+id).value;
 			var maxvalue = document.getElementById("maxvalue"+id).value;
 			var desc = document.getElementById("desc"+id).value;
+			var baseurl = document.getElementById("baseurl").value;
+			//alert(baseurl);
 			// Returns successful data submission message when the entered information is stored in database.
 			var dataString = "minvalue=" + minvalue + "&maxvalue=" + maxvalue + "&desc=" + desc + "&id=" + id;
 			//alert(dataString);
@@ -96,13 +98,17 @@
 				//alert ("Parameter values updated successfully");
 				if(data =='Parameter values updated successfully')
 				{
-				alert("Parameter values updated successfully")
+				  window.location = baseurl+"index.php/edit?update=success";
+				//alert("Parameter values updated successfully")
 				}
 				else
 				{
-				alert("Updation failed");
+				 window.location = baseurl+"index.php/edit?update=failed";
+
+				//alert("Updation failed");
+				//webPageForm.submit();				
+
 				}
-				webPageForm.submit();				
 			}
 			});
 			}
@@ -163,13 +169,17 @@
 				//alert ("Parameter values updated successfully");
 				if(data =='Parameter values updated successfully')
 				{
-				alert("Parameter values updated successfully")
+				  window.location = baseurl+"index.php/edit/editthreshold/"+parampageid +"?update=success";
+				//alert("Parameter values updated successfully")
 				}
 				else
 				{
-				alert("Updation failed");
-				}
-				webPageForm.submit();				
+				 window.location = baseurl+"index.php/edit?update=failed";
+
+				//alert("Updation failed");
+				//webPageForm.submit();				
+
+				}				
 			}
 			});
 			}
