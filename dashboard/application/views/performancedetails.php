@@ -51,20 +51,7 @@
                      <!--    Hover Rows  -->
                    <div class="panel panel-default">
                         <div class="panel-body">
-							<div id="chart_div" class="panel-chart"></div>
-						</div>
-                    </div>
-                    <!-- End  Hover Rows  -->
-               </div>
-            </div>
-                <!-- /. ROW  -->
-            <div class="row">
-                <div class="col-md-12">
-                    <!-- Advanced Tables -->
-					
-                    <div class="panel panel-default" id="pagespeed">
-                        <div class="panel-body">
-							<div class="panel-body-detailed">						
+						<div class="panel-body-detailed">						
 								 <?php 
 									if($feedExists > 0) 
 									{										
@@ -93,6 +80,31 @@
 								}
 								}
 									echo '<br><br>';
+
+								
+									}
+								?>
+							</div>
+							<div id="chart_div" class="panel-chart"></div>
+						</div>
+                    </div>
+                    <!-- End  Hover Rows  -->
+               </div>
+            </div>
+                <!-- /. ROW  -->
+            <div class="row">
+                <div class="col-md-12">
+                    <!-- Advanced Tables -->
+					
+                    <div class="panel panel-default" id="pagespeed">
+                        <div class="panel-body">
+							<div class="panel-body-detailed">						
+								 <?php 
+									if($feedExists > 0) 
+									{										
+									$heading = $param; //$_GET['param'];
+									
+									
 
 									echo  "Description".": <b style=\"font-weight: lighter;text-decoration: none;color:black;\">".$paramDescriptionArray[$param-1]."</b>";
 									echo '<br><br>';
