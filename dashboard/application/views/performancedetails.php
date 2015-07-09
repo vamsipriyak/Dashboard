@@ -46,7 +46,18 @@
 					<button id="refreshPage" onclick="pageRefresh()" style="background-color: Transparent;background-repeat:no-repeat;border: none;cursor:pointer;overflow: hidden;outline:none;"  ><img src="<?php echo $this->config->base_url(); ?>application/views/assets/img/refresh.png" alt="Mountain View" style="width:60px;height:60px" ></button>
             </div> 
             <!-- /. ROW  -->
-               
+                 <div class="row" >
+                <div class="col-md-12">
+                     <!--    Hover Rows  -->
+                   <div class="panel panel-default">
+                        <div class="panel-body">
+							<div id="chart_div" class="panel-chart"></div>
+						</div>
+                    </div>
+                    <!-- End  Hover Rows  -->
+               </div>
+            </div>
+                <!-- /. ROW  -->
             <div class="row">
                 <div class="col-md-12">
                     <!-- Advanced Tables -->
@@ -110,18 +121,7 @@
                 </div>
             </div>
 			<br><br>
-            <div class="row" >
-                <div class="col-md-12">
-                     <!--    Hover Rows  -->
-                   <div class="panel panel-default">
-                        <div class="panel-body">
-							<div id="chart_div" class="panel-chart"></div>
-						</div>
-                    </div>
-                    <!-- End  Hover Rows  -->
-               </div>
-            </div>
-                <!-- /. ROW  -->
+          
         </div>
     </div>
 	<?php
