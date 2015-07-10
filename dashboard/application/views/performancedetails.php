@@ -60,12 +60,14 @@
 									if($this->uri->segment(3) == 1 || $this->uri->segment(3) == 4 || $this->uri->segment(3) == 5 ) {
 								//positive logic
 								if($paramValues[$param-1] >= $max) {
-								
+																	echo "hiiiiii";
+
 										echo  "<b style=\"font-size:25px;font-weight: lighter;text-decoration: none;\"><div style=\"float:left\">".$paramArray[$param-1].": </div> <div style=\"float:left\" class=\"green-new\">".$paramValues[$param-1]." </div>".$paramUnitArray[$param-1]."</b>";
 									
-								} else if($paramValues[$param-1] < $max && $paramValue >= $min) {
-									echo  "<b style=\"font-size:25px;font-weight: lighter;text-decoration: none;\"><div style=\"float:left\">".$paramArray[$param-1].": </div> <div style=\"float:left\" class=\"red-new\">".$paramValues[$param-1]." </div>".$paramUnitArray[$param-1]."</b>";
+								} else if($paramValues[$param-1] < $max && $paramValues[$param-1] >= $min) {
+									echo  "<b style=\"font-size:25px;font-weight: lighter;text-decoration: none;\"><div style=\"float:left\">".$paramArray[$param-1].": </div> <div style=\"float:left\" class=\"yellow-new\">".$paramValues[$param-1]." </div>".$paramUnitArray[$param-1]."</b>";
 								} else {
+
 								echo  "<b style=\"font-size:25px;font-weight: lighter;text-decoration: none;\"><div style=\"float:left\">".$paramArray[$param-1].":</div> <div style=\"float:left\" class=\"red-new\">".$paramValues[$param-1]." </div>".$paramUnitArray[$param-1]."</b>";
 								}
 								} else {
@@ -74,8 +76,10 @@
 									echo  "<b style=\"font-size:25px;font-weight: lighter;text-decoration: none;\"><div style=\"float:left\">".$paramArray[$param-1].": </div> <div style=\"float:left\" class=\"green-new\">".$paramValues[$param-1]." </div>".$paramUnitArray[$param-1]."</b>";
 								
 								} else if($paramValues[$param-1] >= $min && $paramValues[$param-1] < $max) {
+								echo "hiii";
 									echo  "<b style=\"font-size:25px;font-weight: lighter;text-decoration: none;\"><div style=\"float:left\">".$paramArray[$param-1].": </div> <div style=\"float:left\" class=\"yellow-new\">".$paramValues[$param-1]." </div>".$paramUnitArray[$param-1]."</b>";
 								} else {
+								echo "hiii";
 									echo  "<b style=\"font-size:25px;font-weight: lighter;text-decoration: none;\"><div style=\"float:left\">".$paramArray[$param-1].": </div> <div style=\"float:left\" class=\"red-new\">".$paramValues[$param-1]." </div>".$paramUnitArray[$param-1]."</b>";
 								}
 								}
