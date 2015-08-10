@@ -185,7 +185,14 @@
 			}
 			return false;
 		}
-			
+function changeResults(){
+    // Now get the values of checkbox
+    var chk1 = val; // checkbox1 is id of checkbox
+	
+	alert("hiii");
+   
+}
+		
 		
 		function pageRefresh()
 		{

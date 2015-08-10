@@ -9,6 +9,15 @@
                
             <div class="row">
                 <div class="col-md-12">
+				<input type="hidden" name="baseurl" id="baseurl" value="<?php echo $this->config->base_url() ?>">
+				<a href="#" onClick="changeResults('All');" >All </a> | <a href="#" onClick="changeResults('Recent');" >Recent </a> | <a href="#" onClick="changeResults('Most');" >Most Used </a> | <a href="#" onClick="changeResults('Mysites');" >My Sites </a>
+				<select name="sortby" id="sortby" onchange="sortResults(this.value);" style="float:right;">
+				<option value="">- Select -</option>
+				<option value="URL">Webpage</option>
+				<option value="Param1">Pagescore</option>
+				<option value="Param2">Firstbyte</option>				
+				</select>
+				
                     <!-- Advanced Tables -->
                     <div class="panel panel-default">
                          <div class="panel-heading">
@@ -44,9 +53,9 @@
 						?>
 							</div>
                         </div>
-                        <div class="panel-body">
+                        <div class="panel-body" >
 						
-                            <div class="table-responsive">
+                            <div class="table-responsive" >
                                 <table class="table table-striped table-bordered table-hover" id="dataTables-example">
                                     <thead>
                                         <tr>
@@ -72,7 +81,7 @@
                                     </thead>
                                    <tbody>
 					
-								   
+								   <div id="test">	
 								   <?php										
 										   // iterate result array to display the values
 										  $k=0;
@@ -81,7 +90,8 @@
 										  	$url = $row['value']['URL'];
 										  	if($url!='')
 											{
-											?>										 
+											?>
+										
 											<tr id="<?php echo $row['_id'];?>">
 											<?php							
 
@@ -147,13 +157,14 @@
 											?>	
 										
 											</tr>
+											
 											<?php
 											}
 										   }
 										   // End of for loop//
 								?>		
                                        
-                                      
+                                      </div>
                                     </tbody>
                                 </table>
                             </div>
@@ -190,4 +201,43 @@ $(document).on('click', '.refresh', function()
   }
 });
 });	 
+
+
+function changeResults(val){
+    // Now get the values of checkbox
+		var baseurl = document.getElementById("baseurl").value;
+    var chk1 = val; // checkbox1 is id of checkbox
+		//alert(chk1);
+
+    $.ajax({
+    type : 'POST',
+    url: baseurl+"index.php/home/filterby",
+     data : 'check='+chk1,
+     success : function(data){
+	 //alert(data);
+	 $('#page-wrapper-home').replaceWith(data);
+         // $('#page-wrapper-home').html(data); // replace the contents coming from php file
+     }  
+    });
+}
+
+
+function sortResults(val){
+    // Now get the values of checkbox
+		var baseurl = document.getElementById("baseurl").value;
+    var chk1 = val; // checkbox1 is id of checkbox
+		//alert(chk1);
+
+    $.ajax({
+    type : 'POST',
+    url: baseurl+"index.php/home/sortby",
+     data : 'check='+chk1,
+     success : function(data){
+	// alert(data);
+	 $('#page-wrapper-home').replaceWith(data);
+         // $('#page-wrapper-home').html(data); // replace the contents coming from php file
+     }  
+    });
+}
+
  </script>

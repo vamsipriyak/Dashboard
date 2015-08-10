@@ -150,10 +150,46 @@ public function getParameterdata()
 		   'sort' =>array('_id' => -1),
 			"out" => array('reduce'=>'parameters_Collection') // new collection name
 		));
-	 
+	       
 			 $parameterdata = $this->mongo_db->db->selectCollection('parameters_Collection');
-		 $results = $parameterdata->find()->sort(array('_id' => 1));
+			 
+		
+			 $results = $parameterdata->find()->sort(array('_id' => 1));
+			 
 			 return $results;
+	}
+	
+	public function getParameterdata1($value)
+	{
+	 $parameterdata = $this->mongo_db->db->selectCollection('parameters_Collection');
+		if($value!="")
+			 { 
+			 if($value=="All")
+			 {
+		 $results = $parameterdata->find()->sort(array('_id' => 1));
+		 }
+		 else if($value=="Recent")
+			 {
+			 
+			 		 $results = $parameterdata->find()->sort(array('_id' => -1))->limit(5);
+
+			 }
+			 }
+			 return $results;
+			
+	}
+	
+	public function getParameterdata2($value)
+	{
+	 $parameterdata = $this->mongo_db->db->selectCollection('parameters_Collection');
+		if($value!="")
+			 { 
+			
+		  $results = $parameterdata->find()->sort(array('value.'.$value => 1));
+		 
+			 }
+			 return $results;
+			
 	}
 	public function getParameters()
 	{	 

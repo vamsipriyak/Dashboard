@@ -33,16 +33,55 @@ class Home extends CI_Controller {
 
 	public function index()
 	{	
-
+		if($_POST['check']=='')
+		{
+		$value="All";
+		}
+		else
+		{
+			 $value = $_POST['check']; 
+		}
  	    $this->load->view('includes/header');		
-	   $parameterdata['parameterdata'] = $this->Homemodel->getParameterdata();
+	   $parameterdata['parameterdata'] = $this->Homemodel->getParameterdata($value);
 	   $parameterdata['parameters'] = $this->Homemodel->getParameters();
 	   //$websites['websites'] = $this->Homemodel->getWebsites();
 		$parameterdata['crontime'] = $this->Homemodel->getLastcrontime();
 		$this->load->view('home', $parameterdata);
 		$this->load->view('includes/footer');
 	}
+	public function filterby()
+	{	
+		if($_POST['check']=='')
+		{
+		$value="All";
+		}
+		else
+		{
+			 $value = $_POST['check']; 
+		}
+		//$val="filterby";
+		$parameterdata['parameters'] = $this->Homemodel->getParameters();
+		$parameterdata['parameterdata'] = $this->Homemodel->getParameterdata1($value);
+		$parameterdata['crontime'] = $this->Homemodel->getLastcrontime();
+		$this->load->view('home', $parameterdata);
+	}
 	
+	public function sortby()
+	{	
+		if($_POST['check']=='')
+		{
+		$value="All";
+		}
+		else
+		{
+			 $value = $_POST['check']; 
+		}
+			   $parameterdata['parameters'] = $this->Homemodel->getParameters();
+
+	   $parameterdata['parameterdata'] = $this->Homemodel->getParameterdata2($value);
+	   $parameterdata['crontime'] = $this->Homemodel->getLastcrontime();
+		$this->load->view('home', $parameterdata);
+	}
 	public function ajaxload()
 	{
 	  $this->load->model('Homemodel');
