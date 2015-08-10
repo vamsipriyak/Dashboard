@@ -63,7 +63,7 @@ class Home extends CI_Controller {
 		$parameterdata['parameters'] = $this->Homemodel->getParameters();
 		$parameterdata['parameterdata'] = $this->Homemodel->getParameterdata1($value);
 		$parameterdata['crontime'] = $this->Homemodel->getLastcrontime();
-		$this->load->view('home', $parameterdata);
+		$this->load->view('ajaxload', $parameterdata);
 	}
 	
 	public function sortby()
@@ -80,7 +80,7 @@ class Home extends CI_Controller {
 
 	   $parameterdata['parameterdata'] = $this->Homemodel->getParameterdata2($value);
 	   $parameterdata['crontime'] = $this->Homemodel->getLastcrontime();
-		$this->load->view('home', $parameterdata);
+		$this->load->view('ajaxload', $parameterdata);
 	}
 	public function ajaxload()
 	{
