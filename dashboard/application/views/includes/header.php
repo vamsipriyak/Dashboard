@@ -46,6 +46,7 @@
               <div style="float:right" >
 			  <?php if (strpos($url,'/help') == false) { ?>
 			  <?php if (strpos($url,'/form') == false) { ?>
+			   <a href="<?php echo $this->config->base_url(); ?>index.php/Group" class="navbar-help">Add a site </a> 
 			  <a href="<?php echo $this->config->base_url(); ?>index.php/form" class="navbar-help">Add a webpage </a> | <?php   } ?> 
 			  <?php if (strpos($url,'/edit') == false) { ?>
 			  <a href="<?php echo $this->config->base_url(); ?>index.php/edit" class="navbar-help">Edit Parameters </a> 

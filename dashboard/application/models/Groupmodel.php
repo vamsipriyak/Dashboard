@@ -1,43 +1,29 @@
 <?php
-class Formmodel extends CI_Model {
+class Groupmodel extends CI_Model {
 
-	public function getWebsite()
+	public function getgroups()
 	{	 
-        $collection = $this->mongo_db->db->selectCollection('websites');
+        $collection = $this->mongo_db->db->selectCollection('groups');
        	//selecting records from the collection - surfinme_index
-       	$websites = $collection->find();
-		return $websites;
+       	$groups = $collection->find();
+		return $groups;
 	}		
 	public function insertData($inputValues)
 	{	
-	 //$this->load->helper('url');
-	 
-		$websites = $this->getWebsite();
-		foreach($websites as $count)
-		{
-			//needed
-		}
-		if(!count($count))
-		{
-			$id = 1;
-		}
-		else
-		{
-			$id = $count['_id']+1;
-		}
-		  
+	 //$this->load->helper('url'); 
+	  
 		if($_SESSION['authentication']==1)
 		 {
-		$user_collection = $this->mongo_db->db->websites;
-		$websiteID = $this->getNextSequence("websiteid");
-		if($inputValues['isParent'] == "Yes")
-				$parentSiteID = $websiteID;
-		else
-				$parentSiteID = (int)$inputValues['parentSiteId'];	
+		 $logo = $_FILES['userfile']['name'];
+		$user_collection = $this->mongo_db->db->groups;
+		$groupID = $this->getNextSequence("groupid");
+		$parentSiteID = (int)$inputValues['parentSiteId'];	
 		$document = array( 
-			"_id" => $websiteID,
+			"_id" => $groupID,
 			"parent_page_id" => $parentSiteID,
 			"URL" =>$inputValues['webPageUrl'],
+			"title" =>$inputValues['title'],
+			"logo" =>$logo,
 			"param1_minvalue" => $inputValues['param1_minvalue'],			
 			"param1_maxvalue" => $inputValues['param1_maxvalue'],
 			"param2_minvalue" => $inputValues['param2_minvalue'],			
@@ -46,18 +32,7 @@ class Formmodel extends CI_Model {
 			"param3_maxvalue" => $inputValues['param3_maxvalue'],
 			"param4_minvalue" => $inputValues['param4_minvalue'],			
 			"param4_maxvalue" => $inputValues['param4_maxvalue'],
-			"param5_minvalue" => $inputValues['param5_minvalue'],			
-			"param5_maxvalue" => $inputValues['param5_maxvalue'],
-			"param6_minvalue" => $inputValues['param6_minvalue'],			
-			"param6_maxvalue" => $inputValues['param6_maxvalue'],
-			"param7_minvalue" => $inputValues['param7_minvalue'],			
-			"param7_maxvalue" => $inputValues['param7_maxvalue'],
-			"param8_minvalue" => $inputValues['param8_minvalue'],			
-			"param8_maxvalue" => $inputValues['param8_maxvalue'],
-			"param9_minvalue" => $inputValues['param9_minvalue'],			
-			"param9_maxvalue" => $inputValues['param1_maxvalue'],
-			"param10_minvalue" => $inputValues['param10_minvalue'],			
-			"param10_maxvalue" => $inputValues['param10_maxvalue'],
+		
 	     );
 		 		return $user_collection->insert($document);
 
@@ -81,8 +56,17 @@ class Formmodel extends CI_Model {
 	}	
 	public function isWebsiteExists($link)
 	{
-		$collection = $this->mongo_db->db->selectCollection('websites');
+		$collection = $this->mongo_db->db->selectCollection('groups');
 		$website = $collection->find(array('URL' => $link));
+		foreach($website as $url) {
+		}				
+		return $url;
+	}
+	
+	public function isTitleExists($link)
+	{
+		$collection = $this->mongo_db->db->selectCollection('groups');
+		$website = $collection->find(array('title' => $link));
 		foreach($website as $url) {
 		}				
 		return $url;
@@ -91,13 +75,12 @@ class Formmodel extends CI_Model {
 	public function getParams()
 	{	 
         $collection = $this->mongo_db->db->selectCollection('parameters');
-       	//selecting records from the collection - surfinme_index
-       	$params = $collection->find();
+       	$params = $collection->find()->sort(array('_id' => 1))->limit(4);;
 		return $params;
 	}
 	public function getNextSequence($name){
 		global $collection;
-		$collection = $this->mongo_db->db->selectCollection('website_counters');
+		$collection = $this->mongo_db->db->selectCollection('group_counters');
 		$retval = $collection->findAndModify(
 		 array('_id' => $name),
 		 array('$inc' => array("seq" => 1)),

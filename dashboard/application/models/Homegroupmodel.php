@@ -1,5 +1,5 @@
 <?php
-class Homemodel extends CI_Model {
+class Homegroupmodel extends CI_Model {
 public function getParameterdata()
 	{	
 	
@@ -156,8 +156,6 @@ public function getParameterdata()
 			"out" => array('reduce'=>'parameters_Collection') // new collection name
 		));
 	       
-			 $parameterdata = $this->mongo_db->db->selectCollection('parameters_Collection');			
-			 $results = $parameterdata->find()->sort(array('_id' => 1));
 			 
 	/***** Start of group by parent site *****/ 
 			 $ops = array( 
@@ -169,47 +167,118 @@ public function getParameterdata()
 					'Param4_avg' => array('$avg' => '$value.Param4'),
 					)
 				);
-			$resultgroup = $parameterdata->aggregate($ops);
+			$parameterdatas = $this->mongo_db->db->selectCollection('parameters_Collection');			
+			$resultgroup = $parameterdatas->aggregate($ops);
 			$user_collection = $this->mongo_db->db->resultgroupby;
 			for($i=0;$i<count($resultgroup['result']);$i++)
 			{
 				$parent_page_id = $resultgroup['result'][$i]['_id'];
 				if($parent_page_id!='')
 				{
-					$websites = $this->mongo_db->db->selectCollection('websites');
-					$websites = $websites->findOne(array('parent_page_id' => $parent_page_id), array('URL'));
+							$groupvalueID = $this->getNextSequence("groupvalueid");
 
+					$groups = $this->mongo_db->db->selectCollection('groups');
+					$groups = $groups->findOne(array('parent_page_id' => $parent_page_id));
+					
+					
+					if($resultgroup['result'][$i]['Param1_avg'] >=  $groups['param1_maxvalue']) {
+					
+					        $Param1_flag="Green";
+						
+							} else if($resultgroup['result'][$i]['Param1_avg'] < $groups['param1_maxvalue'] && $resultgroup['result'][$i]['Param1_avg'] >= $groups['param1_minvalue']) {
+							$Param1_flag="Yellow";
+								
+							} else {
+							$Param1_flag="Red";
+							}
+							if($resultgroup['result'][$i]['Param4_avg'] >=  $groups['param4_maxvalue']) {
+					
+					          $Param4_flag="Green";
+						
+							} else if($resultgroup['result'][$i]['Param4_avg'] < $groups['param4_maxvalue'] && $resultgroup['result'][$i]['Param4_avg'] >= $groups['param4_minvalue']) {
+							$Param4_flag="Yellow";
+								
+							} else {
+							$Param4_flag="Red";
+							}
+								if($resultgroup['result'][$i]['Param2_avg'] < $groups['param2_minvalue']) {
+									$Param2_flag="Green";			
+								} else if($resultgroup['result'][$i]['Param2_avg'] >= $groups['param2_minvalue'] && $resultgroup['result'][$i]['Param2_avg'] < $groups['param2_maxvalue']) {
+									$Param2_flag="Yellow";
+								} else {
+									$Param2_flag="Red";
+								}	
+                          if($resultgroup['result'][$i]['Param3_avg'] < $groups['param3_minvalue']) {
+									$Param3_flag="Green";			
+								} else if($resultgroup['result'][$i]['Param3_avg'] >= $groups['param3_minvalue'] && $resultgroup['result'][$i]['Param3_avg'] < $groups['param3_maxvalue']) {
+									$Param3_flag="Yellow";
+								} else {
+									$Param3_flag="Red";
+								}									
+											
+											/*} 
+											
+											else {
+											
+											//reverse logic
+												if($resultgroup['result'][$i]['Param1_avg'] < $groups['param1_minvalue']) {
+												
+											} else if($resultgroup['result'][$i]['Param1_avg'] >= $groups['param1_minvalue'] && $paramValue < $groups['param1_maxvalue']) {
+												
+											} else {
+												
+											}
+											}*/
+					
+					
 					$document = array( 
+					"_id" => $groupvalueID,
 					"parent_page_id" => $parent_page_id,
-					"URL" =>$websites['URL'],
+					"URL" =>$groups['URL'],
+					"title" =>$groups['title'],
+					"logo" =>$groups['logo'],
 					"Param1" => $resultgroup['result'][$i]['Param1_avg'],
 					"Param2" => $resultgroup['result'][$i]['Param2_avg'],
 					"Param3" => $resultgroup['result'][$i]['Param3_avg'],
-					"Param4" => $resultgroup['result'][$i]['Param4_avg'],		
-
+					"Param4" => $resultgroup['result'][$i]['Param4_avg'],
+                    "param1_minvalue" => $groups['param1_minvalue'],			
+					"param1_maxvalue" => $groups['param1_maxvalue'],
+					"param2_minvalue" => $groups['param2_minvalue'],			
+					"param2_maxvalue" => $groups['param2_maxvalue'],
+					"param3_minvalue" => $groups['param3_minvalue'],			
+					"param3_maxvalue" => $groups['param3_maxvalue'],
+					"param4_minvalue" => $groups['param4_minvalue'],			
+					"param4_maxvalue" => $groups['param4_maxvalue'],					
+					"param1_flag" => $Param1_flag,	
+					"param2_flag" => $Param2_flag,	
+					"param3_flag" => $Param3_flag,	
+					"param4_flag" => $Param4_flag,	
 					);
 					$user_collection->insert($document);
 					
 				}
 			}
     /***** End of group by parent site *****/
-			 
+	 $parameterdata = $this->mongo_db->db->selectCollection('resultgroupby');
+	 $results = $parameterdata->find()->sort(array('parent_page_id' => 1));
+	 
+
 		 return $results;
 	}
 	
 	public function getParameterdata1($value)
 	{
-	 $parameterdata = $this->mongo_db->db->selectCollection('parameters_Collection');
+	 $parameterdata = $this->mongo_db->db->selectCollection('resultgroupby');
 		if($value!="")
 			 { 
 			 if($value=="All")
 			 {
-		 $results = $parameterdata->find()->sort(array('_id' => 1));
+		 $results = $parameterdata->find()->sort(array('_id' => -1));
 		 }
 		 else if($value=="Recent")
 			 {
 			 
-			 		 $results = $parameterdata->find()->sort(array('_id' => -1))->limit(5);
+			 		 $results = $parameterdata->find()->sort(array('_id' => -1))->limit(20);
 
 			 }
 			 }
@@ -219,11 +288,11 @@ public function getParameterdata()
 	
 	public function getParameterdata2($value)
 	{
-	 $parameterdata = $this->mongo_db->db->selectCollection('parameters_Collection');
+	 $parameterdata = $this->mongo_db->db->selectCollection('resultgroupby');
 		if($value!="")
 			 { 
 			
-		  $results = $parameterdata->find()->sort(array('value.'.$value => 1));
+		  $results = $parameterdata->find()->sort(array($value => 1));
 		 
 			 }
 			 return $results;
@@ -232,7 +301,7 @@ public function getParameterdata()
 	public function getParameters()
 	{	 
 		 $parameters = $this->mongo_db->db->selectCollection('parameters');
-		 $results = $parameters->find()->sort(array('_id' => 1));
+		 $results = $parameters->find()->sort(array('_id' => 1))->limit(4);
 		 return $results;
 	}
 	public function getParameterscollection($pageid)
@@ -241,6 +310,19 @@ public function getParameterdata()
 		 $results = $parameters->find(array('_id' => $pageid));
 		 return $results;
 	}
+	public function getParametersajaxload()
+	{	 
+		 $parameters = $this->mongo_db->db->selectCollection('parameters');
+		 $results = $parameters->find()->sort(array('_id' => 1));
+		 return $results;
+	}
+	public function getParamdatabyparentpageid($pageid)
+	{	 
+		 $parameters = $this->mongo_db->db->selectCollection('parameters_Collection');
+		 $results = $parameters->find(array("value.parent_page_id" => $pageid));
+		 return $results;
+	}
+	
 	public function getLastcrontime()
 	{	 
 		 $parameters = $this->mongo_db->db->selectCollection('cron');
@@ -248,9 +330,9 @@ public function getParameterdata()
 		 return $results;
 	}
 	
-	public function getNextSequence11($name){
+	public function getNextSequence($name){
 		global $collection;
-		$collection = $this->mongo_db->db->selectCollection('website_counters');
+		$collection = $this->mongo_db->db->selectCollection('groupvalues_counters');
 		$retval = $collection->findAndModify(
 		 array('_id' => $name),
 		 array('$inc' => array("seq" => 1)),
